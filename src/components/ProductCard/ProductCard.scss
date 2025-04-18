@@ -1,0 +1,142 @@
+.product-card {
+  width: 272px;
+  padding: 32px;
+  border: 1px solid #E2E6E9;
+  border-radius: 8px;
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: #0F0F11;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: #0F0F11;
+    display: block;
+  }
+
+  &__image-container {
+    width: 208px;
+    height: 208px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    margin: 0 0 8px;
+    height: 42px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__price-block {
+    margin-bottom: 16px;
+  }
+
+  &__price {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 140%;
+    margin-right: 8px;
+  }
+
+  &__full-price {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    text-decoration-line: line-through;
+    color: #89939A;
+  }
+
+  &__divider {
+    height: 1px;
+    background: #E2E6E9;
+    margin-bottom: 16px;
+  }
+
+  &__specs {
+    margin-bottom: 16px;
+  }
+
+  &__spec-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__spec-name {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #89939A;
+  }
+
+  &__spec-value {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: #0F0F11;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__add-to-cart {
+    flex-grow: 1;
+    height: 40px;
+    background: #216CFF;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background: #005BFF;
+    }
+  }
+
+  &__favorite {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 1px solid #B4BDC4;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: #0F0F11;
+    }
+  }
+
+  &__favorite-icon {
+    width: 16px;
+    height: 16px;
+  }
+} 
