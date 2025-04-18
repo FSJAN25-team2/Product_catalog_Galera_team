@@ -1,0 +1,65 @@
+body {
+   margin: 0;
+   font-family: 'Mont-Regular';
+}
+
+.container {
+    display: flex;
+    height: 64px;
+    align-items: center;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+
+    @media (max-width: 1199px) {
+        max-width: 1199px;
+        padding: 0 24px;
+    }
+
+    @media (max-width: 639px) {
+        max-width: 639px;
+        padding: 0 16px;
+        gap: 16px;
+    }
+}
+
+.logo {
+    &__image {
+        width: 80px;
+
+        @media (max-width: 639px) {
+            width: 60px;
+        }
+    }
+    &__link {
+        max-height: 40px;
+    }
+}
+
+.navigation {
+    &__list {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        gap: 64px;
+        padding: 0;
+
+        @media (max-width: 1199px) {
+            gap: 32px;
+        }
+
+        @media (max-width: 639px) {
+            gap: 16px;
+        }
+    }
+
+    &__link_item {
+        text-transform: uppercase;
+        font-size: 12px;
+
+        @media (max-width: 639px) {
+            font-size: 10px;
+        }
+    }
+}

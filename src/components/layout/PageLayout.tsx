@@ -3,8 +3,11 @@ import { styled } from '@mui/material/styles';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   width: '100%',
+  height: '100vh', // Фіксована висота на весь екран
   margin: '0 auto',
   padding: 0,
+  display: 'flex',
+  flexDirection: 'column',
   
   // Мобільна версія (320-639px)
   [theme.breakpoints.between('xs', 'sm')]: {
@@ -13,6 +16,8 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     '& .MuiGrid-container': {
       margin: '0 -8px',
       width: 'calc(100% + 16px)',
+      height: '100%',
+      gap: '16px',
       '& .MuiGrid-item': {
         padding: '0 8px',
       }
@@ -26,6 +31,8 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     '& .MuiGrid-container': {
       margin: '0 -8px',
       width: 'calc(100% + 16px)',
+      height: '100%',
+      gap: '16px',
       '& .MuiGrid-item': {
         padding: '0 8px',
       }
@@ -39,8 +46,11 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     '& .MuiGrid-container': {
       margin: '0 -8px',
       width: 'calc(100% + 16px)',
+      height: '100%',
+      gap: '16px',
       '& .MuiGrid-item': {
         padding: '0 8px',
+        width: '32px',
       }
     }
   }
@@ -53,7 +63,14 @@ interface PageLayoutProps {
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
     <StyledContainer disableGutters>
-      <Grid container>
+      <Grid 
+        container 
+        sx={{ 
+          height: '100%', // Додаємо висоту для grid
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
         {children}
       </Grid>
     </StyledContainer>
