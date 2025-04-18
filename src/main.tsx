@@ -22,7 +22,9 @@ createRoot(document.getElementById('root')!).render(
                 <Route path='tablets' element={<TabletsCatalog />}>
                     <Route path='?itemId' element={<ItemCard />}></Route>
                 </Route>
-                <Route path='accessories' element={<Accessories />}></Route>
+                <Route path='accessories' element={<Accessories />}>
+                    <Route path='?itemId' element={<ItemCard />}></Route>
+                </Route>
                 <Route path='favourites' element={<Favourites />}></Route>
             </Route>
         </Routes>
