@@ -1,0 +1,15 @@
+.home-page {
+  padding: 24px;
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+} 

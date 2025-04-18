@@ -1,4 +1,30 @@
+import { ProductCard } from '../ProductCard/ProductCard';
+import './HomePage.scss';
+
+const testProduct = {
+  name: 'Apple iPhone 14 Pro',
+  fullPrice: 1199,
+  price: 1099,
+  screen: "6.1' OLED",
+  capacity: '256GB',
+  ram: '6GB',
+  image: 'https://example.com/iphone.jpg',
+  itemId: '1',
+  category: 'phones',
+};
+
 export const HomePage = () => {
-    return (
-    <h1>Home Page content</h1>
-)};
+  return (
+    <div className="home-page">
+      <h1 className="home-page__title">
+        Welcome to Nice Gadgets store
+      </h1>
+      
+      <div className="home-page__content">
+        <ProductCard product={testProduct} />
+        <ProductCard product={testProduct} />
+        <ProductCard product={testProduct} />
+      </div>
+    </div>
+  );
+};
