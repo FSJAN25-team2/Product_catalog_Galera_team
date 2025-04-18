@@ -1,8 +1,13 @@
-function App() {
+import SwiperPhone from "../compoents/SwiperPhone/SwiperPhone";
 
+function App() {
   return (
-    <p>Hello World</p>
-  )
+    <>
+      <p>Hello World</p>
+      <SwiperPhone />
+    </>
+    
+  );
 }
 
-export default App
+export default App;
