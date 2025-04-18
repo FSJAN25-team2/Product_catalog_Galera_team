@@ -1,0 +1,34 @@
+body {
+   margin: 0;
+   font-family: 'Mont-Regular';
+}
+
+.container {
+    display: flex;
+    height: 64px;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo {
+    &__image {
+        width: 80px;
+    }
+    &__link {
+        max-height: 40px;
+    }
+}
+
+.navigation {
+    &__list {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        gap: 64px;
+        padding: 0;
+    }
+
+    &__link_item {
+        text-transform: uppercase;
+    }
+}
