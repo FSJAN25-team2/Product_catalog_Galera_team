@@ -9,6 +9,7 @@ import { TabletsCatalog } from './components/TabletsCatalog/TabletsCatalog.tsx'
 import { ItemCard } from './components/ItemCard/ItemCard.tsx'
 import { Favourites } from './components/Favourites/Favourites.tsx'
 import { Accessories } from './components/Accessories/Accessories.tsx'
+import { ErrorPage } from './components/ErrorPage/ErrorPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <HashRouter>
@@ -17,15 +18,16 @@ createRoot(document.getElementById('root')!).render(
                 <Route index element={<HomePage />}></Route>
                 <Route path='homepage' element={<Navigate to="/" />}></Route>
                 <Route path='phones' element={<PhonesCatalog />}>
-                    <Route path='?itemId' element={<ItemCard />}></Route>
+                    <Route path=':itemId' element={<ItemCard />}></Route>
                 </Route>
                 <Route path='tablets' element={<TabletsCatalog />}>
-                    <Route path='?itemId' element={<ItemCard />}></Route>
+                    <Route path=':itemId' element={<ItemCard />}></Route>
                 </Route>
                 <Route path='accessories' element={<Accessories />}>
-                    <Route path='?itemId' element={<ItemCard />}></Route>
+                    <Route path=':itemId' element={<ItemCard />}></Route>
                 </Route>
                 <Route path='favourites' element={<Favourites />}></Route>
+                <Route path='*' element={<ErrorPage />}></Route>
             </Route>
         </Routes>
     </HashRouter>
