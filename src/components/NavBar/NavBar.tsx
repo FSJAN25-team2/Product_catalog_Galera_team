@@ -1,28 +1,58 @@
 import { Link } from "react-router-dom";
+import '../../styles/NavBar.scss';
 
 export const NavBar = () => {
     return (
-        <div className="container">
-            <Link to=".." className="logo__link">
-                <img src="public/img/logos/logo.png" alt="Nice Gadgets Logo" className="logo__image"/>
-            </Link>
+        <nav className="nav">
+            <div className="nav__container">
+                <Link to="/" className="nav__logo">
+                    <img 
+                        src="/img/logos/logo.png" 
+                        alt="Nice Gadgets Logo" 
+                        className="nav__logo-image"
+                    />
+                </Link>
 
-            <div className="navigation">
-                <ul className="navigation__list">
-                    <Link to="..">
-                        <li className="navigation__link_item">home</li>
-                    </Link>
-                    <Link to="/phones">
-                        <li className="navigation__link_item">phone</li>
-                    </Link>
-                    <Link to="/tablets">
-                        <li className="navigation__link_item">tablets</li>
-                    </Link>
-                    <Link to="/accessories">
-                        <li className="navigation__link_item">accessories</li>
-                    </Link>
+                <ul className="nav__menu">
+                    <li>
+                        <Link to="/" className="nav__menu-link">
+                            HOME
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/phones" className="nav__menu-link">
+                            PHONES
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/tablets" className="nav__menu-link">
+                            TABLETS
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/accessories" className="nav__menu-link">
+                            ACCESSORIES
+                        </Link>
+                    </li>
                 </ul>
+
+                <div className="nav__icons">
+                    <Link to="/favourites" className="nav__icon-link">
+                        <img 
+                            src="/logos/favourites-icon.svg" 
+                            alt="Favourites" 
+                            className="nav__icon"
+                        />
+                    </Link>
+                    <Link to="/cart" className="nav__icon-link">
+                        <img 
+                            src="/logos/cart-icon.svg" 
+                            alt="Cart" 
+                            className="nav__icon"
+                        />
+                    </Link>
+                </div>
             </div>
-        </div>
+        </nav>
     );
 }
