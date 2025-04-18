@@ -31,10 +31,15 @@ body {
     &__logo {
         display: flex;
         align-items: center;
+        justify-content: center;
         text-decoration: none;
+        width: 128px;
+        height: 64px;
+        padding: 0 24px;
     }
 
     &__logo-image {
+        width: 80px;
         height: 28px;
     }
 
