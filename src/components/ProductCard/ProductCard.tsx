@@ -10,14 +10,32 @@ const StyledCard = styled(Card)(({ theme }) => ({
   flexDirection: 'column',
   gap: '8px',
   backgroundColor: '#fff',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+  border: '1px solid #E2E6E9',
+  borderRadius: '8px',
+
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: '0px 3px 13px rgba(23, 32, 49, 0.1)',
+    borderColor: 'transparent',
+  },
 }));
 
-const StyledCardMedia = styled(CardMedia)({
+const ImageContainer = styled(Box)({
   width: '208px',
   height: '196px',
   margin: '0 auto',
-  objectFit: 'contain',
   marginBottom: '24px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+const StyledCardMedia = styled(CardMedia)({
+  width: '100%',
+  height: '100%',
+  objectFit: 'contain',
 });
 
 const PriceBlock = styled(Box)({
@@ -51,12 +69,32 @@ const ButtonsContainer = styled(Box)({
   marginTop: '16px',
 });
 
+const AddToCartButton = styled(Button)({
+  height: '40px',
+  fontSize: '14px',
+  fontWeight: 700,
+  lineHeight: '21px',
+  textTransform: 'none',
+  backgroundColor: '#0F0F11',
+  transition: 'all 0.3s ease',
+  
+  '&:hover': {
+    backgroundColor: '#313237',
+  },
+});
+
 const FavoriteButton = styled(Button)({
   minWidth: '40px',
   width: '40px',
   height: '40px',
   padding: '0',
   border: '1px solid #B4BDC4',
+  transition: 'all 0.3s ease',
+  
+  '&:hover': {
+    borderColor: '#0F0F11',
+    backgroundColor: 'transparent',
+  },
 });
 
 const ProductTitle = styled(Typography)({
@@ -93,14 +131,24 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const imageUrl = product.image
+    .replace('.jpg', '.webp')
+    .replace(/^\//, '');
+
   return (
     <StyledCard>
-      <Link to={`/${product.category}/${product.itemId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <StyledCardMedia
-          component="img"
-          image={product.image}
-          alt={product.name}
-        />
+      <Link 
+        to={`/${product.category}/${product.itemId}`} 
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        <ImageContainer>
+          <StyledCardMedia
+            component="img"
+            image={imageUrl}
+            alt={product.name}
+          />
+        </ImageContainer>
+        
         <CardContent sx={{ p: 0 }}>
           <ProductTitle
             sx={{ 
@@ -162,18 +210,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </Link>
       
       <ButtonsContainer>
-        <Button 
+        <AddToCartButton 
           variant="contained" 
           fullWidth
-          sx={{
-            height: '40px',
-            fontSize: '14px',
-            fontWeight: 700,
-            lineHeight: '21px',
-          }}
         >
           Add to cart
-        </Button>
+        </AddToCartButton>
         <FavoriteButton variant="outlined">
           <FavoriteBorderIcon sx={{ fontSize: 20, color: '#0F0F11' }} />
         </FavoriteButton>

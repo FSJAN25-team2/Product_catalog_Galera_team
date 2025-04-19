@@ -11,8 +11,8 @@ const testProducts = [
     screen: "6.1' OLED",
     capacity: '256GB',
     ram: '6GB',
-    image: 'https://example.com/iphone.jpg',
-    itemId: '1',
+    image: 'img/phones/apple-iphone-14-pro/spaceblack/00.webp',
+    itemId: 'apple-iphone-14-pro-256gb-spaceblack',
     category: 'phones',
   },
   {
@@ -22,8 +22,8 @@ const testProducts = [
     screen: "6.1' OLED",
     capacity: '128GB',
     ram: '4GB',
-    image: 'https://example.com/iphone13.jpg',
-    itemId: '2',
+    image: 'img/phones/apple-iphone-13-pro-max/graphite/00.webp',
+    itemId: 'apple-iphone-13-128gb-graphite',
     category: 'phones',
   },
   {
@@ -33,8 +33,8 @@ const testProducts = [
     screen: "6.1' OLED",
     capacity: '64GB',
     ram: '4GB',
-    image: 'https://example.com/iphone12.jpg',
-    itemId: '3',
+    image: 'img/phones/apple-iphone-12/black/00.webp',
+    itemId: 'apple-iphone-12-64gb-black',
     category: 'phones',
   },
   {
@@ -44,8 +44,8 @@ const testProducts = [
     screen: "6.1' LCD",
     capacity: '64GB',
     ram: '4GB',
-    image: 'https://example.com/iphone11.jpg',
-    itemId: '4',
+    image: 'img/phones/apple-iphone-11/black/00.webp',
+    itemId: 'apple-iphone-11-64gb-black',
     category: 'phones',
   }
 ];
