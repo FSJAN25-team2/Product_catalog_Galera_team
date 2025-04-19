@@ -14,17 +14,12 @@ interface ProductCardProps {
   category: string;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({
-  name,
-  fullPrice,
-  price,
-  screen,
-  capacity,
-  ram,
-  image,
-  itemId,
-  category,
-}) => {
+interface Product {
+  product: ProductCardProps;
+}
+
+export const ProductCard: React.FC<Product> = ({product}) => {
+  const { capacity, category, fullPrice, image, itemId, name, price, ram, screen } = product;
   return (
     <div className="product-card">
       <Link to={`/${category}/${itemId}`} className="product-card__link">
