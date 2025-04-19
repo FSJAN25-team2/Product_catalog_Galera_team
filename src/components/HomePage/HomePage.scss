@@ -1,15 +1,33 @@
 .home-page {
-  padding: 24px;
+  max-width: 1136px;
+  margin: 0 auto;
+  padding: 0 16px;
 
   &__title {
     font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 32px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    line-height: 41px;
+    letter-spacing: -0.01em;
   }
 
   &__content {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 272px);
     gap: 16px;
+    justify-content: center;
+
+    @media (max-width: 1199px) {
+      grid-template-columns: repeat(3, 272px);
+    }
+
+    @media (max-width: 899px) {
+      grid-template-columns: repeat(2, 272px);
+    }
+
+    @media (max-width: 639px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
   }
 } 

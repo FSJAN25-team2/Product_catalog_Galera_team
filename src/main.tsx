@@ -1,3 +1,4 @@
+import './styles/global.scss';
 import './components/NavBar/NavBar.scss';
 
 import { createRoot } from 'react-dom/client';

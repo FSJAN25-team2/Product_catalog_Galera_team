@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Перевизначення шрифтів для MUI
+.MuiTypography-root {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.MuiTypography-h1,
+.MuiTypography-h2 {
+  font-weight: 800 !important;
+}
+
+.MuiTypography-h3,
+.MuiTypography-h4,
+.MuiTypography-subtitle1,
+.MuiTypography-subtitle2,
+.MuiTypography-body1,
+.MuiTypography-body2 {
+  font-weight: 600 !important;
+}
+
+.MuiButton-root {
+  font-weight: 700 !important;
+} 
