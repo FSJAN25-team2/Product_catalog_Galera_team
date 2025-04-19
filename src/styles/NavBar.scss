@@ -1,34 +1,109 @@
 body {
    margin: 0;
-   font-family: 'Mont-Regular';
+   font-family: 'Mont-Regular', sans-serif;
 }
 
-.container {
-    display: flex;
+.nav {
     height: 64px;
-    align-items: center;
-    gap: 24px;
-}
+    background-color: #fff;
+    border-bottom: 1px solid #E2E6E9;
 
-.logo {
-    &__image {
-        width: 80px;
-    }
-    &__link {
-        max-height: 40px;
-    }
-}
-
-.navigation {
-    &__list {
+    &__container {
+        max-width: 1200px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 16px;
         display: flex;
-        flex-direction: row;
-        list-style: none;
-        gap: 64px;
-        padding: 0;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: 1199px) {
+            max-width: 1199px;
+            padding: 0 24px;
+        }
+
+        @media (max-width: 639px) {
+            max-width: 639px;
+            padding: 0 16px;
+        }
     }
 
-    &__link_item {
+    &__logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 128px;
+        height: 64px;
+        padding: 0 24px;
+    }
+
+    &__logo-image {
+        width: 80px;
+        height: 28px;
+    }
+
+    &__menu {
+        display: flex;
+        gap: 64px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        @media (max-width: 1199px) {
+            gap: 32px;
+        }
+
+        @media (max-width: 639px) {
+            gap: 16px;
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &__menu-link {
+        color: #89939A;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 12px;
+        line-height: 11px;
+        letter-spacing: 0.04em;
         text-transform: uppercase;
+        padding: 24px 0;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s;
+
+        &:hover {
+            color: #0F0F11;
+            border-bottom: 2px solid #0F0F11;
+        }
+
+        &.active {
+            color: #0F0F11;
+            border-bottom: 2px solid #0F0F11;
+        }
+    }
+
+    &__icons {
+        display: flex;
+        gap: 32px;
+    }
+
+    &__icon-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        text-decoration: none;
+    }
+
+    &__icon {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 }
