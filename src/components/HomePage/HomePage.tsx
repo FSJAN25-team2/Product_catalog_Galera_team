@@ -1,4 +1,5 @@
 import { ProductCard } from '../ProductCard/ProductCard';
+import SwiperPhone from '../SwiperPhone/SwiperPhone';
 import './HomePage.scss';
 
 const testProduct = {
@@ -21,6 +22,7 @@ export const HomePage = () => {
       </h1>
       
       <div className="home-page__content">
+        <SwiperPhone />
         <ProductCard product={testProduct} />
         <ProductCard product={testProduct} />
         <ProductCard product={testProduct} />
