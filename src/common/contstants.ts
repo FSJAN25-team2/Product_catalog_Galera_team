@@ -1,0 +1,1 @@
+export const SERVER_BASE_URL = "https://product-catalog-galera-team-server.onrender.com/api";

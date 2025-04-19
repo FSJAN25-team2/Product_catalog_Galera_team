@@ -2,6 +2,9 @@ import './PhonesCatalog.scss';
 import React, { useEffect, useState } from 'react';
 import { Phone } from '../../types/Phone';
 import { ProductCard } from '../ProductCard/ProductCard';
+import { getPhones } from '../../api/phones';
+
+// Need to create .env file and migrate base server URL
 
 export const PhonesCatalog: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
@@ -9,9 +12,9 @@ export const PhonesCatalog: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(16);
 
   useEffect(() => {
-    fetch('/api/phones.json')
-      .then(response => response.json())
-      .then(data => setPhones(data));
+    getPhones()
+      .then(data => setPhones(data))
+      .catch(error => console.error(error));
   }, []);
 
   const sortedPhones = [...phones].sort((a, b) => {
@@ -85,4 +88,3 @@ export const PhonesCatalog: React.FC = () => {
     </div>
   );
 };
-
