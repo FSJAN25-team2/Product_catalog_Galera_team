@@ -4,6 +4,10 @@
   border: 1px solid #E2E6E9;
   border-radius: 8px;
   transition: all 0.3s;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   &:hover {
     border-color: #0F0F11;
@@ -18,7 +22,7 @@
   &__image-container {
     width: 208px;
     height: 208px;
-    margin-bottom: 24px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,7 +38,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    margin: 0 0 8px;
+    margin: 0;
     height: 42px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -43,14 +47,15 @@
   }
 
   &__price-block {
-    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   &__price {
     font-weight: 800;
     font-size: 22px;
     line-height: 140%;
-    margin-right: 8px;
   }
 
   &__full-price {
@@ -64,21 +69,18 @@
   &__divider {
     height: 1px;
     background: #E2E6E9;
-    margin-bottom: 16px;
+    width: 100%;
   }
 
   &__specs {
-    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   &__spec-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   &__spec-name {
@@ -139,4 +141,4 @@
     width: 16px;
     height: 16px;
   }
-} 
+}
