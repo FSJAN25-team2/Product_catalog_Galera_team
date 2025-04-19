@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 interface Category {
@@ -39,34 +39,28 @@ export const CategoryBlock: React.FC = () => {
         py: '80px',
       }}
     >
-      <Grid 
-        container 
-        columns={24}
+      <Box 
         sx={{
           maxWidth: '1200px',
           margin: '0 auto',
+          px: '32px',
         }}
       >
-        <Grid item xs={24} sx={{ px: '32px', mb: 3 }}>
-          <Typography
-            component="h2"
-            sx={{
-              fontSize: '32px',
-              fontWeight: 800,
-              lineHeight: '41px',
-              color: '#313237',
-            }}
-          >
-            Shop by category
-          </Typography>
-        </Grid>
+        <Typography
+          component="h2"
+          sx={{
+            fontSize: '32px',
+            fontWeight: 800,
+            lineHeight: '41px',
+            color: '#313237',
+            mb: 3,
+          }}
+        >
+          Shop by category
+        </Typography>
 
-        <Grid 
-          container 
-          item 
-          xs={24}
+        <Box 
           sx={{ 
-            px: '32px',
             display: 'grid',
             gridTemplateColumns: {
               xs: '1fr',
@@ -132,8 +126,8 @@ export const CategoryBlock: React.FC = () => {
               </Box>
             </Link>
           ))}
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Box>
   );
 }; 

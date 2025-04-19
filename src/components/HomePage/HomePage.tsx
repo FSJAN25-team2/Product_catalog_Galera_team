@@ -1,6 +1,7 @@
 import { Container, Typography, Grid, Box } from '@mui/material';
 import { ProductCard } from '../ProductCard/ProductCard';
 import SwiperPhone from '../SwiperPhone/SwiperPhone';
+import { CategoryBlock } from '../CategoryBlock/CategoryBlock';
 import './HomePage.scss';
 
 const testProducts = [
@@ -55,6 +56,10 @@ export const HomePage = () => {
     <Container>
       <Box sx={{ mb: 6 }}>
         <SwiperPhone />
+      </Box>
+
+      <Box sx={{ mb: 6 }}>
+        <CategoryBlock />
       </Box>
       
       <Typography 
