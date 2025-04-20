@@ -3,13 +3,23 @@ import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   width: '272px',
   padding: '32px',
   display: 'flex',
   flexDirection: 'column',
   gap: '8px',
   backgroundColor: '#fff',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+  border: '1px solid #E2E6E9',
+  borderRadius: '8px',
+
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: '0px 3px 13px rgba(23, 32, 49, 0.1)',
+    borderColor: 'transparent',
+  },
 }));
 
 const StyledCardMedia = styled(CardMedia)({
