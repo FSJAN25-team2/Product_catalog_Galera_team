@@ -1,9 +1,9 @@
-import { Card, CardContent, CardMedia, Typography, Button, Box, Divider } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   width: '272px',
   padding: '32px',
   display: 'flex',
@@ -32,7 +32,7 @@ const ImageContainer = styled(Box)({
   justifyContent: 'center',
 });
 
-const StyledCardMedia = styled(CardMedia)({
+const StyledImage = styled('img')({
   width: '100%',
   height: '100%',
   objectFit: 'contain',
@@ -131,10 +131,6 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const imageUrl = product.image
-    .replace('.jpg', '.webp')
-    .replace(/^\//, '');
-
   return (
     <StyledCard>
       <Link 
@@ -142,9 +138,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         style={{ textDecoration: 'none', color: 'inherit' }}
       >
         <ImageContainer>
-          <StyledCardMedia
-            component="img"
-            image={imageUrl}
+          <StyledImage
+            src={product.image}
             alt={product.name}
           />
         </ImageContainer>

@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Box } from '@mui/material';
+import { Container, Typography, Box } from '@mui/material';
 import { ProductCard } from '../ProductCard/ProductCard';
 import SwiperPhone from '../SwiperPhone/SwiperPhone';
 import { CategoryBlock } from '../CategoryBlock/CategoryBlock';
@@ -74,13 +74,32 @@ export const HomePage = () => {
         Hot prices
       </Typography>
       
-      <Grid container spacing={2} sx={{ mb: 6 }}>
+      <Box 
+        sx={{ 
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2,
+          mb: 6,
+        }}
+      >
         {testProducts.map((product) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={product.itemId}>
+          <Box 
+            key={product.itemId}
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'calc(50% - 8px)',
+                md: 'calc(33.333% - 10.667px)',
+                lg: 'calc(25% - 12px)',
+              },
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
             <ProductCard product={product} />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
 
       <Typography 
         variant="h2" 
@@ -94,13 +113,31 @@ export const HomePage = () => {
         Brand new models
       </Typography>
       
-      <Grid container spacing={2}>
+      <Box 
+        sx={{ 
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2,
+        }}
+      >
         {testProducts.map((product) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={product.itemId}>
+          <Box 
+            key={product.itemId}
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'calc(50% - 8px)',
+                md: 'calc(33.333% - 10.667px)',
+                lg: 'calc(25% - 12px)',
+              },
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
             <ProductCard product={product} />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Container>
   );
 };
