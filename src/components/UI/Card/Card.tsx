@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card as MuiCard, CardProps as MuiCardProps } from '@mui/material';
+import { Card as MuiCard } from '@mui/material';
 import { styles } from './styles';
 import { SxProps, Theme } from '@mui/material/styles';
 
@@ -12,14 +12,14 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({
-  variant = 'default',
+  variant = 'elevation',
   padding = 'medium',
   isHoverable = false,
   children,
   sx,
   ...props
 }) => {
-  const cardStyles = styles[variant];
+  const cardStyles = styles[variant as keyof typeof styles];
   const paddingStyles = styles.padding[padding];
 
   return (

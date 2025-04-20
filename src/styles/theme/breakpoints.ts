@@ -1,6 +1,6 @@
-import { Breakpoints } from '@mui/material/styles';
+import { Breakpoint, BreakpointsOptions } from '@mui/material/styles';
 
-export const breakpoints: Breakpoints = {
+export const breakpoints: BreakpointsOptions = {
   values: {
     xs: 0,
     sm: 640,

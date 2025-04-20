@@ -71,7 +71,7 @@ export const HomePage = () => {
       
       <Grid container spacing={2} sx={{ mb: 6 }}>
         {testProducts.map((product) => (
-          <Grid xs={12} sm={6} md={4} lg={3} key={product.itemId}>
+          <Grid component="div" item xs={12} sm={6} md={4} lg={3} key={product.itemId}>
             <ProductCard product={product} />
           </Grid>
         ))}
@@ -91,7 +91,7 @@ export const HomePage = () => {
       
       <Grid container spacing={2}>
         {testProducts.map((product) => (
-          <Grid xs={12} sm={6} md={4} lg={3} key={product.itemId}>
+          <Grid component="div" item xs={12} sm={6} md={4} lg={3} key={product.itemId}>
             <ProductCard product={product} />
           </Grid>
         ))}

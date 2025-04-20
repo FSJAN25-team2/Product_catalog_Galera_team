@@ -22,12 +22,20 @@ const StyledCard = styled(Card)(() => ({
   },
 }));
 
-const StyledCardMedia = styled(CardMedia)({
+const ImageBox = styled(Box)({
   width: '208px',
   height: '196px',
   margin: '0 auto',
-  objectFit: 'contain',
   marginBottom: '24px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+const StyledCardMedia = styled(CardMedia)({
+  width: '100%',
+  height: '100%',
+  objectFit: 'contain',
 });
 
 const PriceBlock = styled(Box)({
@@ -103,15 +111,23 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const imageUrl = product.image
+    .replace('.jpg', '.webp')
+    .replace(/^\//, '');
+
   return (
     <StyledCard>
-      <Link to={`/${product.category}/${product.itemId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <ImageContainer>
+      <Link 
+        to={`/${product.category}/${product.itemId}`} 
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        <ImageBox>
           <StyledCardMedia
-            image={product.image}
-            alt={product.name}
+            component="img"
+            src={imageUrl}
+            title={product.name}
           />
-        </ImageContainer>
+        </ImageBox>
         <CardContent sx={{ p: 0 }}>
           <ProductTitle
             sx={{ 
