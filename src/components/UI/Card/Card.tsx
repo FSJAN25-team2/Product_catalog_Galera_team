@@ -1,11 +1,14 @@
 import React from 'react';
 import { Card as MuiCard, CardProps as MuiCardProps } from '@mui/material';
 import { styles } from './styles';
+import { SxProps, Theme } from '@mui/material/styles';
 
-export interface CardProps extends MuiCardProps {
-  variant?: 'default' | 'outlined' | 'elevated';
+interface CardProps {
+  children: React.ReactNode;
+  variant?: 'elevation' | 'outlined';
   padding?: 'none' | 'small' | 'medium' | 'large';
   isHoverable?: boolean;
+  sx?: SxProps<Theme>;
 }
 
 export const Card: React.FC<CardProps> = ({

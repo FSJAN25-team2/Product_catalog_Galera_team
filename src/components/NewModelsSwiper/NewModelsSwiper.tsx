@@ -7,6 +7,7 @@ import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './NewModelsSwiper.scss';
+import { Product } from '../../types/product';
 
 interface Props {
   products: Product[];

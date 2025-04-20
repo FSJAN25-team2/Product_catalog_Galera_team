@@ -1,10 +1,12 @@
-export const breakpoints = {
+import { Breakpoints } from '@mui/material/styles';
+
+export const breakpoints: Breakpoints = {
   values: {
     xs: 0,
-    sm: 600,
-    md: 960,
-    lg: 1200,
-    xl: 1536,
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
   },
   up: (key: keyof typeof breakpoints.values) => 
     `@media (min-width: ${breakpoints.values[key]}px)`,

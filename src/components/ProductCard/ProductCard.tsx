@@ -106,11 +106,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <StyledCard>
       <Link to={`/${product.category}/${product.itemId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <StyledCardMedia
-          component="img"
-          image={product.image}
-          alt={product.name}
-        />
+        <ImageContainer>
+          <StyledCardMedia
+            image={product.image}
+            alt={product.name}
+          />
+        </ImageContainer>
         <CardContent sx={{ p: 0 }}>
           <ProductTitle
             sx={{ 
