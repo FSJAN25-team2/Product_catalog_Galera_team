@@ -5,7 +5,7 @@ import { ProductCard } from '../ProductCard/ProductCard';
 import { getPhones } from '../../api/phones';
 import { useSearchParams } from 'react-router-dom';
 
-import { Filters } from './sorting';
+import { Filters } from './Sorting';
 import { Pagination } from './Pagination';
 
 import {
