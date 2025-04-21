@@ -65,7 +65,7 @@ export const ProductCard: React.FC<Product> = ({product}) => {
           </button>
           <button className="product-card__favorite">
             <img 
-              src="/logos/favourites-icon.svg" 
+              src="/icons/favourites-icon.svg" 
               alt="Add to favorites" 
               className="product-card__favorite-icon"
             />
