@@ -1,0 +1,10 @@
+@use 'utils/mixins' as *;
+@use 'utils/normalize' as *;
+@use 'utils/variables' as *;
+@import '../design/templates/global-layout';
+@import '../design/organisms/NavBar/NavBar';
+@import '../design/organisms/SwiperBanner/SwiperBanner';
+@import '../design/organisms/SwiperPhone/SwiperPhone';
+@import '../design/organisms/ProductCard/ProductCard';
+@import '../pages/HomePage/HomePage.scss';
+@import '../pages/PhonesPage/PhonesPage.scss';

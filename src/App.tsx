@@ -1,12 +1,21 @@
 import { Outlet } from 'react-router-dom';
-import PageLayout from './components/layout/PageLayout';
+import { NavBar } from './design/organisms/NavBar/NavBar';
+import { Footer } from './design/organisms/Footer/Footer';
+import { BackToTop } from './design/molecules/BackToTop/BackToTop';
+import { GridTemplate } from './design/templates/GridTemplate';
 
 function App() {
   return (
-    <PageLayout>
-      <Outlet />
-    </PageLayout>
+    <>
+      <NavBar />
+
+      <GridTemplate> 
+        <Outlet />
+        <Footer />
+        <BackToTop />
+      </GridTemplate>
+    </>
   );
 }
 
-export default App; 
+export default App;
