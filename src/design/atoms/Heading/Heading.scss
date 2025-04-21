@@ -1,0 +1,43 @@
+@import '../../../styles/typography.scss';
+@import '../../../styles/utils/mixins.scss';
+
+.heading {
+  margin: 0;
+  padding: 0;
+
+  &--h1 {
+    @include h1-mobile;
+
+    @include on-tablet {
+      @include h1-desktop;
+    }
+  }
+
+  &--h2 {
+    @include h2-mobile;
+
+    @include on-tablet {
+      @include h2-desktop;
+    }
+  }
+
+  &--h3 {
+    @include h3-mobile;
+
+    @include on-tablet {
+      @include h3-desktop;
+    }
+  }
+
+  &--h4 {
+    @include h4-mobile;
+
+    @include on-tablet {
+      @include h4-desktop;
+    }
+  }
+
+  &--uppercase {
+    @include uppercase-desktop;
+  }
+} 

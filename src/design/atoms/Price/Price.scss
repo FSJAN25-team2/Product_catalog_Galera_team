@@ -1,3 +1,5 @@
+@import '../../../styles/typography.scss';
+
 .product-card__price-block {
   display: flex;
   align-items: center;
@@ -5,15 +7,11 @@
 }
 
 .product-card__price {
-  font-weight: 800;
-  font-size: 22px;
-  line-height: 140%;
+  @include h3-desktop;
 }
 
 .product-card__full-price {
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 28px;
+  @include h3-desktop;
   text-decoration-line: line-through;
   color: #89939A;
 } 

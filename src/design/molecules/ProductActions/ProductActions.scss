@@ -1,23 +1,24 @@
+@import '../../../styles/typography.scss';
+@import '../../../styles/utils/variables.scss';
+
 .product-card__buttons {
   display: flex;
   gap: 8px;
 }
 
 .product-card__add-to-cart {
+  @include buttons-desktop;
   flex-grow: 1;
   height: 40px;
-  background: #216CFF;
+  background: $primary-grey-color;
   border: none;
   border-radius: 8px;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 21px;
-  color: #FFFFFF;
+  color: $white;
   cursor: pointer;
   transition: all 0.3s;
 
   &:hover {
-    background: #005BFF;
+    background: #000;
   }
 }
 
@@ -27,14 +28,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FFFFFF;
-  border: 1px solid #B4BDC4;
+  background: $white;
+  border: 1px solid $icons-outline-color;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s;
 
   &:hover {
-    border-color: #0F0F11;
+    border-color: $primary-grey-color;
   }
 }
 

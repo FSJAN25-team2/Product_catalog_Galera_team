@@ -1,18 +1,16 @@
+@import '../../../styles/typography.scss';
+
 .product-card__spec-item {
   display: flex;
   justify-content: space-between;
 }
 
 .product-card__spec-name {
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
+  @include small-text-desktop;
   color: #89939A;
 }
 
 .product-card__spec-value {
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 15px;
+  @include small-text-desktop;
   color: #0F0F11;
 } 
