@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Price } from '../../atoms/Price/Price';
+import { ProductSpecs } from '../../molecules/ProductSpecs/ProductSpecs';
+import { ProductActions } from '../../molecules/ProductActions/ProductActions';
+import './ProductCard.scss';
 
 interface ProductCardProps {
   name: string;
@@ -17,8 +21,19 @@ interface Product {
   product: ProductCardProps;
 }
 
-export const ProductCard: React.FC<Product> = ({product}) => {
-  const { capacity, category, fullPrice, image, itemId, name, price, ram, screen } = product;
+export const ProductCard: React.FC<Product> = ({ product }) => {
+  const { 
+    capacity, 
+    category, 
+    fullPrice, 
+    image, 
+    itemId, 
+    name, 
+    price, 
+    ram, 
+    screen 
+  } = product;
+
   return (
     <div className="product-card">
       <Link to={`/${category}/${itemId}`} className="product-card__link">
@@ -32,44 +47,13 @@ export const ProductCard: React.FC<Product> = ({product}) => {
 
         <h3 className="product-card__title">{name}</h3>
 
-        <div className="product-card__price-block">
-          <span className="product-card__price">${price}</span>
-          {fullPrice > price && (
-            <span className="product-card__full-price">${fullPrice}</span>
-          )}
-        </div>
+        <Price price={price} fullPrice={fullPrice} />
 
         <div className="product-card__divider" />
 
-        <div className="product-card__specs">
-          <div className="product-card__spec-item">
-            <span className="product-card__spec-name">Screen</span>
-            <span className="product-card__spec-value">{screen}</span>
-          </div>
+        <ProductSpecs screen={screen} capacity={capacity} ram={ram} />
 
-          <div className="product-card__spec-item">
-            <span className="product-card__spec-name">Capacity</span>
-            <span className="product-card__spec-value">{capacity}</span>
-          </div>
-
-          <div className="product-card__spec-item">
-            <span className="product-card__spec-name">RAM</span>
-            <span className="product-card__spec-value">{ram}</span>
-          </div>
-        </div>
-
-        <div className="product-card__buttons">
-          <button className="product-card__add-to-cart">
-            Add to cart
-          </button>
-          <button className="product-card__favorite">
-            <img 
-              src="/icons/favourites-icon.svg" 
-              alt="Add to favorites" 
-              className="product-card__favorite-icon"
-            />
-          </button>
-        </div>
+        <ProductActions />
       </Link>
     </div>
   );
