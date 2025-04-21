@@ -14,7 +14,7 @@ export const Pagination: React.FC<Props> = ({
   pageNumbers,
 }) => {
   return (
-    <div className="phones-catalog__pagination">
+    <div className="products-catalog__pagination">
       <button
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}

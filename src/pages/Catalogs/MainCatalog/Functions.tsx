@@ -1,6 +1,6 @@
-import { Phone } from '../../types/Phone';
+import { Product } from "../../../types/Product";
 
-export const sortPhones = (phones: Phone[], sortBy: string) => {
+export const sortProducts = (phones: Product [], sortBy: string) => {
   return [...phones].sort((a, b) => {
     switch (sortBy) {
       case 'cheapest':
@@ -17,8 +17,8 @@ export const getTotalPages = (phonesLength: number, itemsPerPage: number) => {
   return Math.ceil(phonesLength / itemsPerPage);
 };
 
-export const getVisiblePhones = (
-  phones: Phone[],
+export const getVisibleProducts = (
+  phones: Product [],
   currentPage: number,
   itemsPerPage: number
 ) => {

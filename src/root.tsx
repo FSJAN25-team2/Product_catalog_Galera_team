@@ -3,14 +3,14 @@ import './design/organisms/NavBar/NavBar.scss';
 import App from './App.tsx';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage/HomePage.tsx';
-import { PhonesPage } from './pages/PhonesPage/PhonesPage.tsx';
-import { TabletsPage } from './pages/TabletsPage/TabletsPage.tsx';
 import { ItemCard } from './pages/ProductPage/ProductPage.tsx';
 import { FavouritesPage } from './pages/FavouritesPage/FavouritesPage.tsx';
-import { AccessoriesPage } from './pages/AccessoriesPage/AccessoriesPage.tsx';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage.tsx';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
+import { PhonesCatalog } from './pages/Catalogs/PhonesCatalog/PhonesCatalog.tsx';
+import { TabletsCatalog } from './pages/Catalogs/TabletsCatalog/TabletsCatalog.tsx';
+import { AccessoriesCatalog } from './pages/Catalogs/AccessoriesCatalog/AccessoriesCatalog.tsx';
 
 export const Root = () => {
   return (
@@ -21,15 +21,15 @@ export const Root = () => {
             <Route index element={<HomePage />}></Route>
             <Route path="homepage" element={<Navigate to="/" />}></Route>
             <Route path="phones">
-              <Route index element={<PhonesPage />} />
+              <Route index element={<PhonesCatalog />} />
               <Route path=":tabId" element={<ItemCard />} />
             </Route>
             <Route path="tablets">
-              <Route index element={<TabletsPage />} />
+              <Route index element={<TabletsCatalog />} />
               <Route path=":tabId" element={<ItemCard />} />
             </Route>
             <Route path="accessories">
-              <Route index element={<AccessoriesPage />} />
+              <Route index element={<AccessoriesCatalog />} />
               <Route path=":tabId" element={<ItemCard />} />
             </Route>
             <Route path="favourites" element={<FavouritesPage />}></Route>

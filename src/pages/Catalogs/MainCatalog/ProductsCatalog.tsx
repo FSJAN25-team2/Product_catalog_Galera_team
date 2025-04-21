@@ -1,21 +1,29 @@
+import { ProductCard } from '../../../design/organisms/ProductCard/ProductCard';
 import React, { useEffect, useState } from 'react';
-import { Phone } from '../../types/Phone';
-import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
-import { getPhones } from '../../services/api/phones';
 import { useSearchParams } from 'react-router-dom';
-
 import { Filters } from './Sorting';
 import { Pagination } from './Pagination';
+import { Product } from '../../../types/Product';
 
 import {
-  sortPhones,
+  sortProducts,
   getTotalPages,
-  getVisiblePhones,
+  getVisibleProducts,
   getPageNumbers,
 } from './Functions';
 
-export const PhonesPage: React.FC = () => {
-  const [phones, setPhones] = useState<Phone[]>([]);
+type Props = {
+  title: string;
+  category: string;
+  fetchProducts: () => Promise<Product[]>;
+};
+
+export const ProductsCatalog: React.FC<Props> = ({
+  title,
+  category,
+  fetchProducts,
+}) => {
+  const [products, setProducts] = useState<Product[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortBy = searchParams.get('sort') || 'newest';
@@ -23,10 +31,10 @@ export const PhonesPage: React.FC = () => {
   const currentPage = +(searchParams.get('page') || 1);
 
   useEffect(() => {
-    getPhones()
-      .then(data => setPhones(data))
+    fetchProducts()
+      .then(data => setProducts(data))
       .catch(error => console.error(error));
-  }, []);
+  }, [fetchProducts]);
 
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -48,10 +56,10 @@ export const PhonesPage: React.FC = () => {
     setSearchParams(params);
   };
 
-  const sortedPhones = sortPhones(phones, sortBy);
-  const totalPages = getTotalPages(sortedPhones.length, itemsPerPage);
-  const visiblePhones = getVisiblePhones(
-    sortedPhones,
+  const sortedProducts = sortProducts(products, sortBy);
+  const totalPages = getTotalPages(sortedProducts.length, itemsPerPage);
+  const visibleProducts = getVisibleProducts(
+    sortedProducts,
     currentPage,
     itemsPerPage,
   );
@@ -59,9 +67,9 @@ export const PhonesPage: React.FC = () => {
 
   return (
     <div className="container">
-      <div className="phones-catalog">
-        <h1 className="phones-catalog__title">Mobile phones</h1>
-        <p className="phones-catalog__count">{phones.length} models</p>
+      <div className="products-catalog">
+        <h1 className="products-catalog__title">{title}</h1>
+        <p className="products-catalog__count">{products.length} models</p>
 
         <Filters
           sortBy={sortBy}
@@ -70,20 +78,20 @@ export const PhonesPage: React.FC = () => {
           onItemsPerPageChange={handleItemsPerPageChange}
         />
 
-        <div className="phones-catalog__list">
-          {visiblePhones.map(phone => (
+        <div className="products-catalog__list">
+          {visibleProducts.map(product => (
             <ProductCard
-              key={phone.id}
+              key={product.id}
               product={{
-                name: phone.name,
-                fullPrice: phone.priceRegular,
-                price: phone.priceDiscount,
-                screen: phone.screen,
-                capacity: phone.capacity,
-                ram: phone.ram,
-                image: phone.images[0],
-                itemId: phone.id,
-                category: 'phones',
+                name: product.name,
+                fullPrice: product.priceRegular,
+                price: product.priceDiscount,
+                screen: product.screen,
+                capacity: product.capacity,
+                ram: product.ram,
+                image: product.images[0],
+                itemId: product.id,
+                category: category,
               }}
             />
           ))}

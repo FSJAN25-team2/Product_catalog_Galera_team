@@ -30,8 +30,8 @@ export const Filters: React.FC<Props> = ({
   };
 
   return (
-    <div className="phones-catalog__filters">
-      <div className="phones-catalog__filter">
+    <div className="products-catalog__filters">
+      <div className="products-catalog__filter">
         <label htmlFor="sort">Sort by</label>
         <select
           id="sort"
@@ -44,7 +44,7 @@ export const Filters: React.FC<Props> = ({
         </select>
       </div>
 
-      <div className="phones-catalog__filter">
+      <div className="products-catalog__filter">
         <label htmlFor="itemsOnPage">Items on page</label>
         <select
           id="itemsOnPage"
@@ -61,7 +61,7 @@ export const Filters: React.FC<Props> = ({
       {hasFilters() && (
         <div>
           <label>Reset Filters</label>
-          <button className="phones-catalog__reset" onClick={resetFilters}>
+          <button className="products-catalog__reset" onClick={resetFilters}>
             Reset Filters
           </button>
         </div>
