@@ -1,4 +1,5 @@
 import { ProductCard } from '../ProductCard/ProductCard';
+import SwiperBanner from '../SwiperBanner/SwiperBanner';
 import SwiperPhone from '../SwiperPhone/SwiperPhone';
 import './HomePage.scss';
 
@@ -17,10 +18,12 @@ const testProduct = {
 export const HomePage = () => {
   return (
     <div className="home-page">
-      <h1 className="home-page__title">
-        Welcome to Nice Gadgets store
-      </h1>
-      
+      <h1 className="home-page__title">Welcome to Nice Gadgets store</h1>
+
+      <div>
+        <SwiperBanner />
+      </div>
+
       <div className="home-page__content">
         <SwiperPhone />
         <ProductCard product={testProduct} />
