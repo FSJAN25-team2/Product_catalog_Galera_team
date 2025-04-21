@@ -42,7 +42,7 @@ const SwiperBanner: React.FC = () => {
           pagination={{
             el: '.custom-pagination',
             clickable: true,
-            renderBullet: (index: number, className: string) =>
+            renderBullet: (_: number, className: string) =>
               `<span class="${className}"></span>`,
           }}
           navigation={{
