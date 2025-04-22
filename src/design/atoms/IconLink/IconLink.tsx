@@ -5,7 +5,7 @@ interface Props {
   to: string;
   src: string;
   alt: string;
-  className: string;
+  className?: string;
   onClick?: () => void;
 }
 

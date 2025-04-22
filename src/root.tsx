@@ -9,6 +9,7 @@ import { store } from './store/store.ts';
 import { PhonesCatalog } from './pages/Catalogs/PhonesCatalog/PhonesCatalog.tsx';
 import { TabletsCatalog } from './pages/Catalogs/TabletsCatalog/TabletsCatalog.tsx';
 import { AccessoriesCatalog } from './pages/Catalogs/AccessoriesCatalog/AccessoriesCatalog.tsx';
+import { Cart } from './pages/Cart/Cart.tsx';
 
 export const Root = () => {
   return (
@@ -31,6 +32,7 @@ export const Root = () => {
               <Route path=":tabId" element={<ItemCard />} />
             </Route>
             <Route path="favourites" element={<FavouritesPage />}></Route>
+            <Route path="cart" element={<Cart />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Route>
         </Routes>
