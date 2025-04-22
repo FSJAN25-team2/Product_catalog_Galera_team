@@ -1,0 +1,28 @@
+.primary-button {
+  flex-grow: 1;
+  height: 40px;
+  background-color: $primary-grey-color;
+  border: none;
+
+  font-weight: $text-weight-bold;
+  font-size: 14px;
+  line-height: 21px;
+  color: $white;
+
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &--active {
+    background-color: $white;
+    color: $highlight-green;
+    border: 1px solid $element-border-color;
+  }
+
+  &:hover {
+    box-shadow: 0px 3px 13px 0px #17203166;
+  }
+
+  &:active {
+    background-color: #222;
+  }
+}

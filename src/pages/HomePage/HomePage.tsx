@@ -10,7 +10,7 @@ const testProduct = {
   screen: "6.1' OLED",
   capacity: '256GB',
   ram: '6GB',
-  image: 'https://example.com/iphone.jpg',
+  image: 'https://placehold.co/600x900',
   itemId: '1',
   category: 'phones',
 };
