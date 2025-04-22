@@ -2,10 +2,22 @@
 @use 'utils/normalize' as *;
 @use 'utils/variables' as *;
 @import '../design/templates/global-layout';
+
+//organisms
 @import '../design/organisms/Header/Header';
 @import '../design/organisms/SwiperBanner/SwiperBanner';
 @import '../design/organisms/SwiperPhone/SwiperPhone';
 @import '../design/organisms/ProductCard/ProductCard';
-@import '../pages/HomePage/HomePage.scss';
 
+//pages
+@import '../pages/HomePage/HomePage.scss';
 @import '../pages/Catalogs/MainCatalog/ProductsCatalog.scss';
+
+//atoms
+@import '../design/atoms/Typography/H1/H1';
+@import '../design/atoms/Typography/H2/H2';
+@import '../design/atoms/Typography/H3/H3';
+@import '../design/atoms/Typography/H4/H4';
+@import '../design/atoms/Typography/P/P';
+@import '../design/atoms/Typography/P_Small/P_Small';
+@import '../design/atoms/Typography/P_UpperCase/P_UpperCase';
