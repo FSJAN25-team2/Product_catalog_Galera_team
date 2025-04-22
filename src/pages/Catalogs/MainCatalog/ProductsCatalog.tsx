@@ -1,10 +1,10 @@
 import { ProductCard } from '../../../design/organisms/ProductCard/ProductCard';
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { Filters } from './Sorting';
 import { Pagination } from './Pagination';
 import { Product } from '../../../types/Product';
-
+import { Category } from '../../../types/Category';
 import {
   sortProducts,
   getTotalPages,
@@ -14,7 +14,7 @@ import {
 
 type Props = {
   title: string;
-  category: string;
+  category: Category;
   fetchProducts: () => Promise<Product[]>;
 };
 
@@ -35,6 +35,8 @@ export const ProductsCatalog: React.FC<Props> = ({
       .then(data => setProducts(data))
       .catch(error => console.error(error));
   }, [fetchProducts]);
+
+  console.log(products[0]);
 
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -65,45 +67,61 @@ export const ProductsCatalog: React.FC<Props> = ({
   );
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
+  const categoryNames = {
+    [Category.Phones]: 'Phones',
+    [Category.Tablets]: 'Tablets',
+    [Category.Accessories]: 'Accessories',
+  };
+
+  const formattedCategory = categoryNames[category];
+
   return (
-    <div className="container">
-      <div className="products-catalog">
-        <h1 className="products-catalog__title">{title}</h1>
-        <p className="products-catalog__count">{products.length} models</p>
-
-        <Filters
-          sortBy={sortBy}
-          itemsPerPage={itemsPerPage}
-          onSortChange={handleSortChange}
-          onItemsPerPageChange={handleItemsPerPageChange}
-        />
-
-        <div className="products-catalog__list">
-          {visibleProducts.map(product => (
-            <ProductCard
-              key={product.id}
-              product={{
-                name: product.name,
-                fullPrice: product.priceRegular,
-                price: product.priceDiscount,
-                screen: product.screen,
-                capacity: product.capacity,
-                ram: product.ram,
-                image: product.images[0],
-                itemId: product.id,
-                category: category,
-              }}
-            />
-          ))}
-        </div>
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-          pageNumbers={pageNumbers}
-        />
+    <div className="products-catalog">
+      <div className="products-catalog__breadcrumbs">
+        <Link to="/" className="products-catalog__breadcrumbs-link">
+          Home
+        </Link>
+        <span className="products-catalog__breadcrumbs-separator">/</span>
+        <span className="products-catalog__breadcrumbs-current">
+          {formattedCategory}
+        </span>
       </div>
+
+      <h1 className="products-catalog__title">{title}</h1>
+      <p className="products-catalog__count">{products.length} models</p>
+
+      <Filters
+        sortBy={sortBy}
+        itemsPerPage={itemsPerPage}
+        onSortChange={handleSortChange}
+        onItemsPerPageChange={handleItemsPerPageChange}
+      />
+
+      {/* <div className="products-catalog__list"> */}
+        {visibleProducts.map(product => (
+          <ProductCard
+            key={product.id}
+            product={{
+              name: product.name,
+              fullPrice: product.priceRegular,
+              price: product.priceDiscount,
+              screen: product.screen,
+              capacity: product.capacity,
+              ram: product.ram,
+              image: product.images[0],
+              itemId: product.id,
+              category: category,
+            }}
+          />
+        ))}
+      {/* </div> */}
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        pageNumbers={pageNumbers}
+      />
     </div>
   );
 };

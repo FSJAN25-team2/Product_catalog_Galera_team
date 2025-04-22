@@ -1,11 +1,12 @@
 import { getAccessories } from "../../../services/api/phones";
+import { Category } from "../../../types/Category";
 import { ProductsCatalog } from "../MainCatalog/ProductsCatalog";
 
 export const AccessoriesCatalog = () => {
   return (
     <ProductsCatalog
       title="Accessories"
-      category="Accessories"
+      category={Category.Accessories}
       fetchProducts={getAccessories}
     />
   );
