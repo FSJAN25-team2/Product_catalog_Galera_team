@@ -1,21 +1,65 @@
+@import '../../../styles/utils/mixins.scss';
+
 .banner-outer-container {
-  grid-column: 1/-1;
+  grid-column: 1 / -1;
   position: relative;
-  max-width: 1136px;
+  max-width: 320px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   box-sizing: border-box;
+
+  @include on-tablet {
+    max-width: 592px;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 16px;
+  }
+
+  @include on-desktop {
+    max-width: 1136px;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(24, 1fr);
+    column-gap: 16px;
+  }
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  @include on-tablet {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 16px;
+  }
+
+  @include on-desktop {
+    grid-template-columns: repeat(24, 1fr);
+    column-gap: 16px;
+  }
 }
 
 .swiper-container {
-  width: calc(100% - 80px);
-  height: 400px;
-  border-radius: 8px;
+  width: 100%;
+  height: 320px;
   background-color: #f5f7ff;
   overflow: hidden;
   position: relative;
+
+  @include on-tablet {
+    grid-column: 2 / 12;
+    height: 189px;
+  }
+
+  @include on-desktop {
+    grid-column: 2 / 24;
+    height: 400px;
+  }
 }
 
 .mySwiper {
@@ -50,39 +94,65 @@
 }
 
 .custom-nav-button {
-  position: absolute;
-  width: 32px;
-  height: 400px;
-  border: 1px solid #e2e6e9;
-  border-radius: 8px;
-  background-color: #ffffff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  top: 0;
-}
+  display: none;
 
-.prev-button {
-  left: 0;
-}
+  @include on-tablet {
+    display: flex;
+    width: 32px;
+    height: 189px;
+    border: 1px solid #e2e6e9;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
 
-.next-button {
-  right: 0;
-}
+    &:hover {
+      border-color: #b4bdc4;
+    }
+  }
 
-.custom-nav-button:hover {
-  border-color: #b4bdc4;
+  @include on-desktop {
+    height: 400px;
+  }
+
+  &.prev-button {
+    @include on-tablet {
+      grid-column: 1 / 2;
+    }
+
+    @include on-desktop {
+      grid-column: 1 / 2;
+    }
+  }
+
+  &.next-button {
+    @include on-tablet {
+      grid-column: 12 / 13;
+    }
+
+    @include on-desktop {
+      grid-column: 24 / 25;
+    }
+  }
 }
 
 .custom-pagination {
+  @include on-tablet {
+    grid-column: 1 / -1;
+  }
+
+  @include on-desktop {
+    grid-column: 1 / -1;
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   margin-top: 8px;
   height: 4px;
+  width: 100%;
 }
 
 .swiper-pagination-bullet {
@@ -96,46 +166,5 @@
 }
 
 .swiper-pagination-bullet-active {
-  width: 14px;
-  height: 4px;
   background-color: #000;
-  border-radius: 0;
-}
-
-@media (min-width: 640px) and (max-width: 1199px) {
-  .banner-outer-container {
-    width: 592px;
-  }
-
-  .swiper-container {
-    width: 100%;
-    height: 189px;
-  }
-
-  .custom-nav-button {
-    height: 189px;
-  }
-
-  .custom-pagination {
-    margin-top: 8px;
-  }
-}
-
-@media (min-width: 320px) and (max-width: 639px) {
-  .banner-outer-container {
-    width: 320px;
-  }
-
-  .swiper-container {
-    width: 100%;
-    height: 320px;
-  }
-
-  .custom-nav-button {
-    display: none;
-  }
-
-  .custom-pagination {
-    margin-top: 8px; 
-  }
 }

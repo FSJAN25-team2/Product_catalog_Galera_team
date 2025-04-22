@@ -1,7 +1,7 @@
 import './HomePage.scss';
 import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
 import SwiperBanner from '../../design/organisms/SwiperBanner/SwiperBanner';
-import SwiperPhone from '../../design/organisms/SwiperPhone/SwiperPhone';
+// import SwiperPhone from '../../design/organisms/SwiperPhone/SwiperPhone';
 
 const testProduct = {
   name: 'Apple iPhone 14 Pro',
@@ -21,7 +21,7 @@ export const HomePage = () => {
       <h1 className="home-page__title">Welcome to Nice Gadgets store</h1>
       <SwiperBanner />
 
-      <SwiperPhone />
+      {/* <SwiperPhone /> */}
       <ProductCard product={testProduct} />
       <ProductCard product={testProduct} />
       <ProductCard product={testProduct} />
