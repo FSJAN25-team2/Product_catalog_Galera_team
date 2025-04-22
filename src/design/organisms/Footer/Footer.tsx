@@ -1,7 +1,18 @@
+import { Logo } from '../../atoms/Logo/Logo';
+
 export const Footer = () => {
   return (
-    <p style={{
-      'gridColumn': '1/-1'
-    }}>© 2025 Galera team</p>
+    <div className="footer">
+      <Logo />
+      <a href="https://github.com/FSJAN25-team2/Product_catalog_Galera_team" rel="noreferrer">
+        github
+      </a>
+      <a href="#" className="footer_link">
+        contacts
+      </a>
+      <a href="#" className="footer_link">
+        rights
+      </a>
+    </div>
   );
 };
