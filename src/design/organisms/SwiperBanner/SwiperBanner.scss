@@ -1,4 +1,6 @@
 @import '../../../styles/utils/mixins.scss';
+@import '../../../styles/utils/variables.scss';
+
 
 .banner-outer-container {
   grid-column: 1 / -1;
@@ -101,7 +103,7 @@
     width: 32px;
     height: 189px;
     border: 1px solid #e2e6e9;
-    background-color: #ffffff;
+    background-color: $white;
     align-items: center;
     justify-content: center;
     z-index: 10;
