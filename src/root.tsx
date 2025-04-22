@@ -1,5 +1,3 @@
-import './design/organisms/NavBar/NavBar.scss';
-
 import App from './App.tsx';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage/HomePage.tsx';
