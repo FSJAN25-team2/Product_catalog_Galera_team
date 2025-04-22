@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { NavBar } from './design/organisms/NavBar/NavBar';
+import { Header } from './design/organisms/Header/Header';
 import { Footer } from './design/organisms/Footer/Footer';
 import { BackToTop } from './design/molecules/BackToTop/BackToTop';
 import { GridTemplate } from './design/templates/GridTemplate';
@@ -7,7 +7,7 @@ import { GridTemplate } from './design/templates/GridTemplate';
 function App() {
   return (
     <>
-      <NavBar />
+      <Header />
 
       <GridTemplate> 
         <Outlet />
