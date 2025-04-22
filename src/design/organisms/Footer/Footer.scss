@@ -1,5 +1,85 @@
+@use '/src/styles/utils/variables.scss' as *;
+
 .footer {
+  grid-column: 1/-1;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  padding: 32px 16px;
+  border-top: $element-border-default;
+
+  @include on-tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo-link {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  &__logo-image {
+    width: 89px;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include on-tablet {
+      flex-direction: row;
+    }
+
+    @include on-desktop {
+      gap: 105px;
+    }
+  }
+
+  &__link {
+    text-transform: uppercase;
+    color: $secondary-grey-color;
+    transition: $transition-behaviour;
+
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 11px;
+    letter-spacing: 4%;
+
+    &:hover {
+      color: $primary-grey-color;
+    }
+  }
+
+  &__back-to-top {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: $secondary-grey-color;
+    transition: $transition-behaviour;
+
+    &--text {
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    &--icon {
+      border: $element-border-default;
+      padding: 7px;
+      transition: $transition-behaviour;
+    }
+
+    &:hover {
+      color: $primary-grey-color;
+
+      .footer__back-to-top--icon {
+        border: $element-border-hover;
+      }
+    }
+  }
 }

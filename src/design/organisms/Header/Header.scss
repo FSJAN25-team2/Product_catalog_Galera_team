@@ -1,7 +1,10 @@
+@use '/src/styles/utils/variables.scss' as *;
+@use '/src/styles/utils/mixins.scss' as *;
+
 .nav {
   height: 64px;
-  background-color: #fff;
-  box-shadow: 0px 1px 0px 0px #e2e6e9;
+  background-color: $white;
+  border-bottom: $element-border-default;
   margin-bottom: 24px;
 
   &--mobile {
@@ -13,23 +16,19 @@
     flex-direction: column;
 
     z-index: 2;
-    background-color: #fff;
+    background-color: &white;
 
     transform: translateX(-100%);
-    transition: all 0.5s ease;
+    transition: $transition-behaviour;
 
     @include on-tablet {
       display: none;
     }
-
-    // @media (min-width: 640px) {
-    //   display: none;
-    // }
   }
 
   &--mobile.active {
     transform: translateX(0);
-    transition: all 0.5s ease;
+    transition: $transition-behaviour;
   }
 
   &__container {
@@ -43,10 +42,10 @@
   &__left__container {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
 
-    @media (max-width: 1199px) {
-      gap: 16px;
+    @include on-desktop {
+      gap: 24px;
     }
   }
 
@@ -55,10 +54,11 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    padding-inline: 16px;
   }
 
   &__logo-image {
-    width: 128px;
+    height: 35px;
   }
 
   &__menu {
@@ -84,7 +84,6 @@
       align-items: center;
 
       list-style: none;
-
     }
 
     &--mobile--li {
@@ -126,7 +125,7 @@
     width: 64px;
     height: 64px;
     text-decoration: none;
-    border-left: 1px solid #e2e6e9;
+    border-left: $element-border-default;
   }
 
   &__icon {
@@ -136,23 +135,23 @@
 
 .link__effects {
   border-bottom: 2px solid transparent;
-  transition: all 0.3s;
+  transition: $transition-behaviour;
 
   &:hover {
     color: #313237;
-    border-bottom: 2px solid #313237;
+    border-bottom: $link-hover-active-border;
   }
 
   &.active {
     color: #313237;
-    border-bottom: 2px solid #313237;
+    border-bottom: $link-hover-active-border;
   }
 }
 
 .top-bar {
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 1px 0px 0px #e2e6e9;
+  border-bottom: $element-border-default;
 }
 
 .bottom-bar {
@@ -166,7 +165,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-left: 1px solid #e2e6e9;
-    border-top: 1px solid #e2e6e9;
+    border-left: $element-border-default;
+    border-top: $element-border-default;
   }
 }

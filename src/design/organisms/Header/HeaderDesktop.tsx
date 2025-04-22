@@ -6,7 +6,7 @@ export const HeaderDesktop = () => {
   return (
     <>
       <div className="nav__left__container">
-        <Logo />
+        <Logo linkClass={"nav__logo"} imgClass={"nav__logo-image"} />
 
         <nav className="nav__menu">
         <MenuLink to="/">home</MenuLink>

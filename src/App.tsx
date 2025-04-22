@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from './design/organisms/Header/Header';
 import { Footer } from './design/organisms/Footer/Footer';
-import { BackToTop } from './design/molecules/BackToTop/BackToTop';
 import { GridTemplate } from './design/templates/GridTemplate';
 
 function App() {
@@ -9,10 +8,9 @@ function App() {
     <>
       <Header />
 
-      <GridTemplate> 
+      <GridTemplate>
         <Outlet />
         <Footer />
-        <BackToTop />
       </GridTemplate>
     </>
   );
