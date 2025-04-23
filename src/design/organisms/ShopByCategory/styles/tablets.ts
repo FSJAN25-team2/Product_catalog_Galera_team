@@ -16,7 +16,7 @@ export const tablets: Category = {
       bottom: '-97%',
     },
     card: {
-      backgroundColor: '#7f8083',
+      backgroundColor: '#8D8D92',
       opacity: 0.9,
     },
   },

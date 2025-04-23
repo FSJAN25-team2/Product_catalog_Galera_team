@@ -16,7 +16,7 @@ export const accessories: Category = {
       bottom: '-70%',
     },
     card: {
-      backgroundColor: '#b64c70',
+      backgroundColor: '#973D5F',
       opacity: 0.9,
     },
   },
