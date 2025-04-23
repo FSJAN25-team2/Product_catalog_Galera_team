@@ -1,4 +1,3 @@
-import { getAccessories } from "../../../services/api/phones";
 import { Category } from "../../../types/Category";
 import { ProductsCatalog } from "../MainCatalog/ProductsCatalog";
 
@@ -7,7 +6,6 @@ export const AccessoriesCatalog = () => {
     <ProductsCatalog
       title="Accessories"
       category={Category.Accessories}
-      fetchProducts={getAccessories}
     />
   );
 };

@@ -1,12 +1,13 @@
-import { Product } from "../../../types/Product";
+import { ShortProduct } from "../../../types/ShortProduct";
 
-export const sortProducts = (phones: Product [], sortBy: string) => {
+export const sortProducts = (phones: ShortProduct [], sortBy: string) => {
   return [...phones].sort((a, b) => {
     switch (sortBy) {
       case 'cheapest':
-        return a.priceDiscount - b.priceDiscount;
+        return a.price - b.price;
+
       case 'mostExpensive':
-        return b.priceDiscount - a.priceDiscount;
+        return b.price - a.price;
       default:
         return 0;
     }
@@ -18,7 +19,7 @@ export const getTotalPages = (phonesLength: number, itemsPerPage: number) => {
 };
 
 export const getVisibleProducts = (
-  phones: Product [],
+  phones: ShortProduct [],
   currentPage: number,
   itemsPerPage: number
 ) => {
