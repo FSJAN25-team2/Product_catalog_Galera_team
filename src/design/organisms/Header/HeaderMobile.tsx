@@ -13,7 +13,7 @@ export const HeaderMobile = () => {
 
   return (
     <>
-      <Logo linkClass={"nav__logo"} imgClass={"nav__logo-image"} />
+      <Logo linkClass={'nav__logo'} imgClass={'nav__logo-image'} />
 
       <MenuToggleIcon
         src={'/icons/burger-menu.svg'}
@@ -25,7 +25,7 @@ export const HeaderMobile = () => {
         className={isMobileMenuActive ? 'nav--mobile active' : 'nav--mobile'}
       >
         <div className="top-bar">
-          <Logo linkClass={"nav__logo"} imgClass={"nav__logo-image"} />
+          <Logo linkClass={'nav__logo'} imgClass={'nav__logo-image'} />
 
           <MenuToggleIcon
             src={'/icons/icon-close.svg'}
@@ -63,8 +63,18 @@ export const HeaderMobile = () => {
         </nav>
 
         <div className="bottom-bar" onClick={handleToggleMobileMenu}>
-          <IconLink to="/favourites" src="/icons/favourites-icon.svg" alt="Favourites" className="bottom-bar__link" />
-          <IconLink to="/cart" src="/icons/cart-icon.svg" alt="Cart" className="bottom-bar__link" />
+          <IconLink
+            to="/favourites"
+            src="/icons/favourites-icon.svg"
+            alt="Favourites"
+            className="bottom-bar__link"
+          />
+          <IconLink
+            to="/cart"
+            src="/icons/cart-icon.svg"
+            alt="Cart"
+            className="bottom-bar__link"
+          />
         </div>
       </aside>
     </>

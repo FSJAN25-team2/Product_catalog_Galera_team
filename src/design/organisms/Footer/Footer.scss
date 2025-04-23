@@ -1,11 +1,15 @@
 @use '/src/styles/utils/variables.scss' as *;
 
 .footer {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
+  height: 257px;
   margin-top: 64px;
   border-top: $element-border-default;
+  background-color: $white;
+  margin-top: 56px;
+
+  @include on-tablet-small {
+    height: 96px;
+  }
 
   @include on-desktop {
     margin-top: 80px;

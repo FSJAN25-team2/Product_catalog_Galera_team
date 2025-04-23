@@ -22,7 +22,11 @@ export const HeaderDesktop = () => {
           src="/icons/favourites-icon.svg"
           alt="Favourites"
         />
-        <IconLink to="/cart" src="/icons/cart-icon.svg" alt="Cart" />
+        <IconLink
+          to="/cart"
+          src="/icons/cart-icon.svg"
+          alt="Cart"
+        />
       </div>
     </>
   );

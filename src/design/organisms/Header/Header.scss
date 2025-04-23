@@ -11,9 +11,9 @@
   z-index: 11;
 
   &--mobile {
+    height: 48px;
     position: fixed;
     top: 0;
-    height: 100vh;
 
     display: flex;
     flex-direction: column;
@@ -30,6 +30,7 @@
   }
 
   &--mobile.active {
+    height: 100vh;
     transform: translateX(0);
     transition: $transition-behaviour;
   }
