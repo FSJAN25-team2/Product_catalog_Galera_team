@@ -6,6 +6,9 @@
   background-color: $white;
   border-bottom: $element-border-default;
   margin-bottom: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 11;
 
   &--mobile {
     position: fixed;
@@ -16,7 +19,7 @@
     flex-direction: column;
 
     z-index: 2;
-    background-color: &white;
+    background-color: $white;
 
     transform: translateX(-100%);
     transition: $transition-behaviour;
