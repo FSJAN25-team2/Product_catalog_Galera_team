@@ -1,11 +1,25 @@
 import { Link } from 'react-router-dom';
 
-export const Logo = () => (
-  <Link to="/" className="nav__logo">
-    <img
-      src="/img/logos/logo.png"
-      alt="Nice Gadgets Logo"
-      className="nav__logo-image"
-    />
-  </Link>
-);
+interface Props {
+  linkClass: string;
+  imgClass: string;
+}
+
+export const Logo = ({ linkClass, imgClass }: Props) => {
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    });
+  };
+
+  return (
+    <Link to="/" className={linkClass} onClick={handleScrollToTop}>
+      <img
+        src="/img/logos/logo.svg"
+        alt="Nice Gadgets Logo"
+        className={imgClass}
+      />
+    </Link>
+  );
+};

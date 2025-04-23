@@ -1,27 +1,6 @@
-import { IconButton } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useEffect, useState } from 'react';
-import './BackToTop.scss';
+import { P_Small } from "../../atoms/Typography/P_Small/P_Small";
 
 export const BackToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
-  }, []);
-
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -29,17 +8,14 @@ export const BackToTop = () => {
     });
   };
 
-  if (!isVisible) {
-    return null;
-  }
-
   return (
-    <IconButton
-      className="back-to-top"
-      onClick={handleScrollToTop}
-      aria-label="back to top"
-    >
-      <KeyboardArrowUpIcon />
-    </IconButton>
+    <div className='footer__back-to-top' onClick={handleScrollToTop}>
+      <P_Small>Back to top</P_Small>
+      <img 
+        src="/icons/arrow-up.svg" 
+        alt="Back to top"
+        className="footer__back-to-top--icon"
+      />
+    </div>
   );
 }; 

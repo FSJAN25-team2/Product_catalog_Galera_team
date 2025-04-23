@@ -13,7 +13,7 @@ export const HeaderMobile = () => {
 
   return (
     <>
-      <Logo />
+      <Logo linkClass={"nav__logo"} imgClass={"nav__logo-image"} />
 
       <MenuToggleIcon
         src={'/icons/burger-menu.svg'}
@@ -25,7 +25,7 @@ export const HeaderMobile = () => {
         className={isMobileMenuActive ? 'nav--mobile active' : 'nav--mobile'}
       >
         <div className="top-bar">
-          <Logo />
+          <Logo linkClass={"nav__logo"} imgClass={"nav__logo-image"} />
 
           <MenuToggleIcon
             src={'/icons/icon-close.svg'}
