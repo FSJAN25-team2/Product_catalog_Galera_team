@@ -1,5 +1,3 @@
 export const ItemCard = () => {
-    return (
-        <h1>Item card content</h1>
-    )
-}
+  return (<h1 className="itemclass">Item card content</h1>);
+};

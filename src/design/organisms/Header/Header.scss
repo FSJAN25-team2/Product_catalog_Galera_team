@@ -11,14 +11,13 @@
   z-index: 11;
 
   &--mobile {
+    height: 100vh;
     position: fixed;
     top: 0;
-    height: 100vh;
 
     display: flex;
     flex-direction: column;
 
-    z-index: 2;
     background-color: $white;
 
     transform: translateX(-100%);
@@ -30,6 +29,8 @@
   }
 
   &--mobile.active {
+    height: 100vh;
+
     transform: translateX(0);
     transition: $transition-behaviour;
   }

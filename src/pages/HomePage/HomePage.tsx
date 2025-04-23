@@ -2,6 +2,7 @@ import './HomePage.scss';
 import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
 import SwiperBanner from '../../design/organisms/SwiperBanner/SwiperBanner';
 import { ShopByCategory } from '../../design/organisms/ShopByCategory';
+import { H1 } from '../../design/atoms/Typography/H1/H1';
 // import SwiperPhone from '../../design/organisms/SwiperPhone/SwiperPhone';
 
 const testProduct = {
@@ -19,7 +20,7 @@ const testProduct = {
 export const HomePage = () => {
   return (
     <>
-      <h1 className="home-page__title">Welcome to Nice Gadgets store</h1>
+      <H1 className="home-page__title">Welcome to Nice Gadgets store</H1>
       <SwiperBanner />
       <ShopByCategory />
 

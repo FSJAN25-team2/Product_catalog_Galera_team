@@ -6,16 +6,11 @@ interface Props {
   onClick: () => void;
 }
 
-export const MenuToggleIcon = ({src, alt, onClick}: Props) => {
+export const MenuToggleIcon = ({ src, alt, onClick }: Props) => {
   return (
-    <div className='nav__icons'>
-      <Link to="#" className='nav__icon-link link__effects'>
-        <img
-          src={src}
-          alt={alt}
-          className='nav__icon'
-          onClick={onClick}
-        />
+    <div className="nav__icons">
+      <Link to="#" className="nav__icon-link link__effects" onClick={onClick}>
+        <img src={src} alt={alt} className="nav__icon" />
       </Link>
     </div>
   );
