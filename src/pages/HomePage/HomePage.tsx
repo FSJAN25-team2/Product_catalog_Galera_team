@@ -4,6 +4,9 @@ import SwiperBanner from '../../design/organisms/SwiperBanner/SwiperBanner';
 // import SwiperPhone from '../../design/organisms/SwiperPhone/SwiperPhone';
 
 const testProduct = {
+  id: 1 ,
+  color: 'red',
+  year: 2022, 
   name: 'Apple iPhone 14 Pro',
   fullPrice: 1199,
   price: 1099,
