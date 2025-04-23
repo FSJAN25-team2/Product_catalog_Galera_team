@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Specs } from '../../molecules/Specs/Specs';
+import { H4 } from '../../atoms/Typography/H4/H4';
+import { PrimaryButton } from '../../atoms/PrimaryButton/PrimaryButton';
+import { FavouriteButton } from '../../atoms/FavouriteButton/FavouriteButton';
+import { H3 } from '../../atoms/Typography/H3/H3';
 
-interface ProductCardProps {
+interface ProductCard {
+  //should be required
+  color?: string;
+  id?: number;
+  year?: number;
+
   name: string;
   fullPrice: number;
   price: number;
@@ -13,64 +23,82 @@ interface ProductCardProps {
   category: string;
 }
 
-interface Product {
-  product: ProductCardProps;
+interface ProductProps {
+  product: ProductCard;
 }
 
-export const ProductCard: React.FC<Product> = ({product}) => {
-  const { capacity, category, fullPrice, image, itemId, name, price, ram, screen } = product;
+export const ProductCard: React.FC<ProductProps> = ({ product }) => {
+  const {
+    capacity,
+    category,
+    fullPrice,
+    image,
+    itemId,
+    name,
+    price,
+    ram,
+    screen,
+    id,
+    year,
+    color,
+  } = product;
+  const [triggerCart, setTriggerCart] = useState(false);
+  const [triggerFavourite, setTriggerFavourite] = useState(false);
+
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setTriggerCart(!triggerCart);
+  };
+
+  const handleAddToFavourites = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setTriggerFavourite(!triggerFavourite);
+  };
+
   return (
     <div className="product-card">
-      <Link to={`/${category}/${itemId}`} className="product-card__link">
+      <Link
+        to={`/${category}/${itemId}`}
+        state={{ productDetails: { id, year, color }}}
+        className="product-card__link"
+      >
         <div className="product-card__image-container">
-          <img 
-            src={image} 
-            alt={name} 
-            className="product-card__image"
-          />
+          <img src={image} alt={name} className="product-card__image" />
         </div>
 
-        <h3 className="product-card__title">{name}</h3>
+        <H4 className="product-card__title">{name}</H4>
 
         <div className="product-card__price-block">
-          <span className="product-card__price">${price}</span>
-          {fullPrice > price && (
-            <span className="product-card__full-price">${fullPrice}</span>
-          )}
+          <H3>${price}</H3>
+          {
+            // year < 2022 && (
+            <span className="product-card__full-price">${fullPrice}</span> // )
+          }
         </div>
 
         <div className="product-card__divider" />
 
-        <div className="product-card__specs">
-          <div className="product-card__spec-item">
-            <span className="product-card__spec-name">Screen</span>
-            <span className="product-card__spec-value">{screen}</span>
-          </div>
-
-          <div className="product-card__spec-item">
-            <span className="product-card__spec-name">Capacity</span>
-            <span className="product-card__spec-value">{capacity}</span>
-          </div>
-
-          <div className="product-card__spec-item">
-            <span className="product-card__spec-name">RAM</span>
-            <span className="product-card__spec-value">{ram}</span>
-          </div>
-        </div>
+        <Specs specs={{ screen, capacity, ram }} />
 
         <div className="product-card__buttons">
-          <button className="product-card__add-to-cart">
+          <PrimaryButton
+            isInCart={triggerCart}
+            onClick={handleAddToCart}
+          >
             Add to cart
-          </button>
-          <button className="product-card__favorite">
-            <img 
-              src="/icons/favourites-icon.svg" 
-              alt="Add to favorites" 
-              className="product-card__favorite-icon"
-            />
-          </button>
+          </PrimaryButton>
+          <FavouriteButton
+            isInFavourites={triggerFavourite}
+            onClick={handleAddToFavourites}
+          />
         </div>
       </Link>
     </div>
   );
-}; 
+};

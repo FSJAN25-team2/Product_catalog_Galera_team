@@ -3,6 +3,20 @@
 @use 'utils/variables' as *;
 @import '../design/templates/global-layout';
 
+//atoms
+@import '../design/atoms/Typography/H1/H1';
+@import '../design/atoms/Typography/H2/H2';
+@import '../design/atoms/Typography/H3/H3';
+@import '../design/atoms/Typography/H4/H4';
+@import '../design/atoms/Typography/P/P';
+@import '../design/atoms/Typography/P_Small/P_Small';
+@import '../design/atoms/Typography/P_UpperCase/P_UpperCase';
+@import '../design/atoms/PrimaryButton/PrimaryButton';
+@import '../design/atoms/FavouriteButton/FavouriteButton.scss';
+
+//molecules
+@import '../design/molecules/Specs/Specs';
+
 //organisms
 @import '../design/organisms/Header/Header';
 @import '../design/organisms/SwiperBanner/SwiperBanner';
@@ -13,11 +27,4 @@
 @import '../pages/HomePage/HomePage.scss';
 @import '../pages/Catalogs/MainCatalog/ProductsCatalog.scss';
 
-//atoms
-@import '../design/atoms/Typography/H1/H1';
-@import '../design/atoms/Typography/H2/H2';
-@import '../design/atoms/Typography/H3/H3';
-@import '../design/atoms/Typography/H4/H4';
-@import '../design/atoms/Typography/P/P';
-@import '../design/atoms/Typography/P_Small/P_Small';
-@import '../design/atoms/Typography/P_UpperCase/P_UpperCase';
+
