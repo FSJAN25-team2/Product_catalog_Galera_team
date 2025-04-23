@@ -6,6 +6,7 @@ import { PrimaryButton } from '../../atoms/PrimaryButton/PrimaryButton';
 import { FavouriteButton } from '../../atoms/FavouriteButton/FavouriteButton';
 import { H3 } from '../../atoms/Typography/H3/H3';
 import { ShortProduct } from '../../../types/ShortProduct';
+import { useCartToggle } from '../../../utils/hooks/useCartToggle';
 
 interface ProductCard {
   //should be required
@@ -36,11 +37,12 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
     price,
     ram,
     screen,
-    id,
-    year,
-    color,
+    id = 0,
+    year = 2024,
+    color = 'black',
   } = product;
-  const [triggerCart, setTriggerCart] = useState(false);
+
+  const {toggle, isInCart} = useCartToggle(product) 
   const [triggerFavourite, setTriggerFavourite] = useState(false);
 
   const handleAddToCart = (
@@ -48,7 +50,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
   ) => {
     event.stopPropagation();
     event.preventDefault();
-    setTriggerCart(!triggerCart);
+    toggle();
   };
 
   const handleAddToFavourites = (
@@ -63,7 +65,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
     <div className="product-card">
       <Link
         to={`/${category}/${itemId}`}
-        state={{ productDetails: { id, year, color }}}
+        state={{ productDetails: { id, year, color } }}
         className="product-card__link"
       >
         <div className="product-card__image-container">
@@ -86,7 +88,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
 
         <div className="product-card__buttons">
           <PrimaryButton
-            isInCart={triggerCart}
+            isInCart={isInCart}
             onClick={handleAddToCart}
           >
             Add to cart
