@@ -1,6 +1,9 @@
 @use '/src/styles/utils/variables.scss' as *;
 
 .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
   margin-top: 64px;
   border-top: $element-border-default;
 
