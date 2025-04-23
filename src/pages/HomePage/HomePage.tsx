@@ -1,6 +1,7 @@
 import './HomePage.scss';
 import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
 import SwiperBanner from '../../design/organisms/SwiperBanner/SwiperBanner';
+import { ShopByCategory } from '../../design/organisms/ShopByCategory';
 // import SwiperPhone from '../../design/organisms/SwiperPhone/SwiperPhone';
 
 const testProduct = {
@@ -20,6 +21,7 @@ export const HomePage = () => {
     <>
       <h1 className="home-page__title">Welcome to Nice Gadgets store</h1>
       <SwiperBanner />
+      <ShopByCategory />
 
       {/* <SwiperPhone /> */}
       <ProductCard product={testProduct} />
