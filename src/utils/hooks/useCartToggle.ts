@@ -5,10 +5,10 @@ import { ProductLight } from '../../types/Product';
 export const useCartToggle = (product: ProductLight) => {
   const dispatch = useAppDispatch();
   const isInCart = useAppSelector(state =>
-    state.cartProduct.some(p => p.itemId === product.itemId),
+    state.cartProducts.some(p => p.itemId === product.itemId),
   );
 
-  const toggle = () => {
+  const toggleCart = () => {
     dispatch(
       isInCart
         ? cartActions.removeFromCart(product.itemId)
@@ -16,5 +16,5 @@ export const useCartToggle = (product: ProductLight) => {
     );
   };
 
-  return { isInCart, toggle };
+  return { isInCart, toggleCart };
 };

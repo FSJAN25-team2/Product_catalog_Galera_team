@@ -1,13 +1,19 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import cartProductsReducer from './features/cartProducts';
-import { localStorageMiddleware } from './middleware/cartMiddleware';
+import { cartLocStorMiddleware } from './middleware/cartMiddleware';
+import cartReducer from './features/cartProducts';
+import favouritesReducer from './features/favouriteProducts';
+import { favouritesLocStorMiddleWare } from './middleware/favouritesMiddleware';
 
 export const store = configureStore({
   reducer: {
-    cartProduct: cartProductsReducer
+    cartProducts: cartReducer,
+    favouriteProducts: favouritesReducer,
   },
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(localStorageMiddleware)
+  middleware: getDefaultMiddleware => {
+    return getDefaultMiddleware().concat(
+      cartLocStorMiddleware,
+      favouritesLocStorMiddleWare,
+    );
   },
 });
 

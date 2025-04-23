@@ -12,17 +12,21 @@
   cursor: pointer;
   transition: all 0.3s;
 
+  &:active {
+    background: #222;
+  }
+
   &--active {
     background-color: $white;
     color: $highlight-green;
     border: 1px solid $element-border-color;
+
+    &:active{
+      background-color: rgb(250, 244, 244);
+    }
   }
 
   &:hover {
     box-shadow: 0px 3px 13px 0px #17203166;
-  }
-
-  &:active {
-    background-color: #222;
   }
 }

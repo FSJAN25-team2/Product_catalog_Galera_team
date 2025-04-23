@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Specs } from '../../molecules/Specs/Specs';
 import { H4 } from '../../atoms/Typography/H4/H4';
@@ -7,6 +7,7 @@ import { FavouriteButton } from '../../atoms/FavouriteButton/FavouriteButton';
 import { H3 } from '../../atoms/Typography/H3/H3';
 import { ShortProduct } from '../../../types/ShortProduct';
 import { useCartToggle } from '../../../utils/hooks/useCartToggle';
+import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
 
 interface ProductCard {
   //should be required
@@ -42,15 +43,15 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
     color = 'black',
   } = product;
 
-  const {toggle, isInCart} = useCartToggle(product) 
-  const [triggerFavourite, setTriggerFavourite] = useState(false);
+  const {toggleCart, isInCart} = useCartToggle(product);
+  const {toggleFav, isInFav} = useFavToggle(product);
 
   const handleAddToCart = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.stopPropagation();
     event.preventDefault();
-    toggle();
+    toggleCart();
   };
 
   const handleAddToFavourites = (
@@ -58,7 +59,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
   ) => {
     event.stopPropagation();
     event.preventDefault();
-    setTriggerFavourite(!triggerFavourite);
+    toggleFav();
   };
 
   return (
@@ -94,7 +95,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
             Add to cart
           </PrimaryButton>
           <FavouriteButton
-            isInFavourites={triggerFavourite}
+            isInFavourites={isInFav}
             onClick={handleAddToFavourites}
           />
         </div>
