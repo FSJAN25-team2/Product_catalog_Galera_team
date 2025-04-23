@@ -9,6 +9,10 @@
   justify-self: center;
   width: 100%;
   max-width: 420px;
+
+  @include on-tablet-small {
+    grid-column: span 6;
+  }
   
 
   @include on-tablet {

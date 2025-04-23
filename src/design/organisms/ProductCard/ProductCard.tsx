@@ -75,7 +75,6 @@ export const ProductCard: React.FC<ProductProps> = ({ product }) => {
         <H4 className="product-card__title">{name}</H4>
 
         <div className="product-card__price-block">
-          {/* <span className="product-card__price">${price}</span> */}
           <H3>${price}</H3>
           {
             // year < 2022 && (
@@ -89,7 +88,6 @@ export const ProductCard: React.FC<ProductProps> = ({ product }) => {
 
         <div className="product-card__buttons">
           <PrimaryButton
-          className='anatal'
             isInCart={triggerCart}
             onClick={handleAddToCart}
           >
