@@ -10,8 +10,10 @@ function App() {
 
       <GridTemplate>
         <Outlet />
-        <Footer />
       </GridTemplate>
+
+      <Footer />
+
     </>
   );
 }

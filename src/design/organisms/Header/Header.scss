@@ -66,13 +66,13 @@
 
   &__menu {
     display: flex;
-    gap: 64px;
+    gap: 32px;
     margin: 0;
     padding: 0;
     height: 64px;
 
-    @media (max-width: 1199px) {
-      gap: 32px;
+    @include on-desktop {
+      gap: 64px;
     }
 
     &--mobile {
@@ -83,7 +83,6 @@
       display: flex;
       margin-inline: auto;
       flex-direction: column;
-      padding: 0;
       align-items: center;
 
       list-style: none;
@@ -96,23 +95,15 @@
   }
 
   &__menu-link {
-    padding-block: 24px;
-    display: block;
-    color: #89939a;
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    color: $secondary-grey-color;
 
     &--mobile {
+      color: $secondary-grey-color;
       display: block;
-      color: #89939a;
       text-decoration: none;
-      font-weight: 800;
-      font-size: 12px;
-      line-height: 27px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
       height: 27px;
     }
   }
@@ -141,12 +132,12 @@
   transition: $transition-behaviour;
 
   &:hover {
-    color: #313237;
+    color: $primary-grey-color;
     border-bottom: $link-hover-active-border;
   }
 
   &.active {
-    color: #313237;
+    color: $primary-grey-color;
     border-bottom: $link-hover-active-border;
   }
 }
@@ -155,6 +146,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: $element-border-default;
+  margin-bottom: 24px;
 }
 
 .bottom-bar {

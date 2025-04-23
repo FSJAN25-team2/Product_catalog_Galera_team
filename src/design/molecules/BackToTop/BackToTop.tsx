@@ -1,3 +1,5 @@
+import { P_Small } from "../../atoms/Typography/P_Small/P_Small";
+
 export const BackToTop = () => {
   const handleScrollToTop = () => {
     window.scrollTo({
@@ -8,9 +10,9 @@ export const BackToTop = () => {
 
   return (
     <div className='footer__back-to-top' onClick={handleScrollToTop}>
-      <p className="footer__back-to-top--text">Back to top</p>
+      <P_Small>Back to top</P_Small>
       <img 
-        src="/public/icons/arrow-up.svg" 
+        src="/icons/arrow-up.svg" 
         alt="Back to top"
         className="footer__back-to-top--icon"
       />
