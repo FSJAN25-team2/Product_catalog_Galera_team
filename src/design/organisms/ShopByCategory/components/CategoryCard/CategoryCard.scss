@@ -1,29 +1,7 @@
-@use '../../../styles/utils/mixins' as *;
-@use '../../../styles/utils/variables' as *;
-@use './components/CategoryCard/CategoryCard.scss';
+@use '../../../../../styles/utils/mixins' as *;
+@use '../../../../../styles/utils/variables' as *;
 
 .categories {
-  grid-column: 1 / -1;
-  margin-bottom: 80px;
-
-  &__title {
-    margin-bottom: 24px;
-  }
-
-  &__grid {
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(1, 1fr);
-
-    @include on-tablet-small {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include on-desktop {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
   &__item {
     display: flex;
     flex-direction: column;
