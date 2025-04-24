@@ -11,13 +11,15 @@
     margin-bottom: 24px;
     line-height: 56px;
 
-    grid-column: 1/-1;
-
     @include on-tablet {
       grid-column: span 12;
     }
 
     @include on-desktop {
+      grid-column: span 24;
+    }
+    @include on-big-desktop {
+      width: 1200px;
       grid-column: span 24;
     }
   }
