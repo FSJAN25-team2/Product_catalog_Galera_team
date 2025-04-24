@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Specs } from '../../molecules/Specs/Specs';
 import { H4 } from '../../atoms/Typography/H4/H4';
@@ -6,6 +6,8 @@ import { PrimaryButton } from '../../atoms/PrimaryButton/PrimaryButton';
 import { FavouriteButton } from '../../atoms/FavouriteButton/FavouriteButton';
 import { H3 } from '../../atoms/Typography/H3/H3';
 import { ShortProduct } from '../../../types/ShortProduct';
+import { useCartToggle } from '../../../utils/hooks/useCartToggle';
+import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
 
 interface ProductCard {
   //should be required
@@ -36,19 +38,20 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
     price,
     ram,
     screen,
-    id,
-    year,
-    color,
+    id = 0,
+    year = 2024,
+    color = 'black',
   } = product;
-  const [triggerCart, setTriggerCart] = useState(false);
-  const [triggerFavourite, setTriggerFavourite] = useState(false);
+
+  const {toggleCart, isInCart} = useCartToggle(product);
+  const {toggleFav, isInFav} = useFavToggle(product);
 
   const handleAddToCart = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.stopPropagation();
     event.preventDefault();
-    setTriggerCart(!triggerCart);
+    toggleCart();
   };
 
   const handleAddToFavourites = (
@@ -56,14 +59,14 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
   ) => {
     event.stopPropagation();
     event.preventDefault();
-    setTriggerFavourite(!triggerFavourite);
+    toggleFav();
   };
 
   return (
     <div className="product-card">
       <Link
         to={`/${category}/${itemId}`}
-        state={{ productDetails: { id, year, color }}}
+        state={{ productDetails: { id, year, color } }}
         className="product-card__link"
       >
         <div className="product-card__image-container">
@@ -86,13 +89,13 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
 
         <div className="product-card__buttons">
           <PrimaryButton
-            isInCart={triggerCart}
+            isInCart={isInCart}
             onClick={handleAddToCart}
           >
             Add to cart
           </PrimaryButton>
           <FavouriteButton
-            isInFavourites={triggerFavourite}
+            isInFavourites={isInFav}
             onClick={handleAddToFavourites}
           />
         </div>
