@@ -1,7 +1,7 @@
 import { FullProduct } from '../../types/FullProduct';
-import { ShortProduct } from '../../types/ShortProduct';
 import { ProductRequestQuery } from '../../types/ProductRequestQuery';
 import { client } from '../client/fetchClient';
+import { ProductsResponse } from '../../types/ProductsResponse';
 
 export const getProducts = ({
   limit,
@@ -9,7 +9,7 @@ export const getProducts = ({
   category,
   sortBy,
 }: ProductRequestQuery) => {
-  return client.get<ShortProduct[]>(
+  return client.get<ProductsResponse>(
     `/products?limit=${limit}&page=${page}&category=${category}&sortBy=${sortBy}`,
   );
 };

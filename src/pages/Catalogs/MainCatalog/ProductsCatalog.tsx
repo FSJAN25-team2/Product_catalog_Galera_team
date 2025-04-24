@@ -5,12 +5,7 @@ import { Filters } from './Sorting';
 import { Pagination } from './Pagination';
 import { ShortProduct } from '../../../types/ShortProduct';
 import { Category } from '../../../types/Category';
-import {
-  sortProducts,
-  getTotalPages,
-  getVisibleProducts,
-  getPageNumbers,
-} from './Functions';
+import { getPageNumbers } from './Functions';
 import { getProducts } from '../../../services/api/allProductsAPI';
 import { Sorting } from '../../../types/Sorting';
 
@@ -22,10 +17,12 @@ type Props = {
 export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
   const [products, setProducts] = useState<ShortProduct[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [totalCount, setTotalCount] = useState(0);
 
   const sortBy = searchParams.get('sort') || 'newest';
   const itemsPerPage = +(searchParams.get('itemsPerPage') || 16);
   const currentPage = +(searchParams.get('page') || 1);
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -47,13 +44,6 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
     setSearchParams(params);
   };
 
-  const sortedProducts = sortProducts(products, sortBy);
-  const totalPages = getTotalPages(sortedProducts.length, itemsPerPage);
-  const visibleProducts = getVisibleProducts(
-    sortedProducts,
-    currentPage,
-    itemsPerPage,
-  );
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   const categoryNames = {
@@ -71,12 +61,13 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
       category,
       sortBy: sortBy as Sorting,
     })
-      .then(data => {
-        console.log(data);
-        setProducts(data);
+      .then(({ products, totalCount }) => {
+        setProducts(products);
+        setTotalCount(totalCount);
       })
       .catch(error => console.error(error));
   }, [category, currentPage, itemsPerPage, sortBy]);
+  
 
   return (
     <div className="products-catalog">
@@ -91,7 +82,8 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
       </div>
 
       <h1 className="products-catalog__title">{title}</h1>
-      <p className="products-catalog__count">{products.length} models</p>
+      <p className="products-catalog__count">{totalCount} models</p>
+
 
       <Filters
         sortBy={sortBy}
@@ -100,7 +92,7 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
         onItemsPerPageChange={handleItemsPerPageChange}
       />
 
-      {visibleProducts.map(product => (
+      {products.map(product => (
         <ProductCard
           key={product.id}
           product={{
