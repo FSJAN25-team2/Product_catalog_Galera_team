@@ -3,12 +3,12 @@ import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
 import SwiperBanner from '../../design/organisms/SwiperBanner/SwiperBanner';
 import { ShopByCategory } from '../../design/organisms/ShopByCategory';
 import { H1 } from '../../design/atoms/Typography/H1/H1';
-// import SwiperPhone from '../../design/organisms/SwiperPhone/SwiperPhone';
+import { SwiperPhone } from '../../design/organisms/SwiperPhone/SwiperPhone';
 
 const testProduct = {
-  id: 1 ,
+  id: 1,
   color: 'red',
-  year: 2022, 
+  year: 2022,
   name: 'Apple iPhone 14 Pro',
   fullPrice: 1199,
   price: 1099,
@@ -21,20 +21,23 @@ const testProduct = {
 };
 
 export const HomePage = () => {
+  const productCards = Array.from({ length: 12 }, (_, i) => (
+    <ProductCard key={i} product={testProduct} />
+  ));
   return (
     <>
       <H1 className="home-page__title">Welcome to Nice Gadgets store</H1>
       <SwiperBanner />
+
+      <div className="home-page__content">
+        <SwiperPhone title="Brand new models">{productCards}</SwiperPhone>
+      </div>
+
       <ShopByCategory />
 
-      {/* <SwiperPhone /> */}
-      <ProductCard product={testProduct} />
-      <ProductCard product={testProduct} />
-      <ProductCard product={testProduct} />
-      <ProductCard product={testProduct} />
-      <ProductCard product={testProduct} />
-      <ProductCard product={testProduct} />
-      <ProductCard product={testProduct} />
+      <div className="home-page__content">
+        <SwiperPhone title="Hot prices">{productCards}</SwiperPhone>
+      </div>
     </>
   );
 };
