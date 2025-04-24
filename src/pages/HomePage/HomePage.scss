@@ -7,8 +7,9 @@
   }
 
   &__content {
+    grid-column: 1/-1;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
   }
-} 
+}
