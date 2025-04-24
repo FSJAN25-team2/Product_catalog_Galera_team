@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as cartActions from '../../store/features/cartProducts';
-import { ProductLight } from '../../types/Product';
+import { ShortProduct } from '../../types/ShortProduct';
 
-export const useCartToggle = (product: ProductLight) => {
+export const useCartToggle = (product: ShortProduct) => {
   const dispatch = useAppDispatch();
   const isInCart = useAppSelector(state =>
     state.cartProducts.some(p => p.itemId === product.itemId),

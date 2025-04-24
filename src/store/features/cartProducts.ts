@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProductLight } from '../../types/Product';
+import { ShortProduct } from '../../types/ShortProduct';
 
-const initialState: ProductLight[] = JSON.parse(
+const initialState: ShortProduct[] = JSON.parse(
   localStorage.getItem('cartProducts') || '[]',
 );
 
@@ -9,7 +9,7 @@ export const cartProductsSlice = createSlice({
   name: 'cartProducts',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<ProductLight>) => {
+    addToCart: (state, action: PayloadAction<ShortProduct>) => {
       state.push(action.payload);
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
