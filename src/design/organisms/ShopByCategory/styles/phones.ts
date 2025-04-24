@@ -1,5 +1,5 @@
 import { Category } from '../types';
-import { defaultImageStyles } from './defaultStyles';
+import { IMAGE_DEFAULT_STYLES, IMAGE_SIZE, CATEGORY_POSITIONS, CATEGORY_COLORS } from './constants';
 
 export const phones: Category = {
   id: 'phones',
@@ -9,14 +9,12 @@ export const phones: Category = {
   models: 95,
   styles: {
     image: {
-      ...defaultImageStyles,
-      width: '200%',
-      height: '200%',
-      right: '-60%',
-      bottom: '-90%',
+      ...IMAGE_DEFAULT_STYLES,
+      ...IMAGE_SIZE,
+      ...CATEGORY_POSITIONS.phones,
     },
     card: {
-      backgroundColor: '#fcdec4',
+      backgroundColor: CATEGORY_COLORS.phones,
       opacity: 0.9,
     },
   },

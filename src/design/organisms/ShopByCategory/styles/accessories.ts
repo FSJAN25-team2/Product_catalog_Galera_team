@@ -1,5 +1,5 @@
 import { Category } from '../types';
-import { defaultImageStyles } from './defaultStyles';
+import { IMAGE_DEFAULT_STYLES, IMAGE_SIZE, CATEGORY_POSITIONS, CATEGORY_COLORS } from './constants';
 
 export const accessories: Category = {
   id: 'accessories',
@@ -9,14 +9,12 @@ export const accessories: Category = {
   models: 100,
   styles: {
     image: {
-      ...defaultImageStyles,
-      width: '200%',
-      height: '200%',
-      right: '-110%',
-      bottom: '-70%',
+      ...IMAGE_DEFAULT_STYLES,
+      ...IMAGE_SIZE,
+      ...CATEGORY_POSITIONS.accessories,
     },
     card: {
-      backgroundColor: '#973D5F',
+      backgroundColor: CATEGORY_COLORS.accessories,
       opacity: 0.9,
     },
   },
