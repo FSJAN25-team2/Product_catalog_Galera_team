@@ -1,4 +1,4 @@
-export interface Product {
+export interface FullProduct {
   id: string;
   namespaceId: string;
   name: string;

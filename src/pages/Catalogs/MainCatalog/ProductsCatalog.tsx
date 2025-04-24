@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Filters } from './Sorting';
 import { Pagination } from './Pagination';
-import { Product } from '../../../types/Product';
+import { ShortProduct } from '../../../types/ShortProduct';
 import { Category } from '../../../types/Category';
 import {
   sortProducts,
@@ -11,32 +11,21 @@ import {
   getVisibleProducts,
   getPageNumbers,
 } from './Functions';
+import { getProducts } from '../../../services/api/allProductsAPI';
+import { Sorting } from '../../../types/Sorting';
 
 type Props = {
   title: string;
   category: Category;
-  fetchProducts: () => Promise<Product[]>;
 };
 
-export const ProductsCatalog: React.FC<Props> = ({
-  title,
-  category,
-  fetchProducts,
-}) => {
-  const [products, setProducts] = useState<Product[]>([]);
+export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
+  const [products, setProducts] = useState<ShortProduct[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortBy = searchParams.get('sort') || 'newest';
   const itemsPerPage = +(searchParams.get('itemsPerPage') || 16);
   const currentPage = +(searchParams.get('page') || 1);
-
-  useEffect(() => {
-    fetchProducts()
-      .then(data => setProducts(data))
-      .catch(error => console.error(error));
-  }, [fetchProducts]);
-
-  console.log(products[0]);
 
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -75,6 +64,20 @@ export const ProductsCatalog: React.FC<Props> = ({
 
   const formattedCategory = categoryNames[category];
 
+  useEffect(() => {
+    getProducts({
+      limit: itemsPerPage,
+      page: currentPage,
+      category,
+      sortBy: sortBy as Sorting,
+    })
+      .then(data => {
+        console.log(data);
+        setProducts(data);
+      })
+      .catch(error => console.error(error));
+  }, [category, currentPage, itemsPerPage, sortBy]);
+
   return (
     <div className="products-catalog">
       <div className="products-catalog__breadcrumbs">
@@ -97,24 +100,25 @@ export const ProductsCatalog: React.FC<Props> = ({
         onItemsPerPageChange={handleItemsPerPageChange}
       />
 
-      {/* <div className="products-catalog__list"> */}
-        {visibleProducts.map(product => (
-          <ProductCard
-            key={product.id}
-            product={{
-              name: product.name,
-              fullPrice: product.priceRegular,
-              price: product.priceDiscount,
-              screen: product.screen,
-              capacity: product.capacity,
-              ram: product.ram,
-              image: product.images[0],
-              itemId: product.id,
-              category: category,
-            }}
-          />
-        ))}
-      {/* </div> */}
+      {visibleProducts.map(product => (
+        <ProductCard
+          key={product.id}
+          product={{
+            name: product.name,
+            fullPrice: product.fullPrice,
+            price: product.price,
+            screen: product.screen,
+            capacity: product.capacity,
+            ram: product.ram,
+            image: product.image,
+            itemId: product.itemId,
+            category: category,
+            id: product.id,
+            year: product.year,
+            color: product.color,
+          }}
+        />
+      ))}
 
       <Pagination
         currentPage={currentPage}

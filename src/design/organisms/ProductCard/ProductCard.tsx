@@ -5,11 +5,12 @@ import { H4 } from '../../atoms/Typography/H4/H4';
 import { PrimaryButton } from '../../atoms/PrimaryButton/PrimaryButton';
 import { FavouriteButton } from '../../atoms/FavouriteButton/FavouriteButton';
 import { H3 } from '../../atoms/Typography/H3/H3';
+import { ShortProduct } from '../../../types/ShortProduct';
 
 interface ProductCard {
   //should be required
   color?: string;
-  id?: number;
+  id: number;
   year?: number;
 
   name: string;
@@ -23,11 +24,8 @@ interface ProductCard {
   category: string;
 }
 
-interface ProductProps {
-  product: ProductCard;
-}
 
-export const ProductCard: React.FC<ProductProps> = ({ product }) => {
+export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
   const {
     capacity,
     category,
