@@ -1,4 +1,4 @@
-import App from './App.tsx';
+import { App } from './App';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage/HomePage.tsx';
 import { ItemCard } from './pages/ProductPage/ProductPage.tsx';
