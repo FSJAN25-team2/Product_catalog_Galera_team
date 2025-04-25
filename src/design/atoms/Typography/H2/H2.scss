@@ -3,6 +3,7 @@
   line-height: 31px;
   font-weight: $text-weight-bold;
   letter-spacing: 0;
+  color: var(--primary-grey-color);
 
   @include on-tablet {
     font-size: 32px;

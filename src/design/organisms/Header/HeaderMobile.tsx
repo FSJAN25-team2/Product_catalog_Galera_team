@@ -3,9 +3,13 @@ import { Logo } from '../../atoms/Logo/Logo';
 import { MenuLink } from '../../atoms/MenuLink/MenuLink';
 import { MenuToggleIcon } from '../../atoms/MenuToggleIconMobile/MenuToggleIcon';
 import { IconLink } from '../../atoms/IconLink/IconLink';
+import { Switcher } from '../../atoms/Switcher/Switcher';
+import { useAppDispatch } from '../../../store/hooks';
+import * as themeActions from '../../../store/features/theme.ts'
 
 export const HeaderMobile = () => {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuActive(!isMobileMenuActive);
@@ -58,6 +62,10 @@ export const HeaderMobile = () => {
               <MenuLink to="/accessories" className="nav__menu-link--mobile">
                 accessories
               </MenuLink>
+            </li>
+            <li>
+                    <Switcher onChange={() => dispatch(themeActions.toggleTheme())}/>
+              
             </li>
           </ul>
         </nav>

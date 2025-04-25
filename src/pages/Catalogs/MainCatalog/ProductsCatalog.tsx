@@ -8,6 +8,7 @@ import { Category } from '../../../types/Category';
 import { getPageNumbers } from './Functions';
 import { getProducts } from '../../../services/api/allProductsAPI';
 import { Sorting } from '../../../types/Sorting';
+import { H1 } from '../../../design/atoms/Typography/H1/H1';
 
 type Props = {
   title: string;
@@ -81,7 +82,8 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
         </span>
       </div>
 
-      <h1 className="products-catalog__title">{title}</h1>
+      {/* this styles mb  */}
+      <H1 className="products-catalog__title">{title}</H1>
       <p className="products-catalog__count">{totalCount} models</p>
 
 

@@ -6,22 +6,6 @@
   grid-column: 1/-1;
   &__title {
     grid-column: 1/-1;
-    font-size: 48px;
-    font-weight: 800;
-    margin-bottom: 24px;
-    line-height: 56px;
-
-    @include on-tablet {
-      grid-column: span 12;
-    }
-
-    @include on-desktop {
-      grid-column: span 24;
-    }
-    @include on-big-desktop {
-      width: 1200px;
-      grid-column: span 24;
-    }
   }
 
   &__filters {
@@ -30,7 +14,7 @@
     gap: 24px;
     margin-bottom: 32px;
     flex-wrap: wrap;
-    
+
     & > * {
       display: flex;
       flex-direction: column;
@@ -38,7 +22,7 @@
 
     label {
       font-weight: 700;
-      color: #89939a;
+      color: var(--secondary-grey-color);
       margin-bottom: 4px;
       font-size: 12px;
     }
@@ -52,7 +36,7 @@
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      background: #fff;
+      background: var(--white);
       cursor: pointer;
       transition: 0.3s ease;
 
@@ -66,7 +50,7 @@
     font-weight: 600;
     line-height: 21px;
     font-size: 14px;
-    color: #89939a;
+    color: var(--secondary-grey-color);
     margin-bottom: 16px;
 
     grid-column: span 4;
@@ -105,12 +89,12 @@
       height: 40px;
       margin: 0 4px;
       border: 1px solid #ccc;
-      background: #fff;
+      background: var(--white);
       cursor: pointer;
 
       &.active {
         background: #333;
-        color: #fff;
+        color: var(--white);
       }
 
       &:disabled {
@@ -125,11 +109,11 @@
     grid-column: 1/-1;
     align-items: center;
     font-size: 14px;
-    color: #89939a;
+    color: var(--secondary-grey-color);
     margin-bottom: 16px;
 
     &-link {
-      color: #89939a;
+      color: var(--secondary-grey-color);
       text-decoration: none;
       transition: color 0.3s;
 
@@ -144,7 +128,7 @@
 
     &-current {
       font-weight: 600;
-      color: #89939a;
+      color: var(--secondary-grey-color);
     }
   }
 }

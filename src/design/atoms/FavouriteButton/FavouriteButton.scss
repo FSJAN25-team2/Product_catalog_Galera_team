@@ -3,22 +3,21 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px 16px;
+  transition: $transition-behavior;
 
   width: 40px;
   height: 40px;
 
-  background-color: $white;
-  border: 1px solid $icons-outline-color;
+  background-color: var(--white);
+  border: 1px solid var(--icons-outline-color);
   cursor: pointer;
 
-  transition: all 0.3s;
-
   &--active {
-    border-color: $element-border-color;
+    border-color: var(element-border-color);
     background-image: url(/public/icons/favourites-icon-filled.svg);
   }
 
   &:hover {
-    border-color: $primary-grey-color;
+    border-color: var(--primary-grey-color);
   }
 }

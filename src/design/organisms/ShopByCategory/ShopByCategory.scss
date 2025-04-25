@@ -45,7 +45,7 @@
     border-radius: 0px;
     overflow: hidden;
     border: $element-border-default;
-    transition: $transition-behaviour;
+    transition: $transition-behavior;
     aspect-ratio: 4/3;
     text-decoration: none;
 
@@ -67,10 +67,10 @@
   }
 
   &__card-title {
-    color: $primary-grey-color;
+    color: var(--primary-grey-color);
   }
 
   &__models {
-    color: $secondary-grey-color;
+    color: var(--secondary-grey-color);
   }
-} 
+}
