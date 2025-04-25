@@ -11,4 +11,8 @@
     font-weight: $text-weight-bold;
     letter-spacing: -0.01em;
   }
+
+  @include on-big-desktop {
+    width: 1200px;
+  }
 }
