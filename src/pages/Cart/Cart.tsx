@@ -70,7 +70,7 @@ export const Cart = () => {
           </div>
         </>
       ) : (
-        <H1 className="cart__empty-message">No items have been added to your cart</H1>
+        <H1 className="cart__empty-message">No items have been added to your basket</H1>
       )}
     </section>
   );
