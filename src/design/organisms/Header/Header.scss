@@ -9,7 +9,7 @@
   position: sticky;
   top: 0;
   z-index: 11;
-  transition: $transition-behaviour;
+  transition: $transition-behavior;
 
   &--mobile {
     height: 100vh;
@@ -22,7 +22,7 @@
     background-color: var(--white);
 
     transform: translateX(-100%);
-    transition: $transition-behaviour;
+    transition: $transition-behavior;
 
     @include on-tablet {
       display: none;
@@ -33,7 +33,7 @@
     height: 100vh;
 
     transform: translateX(0);
-    transition: $transition-behaviour;
+    transition: $transition-behavior;
   }
 
   &__container {
@@ -131,7 +131,7 @@
 
 .link__effects {
   border-bottom: 2px solid transparent;
-  transition: $transition-behaviour;
+  transition: $transition-behavior;
 
   &:hover {
     color: var(--primary-grey-color);

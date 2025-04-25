@@ -5,7 +5,7 @@
   border-top: $element-border-default;
   background-color: var(--white);
   margin-top: 56px;
-  transition: $transition-behaviour;
+  transition: $transition-behavior;
 
   @include on-tablet-small {
     height: 96px;
@@ -57,7 +57,7 @@
   &__link {
     text-transform: uppercase;
     color: var(--secondary-grey-color);
-    transition: $transition-behaviour;
+    transition: $transition-behavior;
 
     font-weight: 700;
     font-size: 12px;
@@ -75,12 +75,12 @@
     align-items: center;
     gap: 16px;
     color: var(--secondary-grey-color);
-    transition: $transition-behaviour;
+    transition: $transition-behavior;
 
     &--icon {
       border: $element-border-default;
       padding: 7px;
-      transition: $transition-behaviour;
+      transition: $transition-behavior;
     }
 
     &:hover {

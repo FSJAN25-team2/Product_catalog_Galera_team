@@ -8,7 +8,7 @@ export const Switcher: FC<SwitcherProps> = ({...rest}) => {
     <div className="switcher" {...rest}>
         <svg display="none">
           <symbol id="light" viewBox="0 0 24 24">
-            <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <g stroke="currentColor" strokeWidth="2" stroke-linecap="round">
               <line x1="12" y1="17" x2="12" y2="20" transform="rotate(0,12,12)" />
               <line x1="12" y1="17" x2="12" y2="20" transform="rotate(45,12,12)" />
               <line x1="12" y1="17" x2="12" y2="20" transform="rotate(90,12,12)" />

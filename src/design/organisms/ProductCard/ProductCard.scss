@@ -3,7 +3,7 @@
 
   padding: 32px;
   border: 1px solid var(--element-border-color);
-  transition: $transition-behaviour;
+  transition: $transition-behavior;
   box-sizing: border-box;
   background-color: var(--white);
 
@@ -42,8 +42,7 @@
     flex-direction: column;
     background-color: var(--white);
     gap: 8px;
-    transition: $transition-behaviour;
-
+    transition: $transition-behavior;
   }
 
   &__image-container {
