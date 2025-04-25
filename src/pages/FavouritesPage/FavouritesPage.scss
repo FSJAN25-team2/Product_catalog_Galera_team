@@ -1,0 +1,20 @@
+@use '../../styles/utils/mixins' as *;
+@use '../../styles/utils/variables' as *;
+@use '../../styles/utils/theme' as *;
+
+.favourites-page {
+  @include page-grid;
+  margin-bottom: 40px;
+  grid-column: 1/-1;
+
+  &__title {
+    grid-column: 1/-1;
+    margin-bottom: 8px;
+  }
+
+  &__count {
+    grid-column: 1/-1;
+    margin-bottom: 16px;
+  }
+}
+
