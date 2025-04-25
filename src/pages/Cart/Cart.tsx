@@ -3,6 +3,7 @@ import './Cart.scss';
 import { CartItem } from '../../design/organisms/CartItem/CartItem';
 import { H1 } from '../../design/atoms/Typography/H1/H1';
 import { useAppSelector } from '../../store/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export const Cart = () => {
   const cartProducts = useAppSelector(state => state.cartProducts);
@@ -11,6 +12,8 @@ export const Cart = () => {
   >({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+
+  const navigate = useNavigate();
 
   const handleQuantityChange = (
     id: string,
@@ -36,8 +39,16 @@ export const Cart = () => {
     setTotalItems(newTotalItems);
   }, [itemQuantities]);
 
+  const handleGoBack = () => {
+    navigate(-1); // повернення назад
+  };
+
   return (
     <section className="cart">
+      <button className="cart__back-button" onClick={handleGoBack}>
+        &lt; Back
+      </button>
+
       <H1 className="cart__title">Cart</H1>
 
       {cartProducts.length > 0 ? (
@@ -70,7 +81,9 @@ export const Cart = () => {
           </div>
         </>
       ) : (
-        <H1 className="cart__empty-message">No items have been added to your basket</H1>
+        <H1 className="cart__empty-message">
+          No items have been added to your basket
+        </H1>
       )}
     </section>
   );
