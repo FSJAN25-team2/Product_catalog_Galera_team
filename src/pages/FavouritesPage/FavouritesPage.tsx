@@ -2,6 +2,7 @@ import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
 import { useAppSelector } from '../../store/hooks';
 import { H1 } from '../../design/atoms/Typography/H1/H1';
 import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
+import { Breadcrumbs } from '../../design/atoms/Breadcrumbs';
 import './FavouritesPage.scss';
 
 export const FavouritesPage = () => {
@@ -9,15 +10,21 @@ export const FavouritesPage = () => {
 
   return (
     <div className="favourites-page">
+      <Breadcrumbs className="favourites-page__breadcrumbs" />
       <H1 className="favourites-page__title">Favourites</H1>
       <P_Small className="favourites-page__count">
         {favourites.length} items
       </P_Small>
 
-      {favourites.map(product => (
-        <ProductCard key={product.itemId} product={product} />
-      ))}
+      {favourites.length > 0 ? (
+        favourites.map(product => (
+          <ProductCard key={product.itemId} product={product} />
+        ))
+      ) : (
+        <P_Small className="favourites-page__empty">
+          No items in favourites yet
+        </P_Small>
+      )}
     </div>
   );
 };
-

@@ -1,3 +1,5 @@
+import { Breadcrumbs } from '../../design/atoms/Breadcrumbs';
+
 export const ItemCard = () => {
-  return (<h1 className="itemclass">Item card content</h1>);
+  return (<Breadcrumbs style={{ gridColumn: '1/-1' }} />);
 };
