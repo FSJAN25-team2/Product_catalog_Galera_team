@@ -6,18 +6,11 @@ import * as CartAction from '../../../store/features/cartProducts';
 
 interface CartItemProps {
   product: ShortProduct;
-  initialQuantity?: number;
-  onRemove?: (id: number) => void;
-  onQuantityChange?: (id: number, quantity: number) => void;
 }
 
-export const CartItem: React.FC<CartItemProps> = ({
-  product,
-  initialQuantity = 1,
-  onQuantityChange,
-}) => {
-  const { id, name, price, image, year, fullPrice, itemId } = product;
-  const [quantity, setQuantity] = useState(initialQuantity);
+export const CartItem: React.FC<CartItemProps> = ({ product }) => {
+  const { name, price, image, year, fullPrice, itemId } = product;
+  const [quantity, setQuantity] = useState(1);
 
   const dispatch = useAppDispatch();
 
@@ -25,14 +18,12 @@ export const CartItem: React.FC<CartItemProps> = ({
     if (quantity > 1) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
-      onQuantityChange?.(id, newQuantity);
     }
   };
 
   const handleQuantityIncrease = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
-    onQuantityChange?.(id, newQuantity);
   };
 
   const handleRemove = () => {

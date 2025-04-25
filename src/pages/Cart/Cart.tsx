@@ -13,7 +13,7 @@ export const Cart = () => {
 
       <div className="cart__items">
         {cartProducts.map(cart => {
-          return <CartItem product={cart} />;
+          return <CartItem key={cart.id} product={cart} />;
         })}
       </div>
     </section>
