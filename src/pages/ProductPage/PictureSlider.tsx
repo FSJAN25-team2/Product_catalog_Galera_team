@@ -1,4 +1,4 @@
-import Slider from 'react-slick';
+import Slider, { SwipeDirection } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useState, useRef, useEffect } from 'react';
@@ -64,33 +64,36 @@ function ImageSlider() {
   }, []);
 
   return (
-    <div className="slider-container">
-      <h4>First Slider</h4>
-      <Slider asNavFor={nav2} ref={slider => (sliderRef1 = slider)} className='slick-slider'>
-        {
-          data.images.map(image => (
-            <div>
-              <img src={image} alt="" className='slider__image--top' />
-            </div>
-          ))
-        }
-      </Slider>
-
-      <h4>Second Slider</h4>
+    <div className="slider__outer-container">
       <Slider
         asNavFor={nav1}
         ref={slider => (sliderRef2 = slider)}
         slidesToShow={5}
         swipeToSlide={true}
         focusOnSelect={true}
+        className="slider__swiper-thumbnails"
+        vertical={true}
+        arrows={false}
       >
-        {
-          data.images.map(image => (
-            <div>
-              <img src={image} alt="" className='slider__image--bottom'/>
-            </div>
-          ))
-        }
+        {data.images.map(image => (
+          <div>
+            <img src={image} alt="" className="slider__image--thumbnail" />
+          </div>
+        ))}
+      </Slider>
+
+      <Slider
+        asNavFor={nav2}
+        ref={slider => (sliderRef1 = slider)}
+        className="slick-slider"
+        vertical={true}
+        arrows={false}
+      >
+        {data.images.map(image => (
+          <div>
+            <img src={image} alt="" className="slider__image--preview" />
+          </div>
+        ))}
       </Slider>
     </div>
   );

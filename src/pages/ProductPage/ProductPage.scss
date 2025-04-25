@@ -27,38 +27,36 @@
 .slider {
   &__outer-container {
     grid-column: 1/-1;
-    height: 400px;
-    max-width: 400px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column-reverse;
+    grid-column: 1/-1;
   }
 
-  &__inner-container {
-    height: 400px;
-    width: 3/4;
+  &__swiper-thumbnails {
+    width: 70px;
   }
 
   &__image {
-    --top {
-      width: 200px;
-      height: 200px;
+    --preview {
+      width: 288px;
+      height: 288px;
       object-fit: contain;
     }
-    &--bottom {
+    &--thumbnail {
       width: 60px;
       height: 60px;
       object-fit: contain;
+      cursor: pointer;
     }
   }
 }
 
-div.slider-container {
-  display: flex;
-  flex-direction: column;
-  grid-column: 1/-1;
-}
-
-
 .slick-slider {
-  background-color: black;
-  max-width: 500px;
+  max-width: 288px;
 }
+
+// .slick-track {
+//   display: flex;
+//   flex-direction: column;
+// }
