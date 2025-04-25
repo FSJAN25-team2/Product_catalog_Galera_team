@@ -1,17 +1,23 @@
-import { ProductCard } from "../../design/organisms/ProductCard/ProductCard";
-import { useAppSelector } from "../../store/hooks"
+import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
+import { useAppSelector } from '../../store/hooks';
+import { H1 } from '../../design/atoms/Typography/H1/H1';
+import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
+import './FavouritesPage.scss';
 
 export const FavouritesPage = () => {
   const favourites = useAppSelector(state => state.favouriteProducts);
-  console.log(favourites);
-    return (
-      <>
-      {favourites.map(fav => {
-        return (
-          <ProductCard product={fav} />
-        )
-      })}
-      </>
-        // <h1>Favourites content</h1>
-    )
-}
+
+  return (
+    <div className="favourites-page">
+      <H1 className="favourites-page__title">Favourites</H1>
+      <P_Small className="favourites-page__count">
+        {favourites.length} items
+      </P_Small>
+
+      {favourites.map(product => (
+        <ProductCard key={product.itemId} product={product} />
+      ))}
+    </div>
+  );
+};
+
