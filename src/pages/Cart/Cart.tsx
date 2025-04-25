@@ -3,6 +3,7 @@ import './Cart.scss';
 import { CartItem } from '../../design/organisms/CartItem/CartItem';
 import { H1 } from '../../design/atoms/Typography/H1/H1';
 import { useAppSelector } from '../../store/hooks';
+import { ButtonBack } from '../../design/atoms/ButtonBack/ButtonBack';
 
 export const Cart = () => {
   const cartProducts = useAppSelector(state => state.cartProducts);
@@ -36,8 +37,11 @@ export const Cart = () => {
     setTotalItems(newTotalItems);
   }, [itemQuantities]);
 
+
   return (
     <section className="cart">
+      <ButtonBack />
+
       <H1 className="cart__title">Cart</H1>
 
       {cartProducts.length > 0 ? (
@@ -70,7 +74,9 @@ export const Cart = () => {
           </div>
         </>
       ) : (
-        <H1 className="cart__empty-message">No items have been added to your basket</H1>
+        <H1 className="cart__empty-message">
+          Cart is empty
+        </H1>
       )}
     </section>
   );

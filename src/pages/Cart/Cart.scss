@@ -17,7 +17,6 @@
     font-weight: 600;
     color: var(--secondary-grey-color);
     text-align: center;
-    // margin: 48px 0;
   }
 
   &__checkout-container {
@@ -28,8 +27,7 @@
 
     @include on-desktop {
       grid-column: 17 / 25;
-      // grid-row: 3 / 5;
-      grid-row: 2 / 4;
+      grid-row: 3 / 5;
       max-height: 206px;
     }
   }
