@@ -3,7 +3,6 @@
 
 .cart-item {
   grid-column: 1 / -1;
-  width: 100%;
   display: flex;
   flex-direction: column;
   border: solid var(--element-border-color) 1px;
@@ -17,7 +16,6 @@
   @include on-desktop {
     grid-column: 1 / 17;
     padding: 24px;
-
   }
 
   &__content {
@@ -80,6 +78,7 @@
 
   &__controls {
     gap: 24px;
+    min-width: 180px;
     display: flex;
     justify-content: space-between;
     align-items: center;

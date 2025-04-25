@@ -8,6 +8,7 @@
   --highlight-green: #27ae60;
   --highlight-red: #eb5757;
   --action-button: var(--primary-grey-color);
+  --button-hover: 0px 3px 13px 0px #17203166;
 }
 
 html[data-theme='dark'] {
@@ -20,4 +21,5 @@ html[data-theme='dark'] {
   --highlight-green: #00c853;
   --highlight-red: #ff5252;
   --action-button: #905bff;
+  --button-hover: 0px 3px 13px 0px #a378ff;
 }
