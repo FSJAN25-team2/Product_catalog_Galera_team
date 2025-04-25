@@ -15,10 +15,6 @@
   &__count {
     grid-column: span 4;
     margin-bottom: 16px;
-    font-weight: $text-weight-semibold;
-    line-height: 21px;
-    font-size: 14px;
-    color: var(--secondary-grey-color);
 
     @include on-tablet-small {
       grid-column: span 6;
