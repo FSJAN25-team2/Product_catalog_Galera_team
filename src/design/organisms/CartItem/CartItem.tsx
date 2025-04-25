@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CartItem.scss';
 import { ShortProduct } from '../../../types/ShortProduct';
 import { useAppDispatch } from '../../../store/hooks';
@@ -6,28 +6,41 @@ import * as CartAction from '../../../store/features/cartProducts';
 
 interface CartItemProps {
   product: ShortProduct;
+  onQuantityChange: (id: string, quantity: number, price: number) => void;
 }
 
-export const CartItem: React.FC<CartItemProps> = ({ product }) => {
+export const CartItem: React.FC<CartItemProps> = ({
+  product,
+  onQuantityChange,
+}) => {
   const { name, price, image, year, fullPrice, itemId } = product;
   const [quantity, setQuantity] = useState(1);
 
   const dispatch = useAppDispatch();
 
+  const currentPrice = year < 2022 ? price : fullPrice;
+
+  useEffect(() => {
+    onQuantityChange(itemId, quantity, currentPrice);
+  }, []);
+
   const handleQuantityDecrease = () => {
     if (quantity > 1) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
+      onQuantityChange(itemId, newQuantity, currentPrice);
     }
   };
 
   const handleQuantityIncrease = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
+    onQuantityChange(itemId, newQuantity, currentPrice);
   };
 
   const handleRemove = () => {
     dispatch(CartAction.removeFromCart(itemId));
+    onQuantityChange(itemId, 0, currentPrice);
   };
 
   return (
@@ -72,9 +85,7 @@ export const CartItem: React.FC<CartItemProps> = ({ product }) => {
           </button>
         </div>
 
-        <div className="cart-item__price">
-          ${year < 2022 ? price : fullPrice}
-        </div>
+        <div className="cart-item__price">${currentPrice}</div>
       </div>
     </div>
   );
