@@ -75,7 +75,7 @@ export const Cart = () => {
         </>
       ) : (
         <H1 className="cart__empty-message">
-          No items have been added to your Cart
+          Cart is empty
         </H1>
       )}
     </section>
