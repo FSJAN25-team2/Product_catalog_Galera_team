@@ -89,6 +89,8 @@
       align-items: center;
 
       list-style: none;
+
+      pointer-events: none;
     }
 
     &--mobile--li {
@@ -108,6 +110,7 @@
       display: block;
       text-decoration: none;
       height: 27px;
+      pointer-events: all;
     }
   }
 

@@ -7,6 +7,10 @@
     justify-content: start;
     margin-bottom: 24px;
 
+    @include on-tablet {
+      margin-bottom: 40px;
+    }
+
     &--item-category {
       min-width: fit-content;
     }
@@ -21,42 +25,231 @@
     gap: 8px;
     grid-column: 1/-1;
     align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    grid-column: 1/-1;
+    margin-bottom: 32px;
+  }
+
+  &__tech-specs {
+    grid-column: 1/-1;
+    margin-bottom: 56px;
+  }
+
+  &__specs {
+    grid-column: 1/-1;
+    margin-bottom: 56px;
+  }
+
+  &__swiper {
+    grid-column: 1/-1;
   }
 }
 
 .slider {
   &__outer-container {
     grid-column: 1/-1;
+    justify-self: center;
     box-sizing: border-box;
     display: flex;
     flex-direction: column-reverse;
-    grid-column: 1/-1;
+    gap: 16px;
+    height: fit-content;
+    width: 288px;
+    margin-bottom: 40px;
+
+    @include on-tablet {
+      gap: 0;
+      width: 100%;
+      grid-column: 1/7;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    @include on-desktop {
+      width: 100%;
+      grid-column: 1/12;
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
   &__swiper-thumbnails {
-    width: 70px;
+    grid-column: 1/-1;
+    display: flex;
+
+    @include on-tablet {
+      grid-column: 1/2;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      height: 288px;
+      width: 51px;
+    }
+
+    @include on-desktop {
+      grid-column: 1/4;
+      height: 464px;
+      width: 80px;
+    }
+  }
+
+  &__swiper-preview {
+    height: 288px;
+    box-sizing: border-box;
+
+    @include on-tablet {
+      grid-column: 2/7;
+    }
+
+    @include on-desktop {
+      height: 464px;
+    }
   }
 
   &__image {
-    --preview {
-      width: 288px;
+    &--preview {
       height: 288px;
-      object-fit: contain;
+      width: 288px;
+      object-fit: contain !important;
+
+      @include on-desktop {
+        height: 464px;
+        width: 464px;
+      }
     }
+
     &--thumbnail {
-      width: 60px;
-      height: 60px;
+      width: 51px;
+      height: 51px;
       object-fit: contain;
       cursor: pointer;
+
+      @include on-desktop {
+        width: 80px;
+        height: 80px;
+      }
     }
   }
 }
 
-.slick-slider {
-  max-width: 288px;
+.colorpicker {
+  grid-column: 1/-1;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--element-border-color);
+
+  &__text-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  &__available {
+    color: var(--secondary-grey-color);
+  }
+
+  &__item-id {
+    color: var(--icons-outline-color);
+  }
+
+  &__color-container {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__color {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: $element-border-default;
+
+    &:hover {
+      border: $element-border-hover;
+    }
+
+    &--active {
+      border: $link-hover-active-border;
+    }
+
+    &--yellow {
+      background-color: #ffe983;
+    }
+    &--midnightgreen {
+      background-color: #5f7170;
+    }
+    &--midnight {
+      background-color: #4c4c4c;
+    }
+    &--white {
+      background-color: #f0f0f0;
+    }
+  }
 }
 
-// .slick-track {
-//   display: flex;
-//   flex-direction: column;
-// }
+.capacity {
+  grid-column: 1/-1;
+  border-bottom: 1px solid var(--element-border-color);
+  margin-bottom: 32px;
+
+  &__text {
+    color: var(--secondary-grey-color);
+    margin-bottom: 8px;
+  }
+
+  &__options {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__option {
+    padding-inline: 8px;
+    height: 32px;
+    line-height: 32px;
+    border: $element-border-default;
+    margin-bottom: 24px;
+
+    &--filled {
+      background-color: var(--primary-grey-color);
+      color: var(--white);
+    }
+  }
+}
+
+.price {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+
+  &__full {
+    color: var(--secondary-grey-color);
+    text-decoration: line-through;
+  }
+}
+
+.about {
+  grid-column: 1/-1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 56px;
+
+  &__section--title {
+    border-bottom: $element-border-default;
+  }
+
+  &__title {
+    margin-bottom: 16px;
+  }
+}
+
+.buttons {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
