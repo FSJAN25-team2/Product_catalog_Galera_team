@@ -3,7 +3,7 @@ import './Cart.scss';
 import { CartItem } from '../../design/organisms/CartItem/CartItem';
 import { H1 } from '../../design/atoms/Typography/H1/H1';
 import { useAppSelector } from '../../store/hooks';
-import { useNavigate } from 'react-router-dom';
+import { ButtonBack } from '../../design/atoms/ButtonBack/ButtonBack';
 
 export const Cart = () => {
   const cartProducts = useAppSelector(state => state.cartProducts);
@@ -12,8 +12,6 @@ export const Cart = () => {
   >({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-
-  const navigate = useNavigate();
 
   const handleQuantityChange = (
     id: string,
@@ -39,15 +37,10 @@ export const Cart = () => {
     setTotalItems(newTotalItems);
   }, [itemQuantities]);
 
-  const handleGoBack = () => {
-    navigate(-1); // повернення назад
-  };
 
   return (
     <section className="cart">
-      <button className="cart__back-button" onClick={handleGoBack}>
-        &lt; Back
-      </button>
+      <ButtonBack />
 
       <H1 className="cart__title">Cart</H1>
 

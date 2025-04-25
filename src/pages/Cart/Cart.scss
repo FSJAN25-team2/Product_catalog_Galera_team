@@ -11,19 +11,6 @@
     margin-bottom: 32px;
   }
 
-  &__back-button {
-    height: 16px;
-    width: 66px;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 100%;
-    color: var(--icons-outline-color);
-    background: transparent;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
   &__empty-message {
     grid-column: 1/-1;
     font-size: 20px;
