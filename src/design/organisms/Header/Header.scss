@@ -3,12 +3,13 @@
 
 .nav {
   height: 64px;
-  background-color: $white;
+  background-color: var(--white);
   border-bottom: $element-border-default;
   margin-bottom: 24px;
   position: sticky;
   top: 0;
   z-index: 11;
+  transition: $transition-behaviour;
 
   &--mobile {
     height: 100vh;
@@ -18,7 +19,7 @@
     display: flex;
     flex-direction: column;
 
-    background-color: $white;
+    background-color: var(--white);
 
     transform: translateX(-100%);
     transition: $transition-behaviour;
@@ -99,10 +100,10 @@
     height: 62px;
     display: flex;
     align-items: center;
-    color: $secondary-grey-color;
+    color: var(--secondary-grey-color);
 
     &--mobile {
-      color: $secondary-grey-color;
+      color: var(--secondary-grey-color);
       display: block;
       text-decoration: none;
       height: 27px;
@@ -133,12 +134,12 @@
   transition: $transition-behaviour;
 
   &:hover {
-    color: $primary-grey-color;
+    color: var(--primary-grey-color);
     border-bottom: $link-hover-active-border;
   }
 
   &.active {
-    color: $primary-grey-color;
+    color: var(--primary-grey-color);
     border-bottom: $link-hover-active-border;
   }
 }

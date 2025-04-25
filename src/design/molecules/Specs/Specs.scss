@@ -10,9 +10,9 @@
 }
 
 .spec-name {
-  color: $secondary-grey-color;
+  color: var(--secondary-grey-color);
 }
 
 .spec-value {
-  color: $primary-grey-color;
+  color: var(--primary-grey-color);
 }

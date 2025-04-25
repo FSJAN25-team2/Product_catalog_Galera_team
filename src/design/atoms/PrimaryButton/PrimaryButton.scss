@@ -1,29 +1,30 @@
 .primary-button {
   flex-grow: 1;
   height: 40px;
-  background-color: $primary-grey-color;
+  background-color: var(--action-button);
   border: none;
 
   font-weight: $text-weight-bold;
   font-size: 14px;
   line-height: 21px;
-  color: $white;
+  color: var(--white);
 
   cursor: pointer;
-  transition: all 0.3s;
+  transition: $transition-behaviour;
 
-  &:active {
-    background: #222;
-  }
+
+  // &:active {
+  //   background: #222;
+  // }
 
   &--active {
-    background-color: $white;
-    color: $highlight-green;
-    border: 1px solid $element-border-color;
+    background-color: var(--white);
+    color: var(--highlight-green);
+    border: 1px solid var(--element-border-color);
 
-    &:active{
-      background-color: rgb(250, 244, 244);
-    }
+    // &:active{
+    //   background-color: rgb(250, 244, 244);
+    // }&&&shadow change on dark theme
   }
 
   &:hover {

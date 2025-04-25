@@ -37,7 +37,7 @@
   &__button {
     width: 32px;
     height: 32px;
-    background-color: #fff;
+    background-color: var(--white);
     border: 1px solid #e2e6e9;
     border-radius: 4px;
     display: flex;
@@ -48,7 +48,7 @@
     padding: 0;
 
     &:hover {
-      border-color: #b4bdc3;
+      border-color: var(--icons-outline-color);
     }
 
     &:active {
@@ -70,7 +70,7 @@
   &__slide {
     box-sizing: border-box;
     border: 1px solid #e2e6e9;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 8px;
     height: auto;
     overflow: hidden;

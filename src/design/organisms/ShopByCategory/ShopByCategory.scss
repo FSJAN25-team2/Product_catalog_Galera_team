@@ -67,10 +67,10 @@
   }
 
   &__card-title {
-    color: $primary-grey-color;
+    color: var(--primary-grey-color);
   }
 
   &__models {
-    color: $secondary-grey-color;
+    color: var(--secondary-grey-color);
   }
-} 
+}

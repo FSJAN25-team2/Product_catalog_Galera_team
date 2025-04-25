@@ -1,6 +1,7 @@
+@use 'utils/theme' as *;
 @use 'utils/mixins' as *;
-@use 'utils/normalize' as *;
 @use 'utils/variables' as *;
+@use 'utils/normalize' as *;
 @import '../design/templates/global-layout';
 
 //atoms
@@ -13,6 +14,7 @@
 @import '../design/atoms/Typography/P_UpperCase/P_UpperCase';
 @import '../design/atoms/PrimaryButton/PrimaryButton';
 @import '../design/atoms/FavouriteButton/FavouriteButton.scss';
+@import '../design/atoms/Switcher/Switcher.scss';
 
 //molecules
 @import '../design/molecules/Specs/Specs';

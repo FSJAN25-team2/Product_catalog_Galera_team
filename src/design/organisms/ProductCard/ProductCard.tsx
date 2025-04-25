@@ -9,24 +9,6 @@ import { ShortProduct } from '../../../types/ShortProduct';
 import { useCartToggle } from '../../../utils/hooks/useCartToggle';
 import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
 
-interface ProductCard {
-  //should be required
-  color?: string;
-  id: number;
-  year?: number;
-
-  name: string;
-  fullPrice: number;
-  price: number;
-  screen: string;
-  capacity: string;
-  ram: string;
-  image: string;
-  itemId: string;
-  category: string;
-}
-
-
 export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
   const {
     capacity,
@@ -38,9 +20,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
     price,
     ram,
     screen,
-    id = 0,
-    year = 2024,
-    color = 'black',
+    year,
   } = product;
 
   const {toggleCart, isInCart} = useCartToggle(product);
@@ -66,7 +46,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
     <div className="product-card">
       <Link
         to={`/${category}/${itemId}`}
-        state={{ productDetails: { id, year, color } }}
+        state={{ product }}
         className="product-card__link"
       >
         <div className="product-card__image-container">
@@ -78,8 +58,8 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
         <div className="product-card__price-block">
           <H3>${price}</H3>
           {
-            // year < 2022 && (
-            <span className="product-card__full-price">${fullPrice}</span> // )
+            year < 2022 && (
+            <span className="product-card__full-price">${fullPrice}</span> )
           }
         </div>
 
@@ -94,6 +74,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
           >
             Add to cart
           </PrimaryButton>
+
           <FavouriteButton
             isInFavourites={isInFav}
             onClick={handleAddToFavourites}
