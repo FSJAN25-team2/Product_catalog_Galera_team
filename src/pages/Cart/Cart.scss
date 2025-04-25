@@ -1,0 +1,22 @@
+@import '../../styles/utils/mixins.scss';
+
+.cart {
+  @include page-grid;
+  grid-column: 1/-1;
+  width: 100%;
+
+  &__title {
+    grid-column: 1/-1;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  &__items {
+    @include page-grid;
+    grid-column: 1 / -1;
+    gap: 16px;
+    margin-bottom: 32px;
+    width: 100%;
+  }
+}

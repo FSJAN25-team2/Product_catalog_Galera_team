@@ -9,7 +9,9 @@ import { ShortProduct } from '../../../types/ShortProduct';
 import { useCartToggle } from '../../../utils/hooks/useCartToggle';
 import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
 
-export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
+export const ProductCard: React.FC<{ product: ShortProduct }> = ({
+  product,
+}) => {
   const {
     capacity,
     category,
@@ -23,8 +25,8 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
     year,
   } = product;
 
-  const {toggleCart, isInCart} = useCartToggle(product);
-  const {toggleFav, isInFav} = useFavToggle(product);
+  const { toggleCart, isInCart } = useCartToggle(product);
+  const { toggleFav, isInFav } = useFavToggle(product);
 
   const handleAddToCart = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -56,11 +58,10 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
         <H4 className="product-card__title">{name}</H4>
 
         <div className="product-card__price-block">
-          <H3>${price}</H3>
-          {
-            year < 2022 && (
-            <span className="product-card__full-price">${fullPrice}</span> )
-          }
+          <H3> ${year < 2022 ? price : fullPrice}</H3>
+          {year < 2022 && (
+            <span className="product-card__full-price">${fullPrice}</span>
+          )}
         </div>
 
         <div className="product-card__divider" />
@@ -68,10 +69,7 @@ export const ProductCard: React.FC<{product: ShortProduct}> = ({ product }) => {
         <Specs specs={{ screen, capacity, ram }} />
 
         <div className="product-card__buttons">
-          <PrimaryButton
-            isInCart={isInCart}
-            onClick={handleAddToCart}
-          >
+          <PrimaryButton isInCart={isInCart} onClick={handleAddToCart}>
             Add to cart
           </PrimaryButton>
 
