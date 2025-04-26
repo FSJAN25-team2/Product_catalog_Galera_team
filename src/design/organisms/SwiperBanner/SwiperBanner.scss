@@ -75,7 +75,7 @@
     max-width: 48px;
     grid-column: span 1;
     height: 100%;
-    border: 1px solid #e2e6e9;
+    border: 1px solid var(--element-border-color);
     background-color: var(--white);
     justify-self: center;
     align-items: center;
@@ -89,6 +89,8 @@
   }
 
   &.prev-button {
+    background-color: var(--surface-button);
+
     @include on-tablet {
       grid-column: 1 / 2;
     }
@@ -99,6 +101,8 @@
   }
 
   &.next-button {
+    background-color: var(--surface-button);
+
     @include on-tablet {
       grid-column: 12 / 13;
     }
@@ -133,4 +137,8 @@
 
 .swiper-pagination-bullet-active {
   background-color: #000;
+}
+
+.nav-arrow-icon {
+  stroke: var(--primary-grey-color);
 }
