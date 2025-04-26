@@ -2,12 +2,9 @@
 import { IconLink } from '../../atoms/IconLink/IconLink';
 import { Logo } from '../../atoms/Logo/Logo';
 import { MenuLink } from '../../atoms/MenuLink/MenuLink';
-import { useAppDispatch } from '../../../store/hooks';
-import * as themeActions from '../../../store/features/theme'
 import { Switcher } from '../../atoms/Switcher/Switcher';
 
 export const HeaderDesktop = () => {
-  const dispatch = useAppDispatch();
   return (
     <>
       <div className="nav__left__container">
@@ -20,8 +17,7 @@ export const HeaderDesktop = () => {
         <MenuLink to="/accessories">accessories</MenuLink>
         </nav>
       </div>
-      {/* <Switch onClick={() => dispatch(themeActions.toggleTheme())}/> */}
-      <Switcher onChange={() => dispatch(themeActions.toggleTheme())}/>
+      <Switcher />
       <div className="nav__icons">
         <IconLink
           to="/favourites"
