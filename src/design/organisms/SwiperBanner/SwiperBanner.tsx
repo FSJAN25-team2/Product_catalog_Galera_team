@@ -34,10 +34,10 @@ const SwiperBanner: React.FC = () => {
           >
             <path
               d="M5.5 0.75L1.25 5L5.5 9.25"
-              stroke="black"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className='nav-arrow-icon'
             />
           </svg>
         </button>
@@ -90,10 +90,10 @@ const SwiperBanner: React.FC = () => {
           >
             <path
               d="M0.5 0.75L4.75 5L0.5 9.25"
-              stroke="black"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className='nav-arrow-icon'
             />
           </svg>
         </button>

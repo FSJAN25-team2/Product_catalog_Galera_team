@@ -1,4 +1,5 @@
 @use '../../../styles/utils/mixins.scss' as *;
+@use '../../../styles/utils/variables.scss' as *;
 
 .product-carousel {
   position: relative;
@@ -37,14 +38,13 @@
   &__button {
     width: 32px;
     height: 32px;
-    background-color: var(--white);
-    border: 1px solid #e2e6e9;
-    border-radius: 4px;
+    background-color: var(--surface-button);
+    border: 1px solid var(--element-border-color);
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: border-color 0.3s ease;
+    transition: $transition-behavior;
     padding: 0;
 
     &:hover {
@@ -69,11 +69,15 @@
 
   &__slide {
     box-sizing: border-box;
-    border: 1px solid #e2e6e9;
     background-color: var(--white);
-    border-radius: 8px;
     height: auto;
     overflow: hidden;
+
+    transition: $transition-behavior;
+
+    &:hover {
+      box-shadow: var(--button-hover);
+    }
 
     width: 212px;
 
@@ -94,4 +98,8 @@
 // Ensure proper slide height
 .swiper-slide.product-carousel__slide {
   height: auto;
+}
+
+.nav-arrow-icon-phones {
+  fill: var(--primary-grey-color);
 }
