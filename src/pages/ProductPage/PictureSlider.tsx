@@ -6,23 +6,27 @@ import { useState, useRef, useEffect } from 'react';
 interface Props {
   images: string[];
 }
-//try 2
+
 export const PictureSlider = ({ images }: Props) => {
   const [width, setWidth] = useState(window.innerWidth);
 
-  const sliderRef1 = useRef<Slider>(null);
-  const sliderRef2 = useRef<Slider>(null);
+  const sliderRef1 = useRef<Slider | null>(null);
+  const sliderRef2 = useRef<Slider | null>(null);
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
 
     window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
   }, []);
 
   return (
     <div className="slider__outer-container">
       <Slider
-        asNavFor={sliderRef2.current}
+        asNavFor={sliderRef2.current ?? undefined}
         ref={sliderRef1}
         slidesToShow={5}
         swipeToSlide={true}
@@ -40,7 +44,7 @@ export const PictureSlider = ({ images }: Props) => {
       </Slider>
 
       <Slider
-        asNavFor={sliderRef1.current}
+        asNavFor={sliderRef1.current ?? undefined}
         ref={sliderRef2}
         className="slider__swiper-preview"
         arrows={false}
