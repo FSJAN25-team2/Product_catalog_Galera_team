@@ -4,4 +4,6 @@
   font-weight: $text-weight-semibold;
   letter-spacing: 0;
   color: var(--primary-grey-color);
+  white-space: nowrap;
+  overflow: hidden;
 }
