@@ -13,35 +13,35 @@
   --trans-timing: cubic-bezier(0.65,0,0.35,1);
 }
 
-/* Контейнер перемикача */
 .switcher {
-  grid-column: 1/-1;
+  margin-left: auto;
+  margin-right: 24px;
+  
   display: flex;
-  position: relative; /* Додано для контролю потоку документа */
-  z-index: 1; /* Встановлюємо базовий z-index */
-  margin: 10px 0; /* Додаємо відступи зверху та знизу */
+  position: relative; 
+  z-index: 1; 
   position: relative;
-  z-index: 10; /* Помірний z-index */
   display: inline-flex;
   align-items: center;
 }
 
 .switch, .switch__input {
+  cursor: pointer;
+
   display: block;
   -webkit-tap-highlight-color: transparent;
 }
 
 .switch {
   margin: auto;
-  position: relative; /* Зберігаємо відносне позиціонування */
+  position: relative; 
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
   transform: scale(1.5);
-  transform-origin: center center; /* Встановлюємо точку трансформації по центру */
+  transform-origin: center center; 
 }
 
-/* Іконки перемикача */
 .switch__icon {
   color: hsla(var(--hue),10%,80%);
   pointer-events: none;
@@ -58,7 +58,6 @@
   left: auto;
 }
 
-/* Внутрішні елементи перемикача */
 .switch__inner, .switch__inner-icons {
   border-radius: 0.5em;
   display: block;
@@ -76,7 +75,7 @@
 }
 
 .switch__inner:before {
-  background-color: var(--primary);
+  background-color: var(--action-button);
   border-radius: inherit;
   content: "";
   display: block;
@@ -103,6 +102,8 @@
 /* Вхідний елемент */
 .switch__input {
   background-color: hsl(0,0%,100%);
+  // background-color: var(--white);
+
   border-radius: 0.75em;
   box-shadow: 0 0 0 0.0625em hsla(var(--hue),90%,50%,0), 0 0.125em 0.5em hsla(var(--hue),10%,10%,0.1);
   outline: transparent;
@@ -111,11 +112,13 @@
   -webkit-appearance: none;
   appearance: none;
   transition: background-color var(--trans-dur), box-shadow var(--trans-dur);
-  position: relative; /* Явно вказуємо позиціонування */
+  position: relative; 
 }
 
 .switch__input:checked {
-  background-color: hsl(var(--hue),10%,10%);
+  background-color: var(--white);
+  border: $element-border-default;
+
 }
 
 .switch__input:checked ~ .switch__icon {

@@ -31,6 +31,7 @@
 
   &--mobile.active {
     height: 100vh;
+    z-index: 2;
 
     transform: translateX(0);
     transition: $transition-behavior;

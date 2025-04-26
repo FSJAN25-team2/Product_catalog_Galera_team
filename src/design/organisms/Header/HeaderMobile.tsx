@@ -4,12 +4,9 @@ import { MenuLink } from '../../atoms/MenuLink/MenuLink';
 import { MenuToggleIcon } from '../../atoms/MenuToggleIconMobile/MenuToggleIcon';
 import { IconLink } from '../../atoms/IconLink/IconLink';
 import { Switcher } from '../../atoms/Switcher/Switcher';
-import { useAppDispatch } from '../../../store/hooks';
-import * as themeActions from '../../../store/features/theme.ts'
 
 export const HeaderMobile = () => {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const dispatch = useAppDispatch();
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuActive(!isMobileMenuActive);
@@ -18,7 +15,7 @@ export const HeaderMobile = () => {
   return (
     <>
       <Logo linkClass={'nav__logo'} imgClass={'nav__logo-image'} />
-
+      <Switcher />
       <MenuToggleIcon
         src={'/icons/burger-menu.svg'}
         alt={'Menu'}
@@ -64,8 +61,7 @@ export const HeaderMobile = () => {
               </MenuLink>
             </li>
             <li>
-                    <Switcher onChange={() => dispatch(themeActions.toggleTheme())}/>
-              
+              {/* <Switcher /> */}
             </li>
           </ul>
         </nav>

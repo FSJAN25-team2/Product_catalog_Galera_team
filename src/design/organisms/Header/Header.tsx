@@ -14,8 +14,8 @@ export const Header = () => {
   return (
     <div className="nav">
       <div className="nav__container">
-        {width > 639 && <HeaderDesktop />}
-        {width <= 639 && <HeaderMobile />}
+        {width > 700 && <HeaderDesktop />}
+        {width <= 700 && <HeaderMobile />}
       </div>
     </div>
   );
