@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import './ButtonBack.scss';
 
-export const ButtonBack = () => {
+interface Props {
+  className?: string;
+}
+
+export const ButtonBack = ({className=''}: Props) => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -9,7 +13,7 @@ export const ButtonBack = () => {
   };
 
   return (
-    <button className="cart__back-button" onClick={handleGoBack}>
+    <button className={`cart__back-button ${className}`} onClick={handleGoBack} >
       &lt; Back
     </button>
   );
