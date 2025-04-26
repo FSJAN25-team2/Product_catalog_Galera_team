@@ -12,21 +12,13 @@
   cursor: pointer;
   transition: $transition-behavior;
 
-  // &:active {
-  //   background: #222;
-  // }
+  &:hover {
+    box-shadow: var(--button-hover);
+  }
 
   &--active {
     background-color: var(--white);
     color: var(--highlight-green);
     border: 1px solid var(--element-border-color);
-
-    // &:active{
-    //   background-color: rgb(250, 244, 244);
-    // }&&&shadow change on dark theme
-  }
-
-  &:hover {
-    box-shadow: 0px 3px 13px 0px #17203166;
   }
 }
