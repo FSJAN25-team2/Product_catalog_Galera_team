@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from 'react';
 interface Props {
   images: string[];
 }
-
+//try 2
 export const PictureSlider = ({ images }: Props) => {
   const [width, setWidth] = useState(window.innerWidth);
 
