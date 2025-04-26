@@ -1,0 +1,15 @@
+.item-card {
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    grid-column: 1 / -1;
+  }
+
+  &__slider {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
