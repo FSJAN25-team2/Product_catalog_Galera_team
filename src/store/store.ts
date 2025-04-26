@@ -4,6 +4,7 @@ import { favouritesLocStorMiddleWare } from './middleware/favouritesMiddleware';
 import cartReducer from './features/cartProducts';
 import favouritesReducer from './features/favouriteProducts';
 import themeReducer from './features/theme'
+import { themeMiddleware } from './middleware/themeMiddleware';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     return getDefaultMiddleware().concat(
       cartLocStorMiddleware,
       favouritesLocStorMiddleWare,
+      themeMiddleware,
     );
   },
 });

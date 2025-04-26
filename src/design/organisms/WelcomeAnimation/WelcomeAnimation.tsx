@@ -21,7 +21,7 @@ export const WelcomeAnimation: React.FC = () => {
       <div className="welcome-animation__content">
         <div className="welcome-animation__logo-container">
           <img
-            src="/img/logos/logo.svg"
+            src="/img/logos/Logo-dark.svg"
             alt="Nice Gadgets Logo"
             className="welcome-animation__logo-image"
           />
