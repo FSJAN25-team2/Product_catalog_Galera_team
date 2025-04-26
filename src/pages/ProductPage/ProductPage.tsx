@@ -1,5 +1,4 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
+import { useLocation, useParams } from 'react-router-dom';
 import { PictureSlider } from './PictureSlider';
 import { ColorPicker } from './ColorPicker';
 import { SelectCapacity } from './SelectCapacity';
@@ -18,6 +17,8 @@ import { SwiperPhone } from '../../design/organisms/SwiperPhone/SwiperPhone';
 import { PageButtons } from './PageButtons';
 import { ProductCard } from '../../design/organisms/ProductCard/ProductCard';
 import { H3 } from '../../design/atoms/Typography/H3/H3';
+import { Breadcrumbs } from '../../design/atoms/Breadcrumbs';
+import { ButtonBack } from '../../design/atoms/ButtonBack/ButtonBack';
 
 const data = {
   id: 'apple-iphone-11-128gb-black',
@@ -88,6 +89,9 @@ export const ProductPage = () => {
   const { tabId } = useParams();
   const location = useLocation();
   const category = location.pathname.split('/')[1];
+  const currentproduct = location.state.product;
+
+  console.log(currentproduct);
 
   const {
     camera,
@@ -143,55 +147,47 @@ export const ProductPage = () => {
   }, [category, tabId]);
 
   return (
-    <>
-      <div className="product__breadcrumbs">
-        <Link to="/">
-          <img src="/icons/home-icon.svg" alt="Home" />
-        </Link>
-        <img src="/icons/arrow-right.svg" alt="Home" />
-        <P_Small className="product__breadcrumbs--item-category">
-          Phones
-        </P_Small>
-        <img src="/icons/arrow-right.svg" alt="Home" />
-        <P_Small className="product__breadcrumbs--item-title">
-          {name}({namespaceId})
-        </P_Small>
-      </div>
+    <div className='product'>
+      <Breadcrumbs className="product__breadcrumbs" />
 
-      <Link to=".." className="product__button-back">
-        <img src="/icons/arrow-left.svg" alt="Home" />
-        <P_Small>Back</P_Small>
-      </Link>
+      <ButtonBack className="product__button-back" />
 
       <H2 className="product__title">{name}</H2>
 
       <PictureSlider images={images} />
 
-      <ColorPicker
-        colorsAvailable={colorsAvailable}
-        color={color}
-        id={namespaceId}
-      />
+      <div className="product__top-details">
+        <ColorPicker
+          colorsAvailable={colorsAvailable}
+          color={color}
+          id={namespaceId}
+        />
 
-      <SelectCapacity
-        capacityAvailable={capacityAvailable}
-        capacity={capacity}
-        category={category}
-      />
+        <SelectCapacity
+          capacityAvailable={capacityAvailable}
+          capacity={capacity}
+          category={category}
+        />
 
-      <PriceBlock priceDiscount={priceDiscount} priceRegular={priceRegular} />
+        <PriceBlock
+          priceDiscount={priceDiscount}
+          priceRegular={priceRegular}
+          year={currentproduct.year}
+        />
 
-      <PageButtons product={location.state} />
+        <PageButtons product={currentproduct} />
 
-      <Specs
-        specs={{ screen, resolution, processor, ram }}
-        className="product__specs"
-      />
+        <Specs
+          specs={{ screen, resolution, processor, ram }}
+          className="product__specs"
+        />
+      </div>
 
       <About description={description} />
 
-      <div className="product__tech-specs">
-        <H3 className="section--title">Tech specs</H3>
+      <div className="product__tech-specs section">
+        <H3 className="section__title">Tech specs</H3>
+        
         <Specs
           specs={{
             screen,
@@ -210,6 +206,6 @@ export const ProductPage = () => {
       <div className="product__swiper">
         <SwiperPhone title="You may also like">{productCards}</SwiperPhone>
       </div>
-    </>
+    </div>
   );
 };

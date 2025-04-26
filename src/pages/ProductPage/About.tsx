@@ -8,8 +8,8 @@ interface Props {
 
 export const About: React.FC<Props> = ({ description }) => {
   return (
-    <div className="about">
-      <H3 className="about__section--title">About</H3>
+    <div className="about section">
+      <H3 className="section__title">About</H3>
 
       {description.map(item => {
         const { title, text } = item;

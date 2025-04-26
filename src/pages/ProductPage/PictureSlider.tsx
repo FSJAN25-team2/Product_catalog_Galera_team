@@ -30,7 +30,7 @@ export const PictureSlider = ({ images }: Props) => {
         className="slider__swiper-thumbnails"
         arrows={false}
         infinite={false}
-        vertical={width > 768}
+        vertical={width > 767}
       >
         {images.map(image => (
           <div>
@@ -46,7 +46,7 @@ export const PictureSlider = ({ images }: Props) => {
         arrows={false}
         infinite={false}
         slidesToShow={1}
-        vertical={width > 768}
+        vertical={width > 767}
         swipeToSlide={false}
       >
         {images.map(image => (

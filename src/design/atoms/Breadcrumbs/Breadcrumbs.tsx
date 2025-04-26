@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { Breadcrumbs as MUIBreadcrumbs, Typography } from '@mui/material';
+import { Breadcrumbs as MUIBreadcrumbs } from '@mui/material';
 import { Home as HomeIcon, NavigateNext as NavigateNextIcon } from '@mui/icons-material';
 import { BreadcrumbsProps } from './types';
 import styles from './Breadcrumbs.module.scss';
 import { Capitalize } from '../../../utils/helpers';
+import { P } from '../Typography/P/P';
 
 const DEFAULT_LABELS: Record<string, string> = {
   phones: 'Phones',
@@ -49,13 +50,13 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
       {breadcrumbItems.map(({ path, label, isLast }) => (
         isLast ? (
-          <Typography
+          <P
             key={path}
-            variant="body2"
+            // variant="body2"
             className={styles.current}
           >
             {label.split('-').map(part => Capitalize(part)).join(' ')} 
-          </Typography>
+          </P>
         ) : (
           <Link
             key={path}
