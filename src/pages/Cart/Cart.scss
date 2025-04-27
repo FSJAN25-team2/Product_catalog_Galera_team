@@ -3,6 +3,7 @@
 .cart {
   @include page-grid;
   grid-column: 1/-1;
+  row-gap: 20px;
 
   &__title {
     grid-column: 1/-1;
@@ -22,7 +23,7 @@
   &__checkout-container {
     grid-column: 1 / -1;
 
-    border: 1px solid var(--element-border-color);
+    border: 1px solid var(--checkout);
     padding: 24px;
 
     @include on-desktop {
@@ -79,4 +80,10 @@
       box-shadow: var(--button-hover);
     }
   }
+}
+
+.hr-line-checkout {
+  height: 1px;
+  background-color: var(--checkout);
+  margin-bottom: 24px;
 }

@@ -68,6 +68,8 @@ export const Cart = () => {
               </span>
             </div>
 
+            <div className="hr-line-checkout"/>
+
             <button className="cart__checkout-button" type="button">
               Checkout
             </button>

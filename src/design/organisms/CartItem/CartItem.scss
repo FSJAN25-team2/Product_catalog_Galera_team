@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   border: solid var(--element-border-color) 1px;
+  background-color: var(--surface-card);
   padding: 16px;
 
   @include on-tablet-small {
