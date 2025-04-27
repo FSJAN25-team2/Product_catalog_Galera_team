@@ -1,6 +1,6 @@
 import { ProductCard } from '../../../design/organisms/ProductCard/ProductCard';
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Filters } from './Sorting';
 import { Pagination } from './Pagination';
 import { ShortProduct } from '../../../types/ShortProduct';
@@ -8,7 +8,10 @@ import { Category } from '../../../types/Category';
 import { getPageNumbers } from './Functions';
 import { getProducts } from '../../../services/api/allProductsAPI';
 import { Sorting } from '../../../types/Sorting';
-import { H1 } from '../../../design/atoms/Typography/H1/H1';
+import { Breadcrumbs } from '../../../design/atoms/Breadcrumbs/Breadcrumbs';
+import { ButtonBack } from '../../../design/atoms/ButtonBack/ButtonBack';
+import { H2 } from '../../../design/atoms/Typography/H2/H2';
+import { P_Small } from '../../../design/atoms/Typography/P_Small/P_Small';
 
 type Props = {
   title: string;
@@ -27,33 +30,37 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
 
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
-    params.set('sort', value);
-    params.set('page', '1');
+    if (value === Sorting.Newest) {
+      params.delete('sort');
+    } else {
+      params.set('sort', value);
+    }
+    params.delete('page');
     setSearchParams(params);
   };
 
   const handleItemsPerPageChange = (value: number) => {
     const params = new URLSearchParams(searchParams);
-    params.set('itemsPerPage', value.toString());
-    params.set('page', '1');
+    if (value === 16) {
+      params.delete('itemsPerPage');
+    } else {
+      params.set('itemsPerPage', value.toString());
+    }
+    params.delete('page');
     setSearchParams(params);
   };
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
-    params.set('page', page.toString());
+    if (page === 1) {
+      params.delete('page');
+    } else {
+      params.set('page', page.toString());
+    }
     setSearchParams(params);
   };
 
   const pageNumbers = getPageNumbers(currentPage, totalPages);
-
-  const categoryNames = {
-    [Category.Phones]: 'Phones',
-    [Category.Tablets]: 'Tablets',
-    [Category.Accessories]: 'Accessories',
-  };
-
-  const formattedCategory = categoryNames[category];
 
   useEffect(() => {
     getProducts({
@@ -68,24 +75,15 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
       })
       .catch(error => console.error(error));
   }, [category, currentPage, itemsPerPage, sortBy]);
-  
 
   return (
     <div className="products-catalog">
-      <div className="products-catalog__breadcrumbs">
-        <Link to="/" className="products-catalog__breadcrumbs-link">
-          Home
-        </Link>
-        <span className="products-catalog__breadcrumbs-separator">/</span>
-        <span className="products-catalog__breadcrumbs-current">
-          {formattedCategory}
-        </span>
-      </div>
+      <Breadcrumbs className="products-catalog__breadcrumbs" />
 
-      {/* this styles mb  */}
-      <H1 className="products-catalog__title">{title}</H1>
-      <p className="products-catalog__count">{totalCount} models</p>
+      <ButtonBack className='products-catalog__buttom-back'/>
 
+      <H2 className="products-catalog__title">{title}</H2>
+      <P_Small className="products-catalog__count">{totalCount} models</P_Small>
 
       <Filters
         sortBy={sortBy}

@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { P_Small } from '../../../design/atoms/Typography/P_Small/P_Small';
 
 type Props = {
   sortBy: string;
@@ -14,8 +15,7 @@ export const Filters: React.FC<Props> = ({
   onSortChange,
   onItemsPerPageChange,
 }) => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const hasFilters = () => {
     return (
@@ -26,28 +26,36 @@ export const Filters: React.FC<Props> = ({
   };
 
   const resetFilters = () => {
-    navigate('/phones');
+    setSearchParams('');
   };
 
   return (
     <div className="products-catalog__filters">
       <div className="products-catalog__filter">
-        <label htmlFor="sort">Sort by</label>
+        <label htmlFor="sort">
+          <P_Small>Sort by</P_Small>
+        </label>
+
         <select
           id="sort"
+          className="products-catalog__select"
           value={sortBy}
           onChange={e => onSortChange(e.target.value)}
         >
-          <option value="newest">Newest</option>
-          <option value="cheapest">Cheapest</option>
-          <option value="mostExpensive">Most Expensive</option>
+          <option value="newest">NEWEST</option>
+          <option value="cheapest">CHEAPEST</option>
+          <option value="mostExpensive">MOST EXPENSIVE</option>
         </select>
       </div>
 
       <div className="products-catalog__filter">
-        <label htmlFor="itemsOnPage">Items on page</label>
+        <label htmlFor="itemsOnPage">
+          <P_Small>Items on page</P_Small>
+        </label>
+
         <select
           id="itemsOnPage"
+          className="products-catalog__select"
           value={itemsPerPage}
           onChange={e => onItemsPerPageChange(+e.target.value)}
         >
@@ -59,10 +67,12 @@ export const Filters: React.FC<Props> = ({
       </div>
 
       {hasFilters() && (
-        <div>
-          <label>Reset Filters</label>
+        <div className="products-catalog__filter">
+          <label>
+            <P_Small>Reset Filters</P_Small>
+          </label>
           <button className="products-catalog__reset" onClick={resetFilters}>
-            Reset Filters
+            RESET
           </button>
         </div>
       )}

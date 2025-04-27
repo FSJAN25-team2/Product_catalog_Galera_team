@@ -1,11 +1,11 @@
 .products-catalog {
   @include page-grid;
-  // display: grid;
-  // padding-inline: 16px;
+
   margin-bottom: 40px;
   grid-column: 1/-1;
   &__title {
     grid-column: 1/-1;
+    margin-bottom: 32px;
   }
 
   &__filters {
@@ -44,6 +44,10 @@
         border-color: #333;
       }
     }
+
+    select {
+      text-transform: uppercase;
+    }
   }
 
   &__count {
@@ -66,7 +70,6 @@
 
   &__list {
     grid-column: 1/-1;
-    // display: contents;
   }
 
   &__pagination {
@@ -106,29 +109,19 @@
 
   &__breadcrumbs {
     display: flex;
-    grid-column: 1/-1;
     align-items: center;
-    font-size: 14px;
-    color: var(--secondary-grey-color);
+    gap: 8px;
+    grid-column: 1/-1;
+    justify-content: start;
+    margin-bottom: 24px !important;
+
+    @include on-tablet {
+      margin-bottom: 40px !important;
+    }
+  }
+
+  &__button-back {
+    grid-column: 1/-1;
     margin-bottom: 16px;
-
-    &-link {
-      color: var(--secondary-grey-color);
-      text-decoration: none;
-      transition: color 0.3s;
-
-      &:hover {
-        color: #000;
-      }
-    }
-
-    &-separator {
-      margin: 0 8px;
-    }
-
-    &-current {
-      font-weight: 600;
-      color: var(--secondary-grey-color);
-    }
   }
 }
