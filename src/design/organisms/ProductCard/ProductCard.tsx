@@ -9,7 +9,11 @@ import { ShortProduct } from '../../../types/ShortProduct';
 import { useCartToggle } from '../../../utils/hooks/useCartToggle';
 import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
 
-export const ProductCard: React.FC<{ product: ShortProduct }> = ({
+interface ProductCardProps {
+  product: ShortProduct;
+}
+
+export const ProductCard: React.FC<ProductCardProps> = ({
   product,
 }) => {
   const {
@@ -46,7 +50,7 @@ export const ProductCard: React.FC<{ product: ShortProduct }> = ({
 
   return (
     <div className="product-card">
-      <Link
+        <Link
         to={`/${category}/${itemId}`}
         state={{ product }}
         className="product-card__link"
