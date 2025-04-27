@@ -9,6 +9,8 @@ import { getPageNumbers } from './Functions';
 import { getProducts } from '../../../services/api/allProductsAPI';
 import { Sorting } from '../../../types/Sorting';
 import { H1 } from '../../../design/atoms/Typography/H1/H1';
+import { CardsContainer } from '../../../design/atoms/CardsContainer/CardsContainer';
+import { SkeletonCards } from '../../../design/organisms/SkeletonCards/SkeletonCards';
 
 type Props = {
   title: string;
@@ -19,6 +21,7 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
   const [products, setProducts] = useState<ShortProduct[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const sortBy = searchParams.get('sort') || 'newest';
   const itemsPerPage = +(searchParams.get('itemsPerPage') || 16);
@@ -66,7 +69,8 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
         setProducts(products);
         setTotalCount(totalCount);
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
   }, [category, currentPage, itemsPerPage, sortBy]);
   
 
@@ -94,25 +98,31 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
         onItemsPerPageChange={handleItemsPerPageChange}
       />
 
-      {products.map(product => (
-        <ProductCard
-          key={product.id}
-          product={{
-            name: product.name,
-            fullPrice: product.fullPrice,
-            price: product.price,
-            screen: product.screen,
-            capacity: product.capacity,
-            ram: product.ram,
-            image: product.image,
-            itemId: product.itemId,
-            category: category,
-            id: product.id,
-            year: product.year,
-            color: product.color,
-          }}
-        />
-      ))}
+    <CardsContainer>
+    {loading ? (
+      <SkeletonCards quantity={itemsPerPage}/>
+      ) : (
+        products.map(product => (
+          <ProductCard
+            key={product.id}
+            product={{
+              name: product.name,
+              fullPrice: product.fullPrice,
+              price: product.price,
+              screen: product.screen,
+              capacity: product.capacity,
+              ram: product.ram,
+              image: product.image,
+              itemId: product.itemId,
+              category: category,
+              id: product.id,
+              year: product.year,
+              color: product.color,
+            }}
+          />
+        ))
+      )}
+      </CardsContainer>
 
       <Pagination
         currentPage={currentPage}
