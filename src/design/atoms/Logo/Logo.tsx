@@ -19,7 +19,7 @@ export const Logo = ({ linkClass, imgClass }: Props) => {
   return (
     <Link to="/" className={linkClass} onClick={handleScrollToTop}>
       <img
-        src={theme === 'dark' ? "/public/img/logos/Logo-dark.svg" : "/img/logos/logo.svg"}
+        src={theme === 'dark' ? "/img/logos/Logo-dark.svg" : "/img/logos/logo.svg"}
         alt="Nice Gadgets Logo"
         className={imgClass}
       />
