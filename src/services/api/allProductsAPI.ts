@@ -2,6 +2,7 @@ import { FullProduct } from '../../types/FullProduct';
 import { ProductRequestQuery } from '../../types/ProductRequestQuery';
 import { client } from '../client/fetchClient';
 import { ProductsResponse } from '../../types/ProductsResponse';
+import { ShortProduct } from '../../types/ShortProduct';
 
 export const getProducts = ({
   limit,
@@ -12,6 +13,10 @@ export const getProducts = ({
   return client.get<ProductsResponse>(
     `/products?limit=${limit}&page=${page}&category=${category}&sortBy=${sortBy}`,
   );
+};
+
+export const getHotPricedProducts = (limit = 8) => {
+  return client.get<ShortProduct[]>(`/products/hot-prices?limit=${limit}`);
 };
 
 export const getPhoneById = (phoneId: string) => {
