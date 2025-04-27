@@ -7,7 +7,7 @@ interface ThemeState {
 }
 
 const initialState: ThemeState = {
-  theme: 'light',
+  theme: localStorage.getItem('theme') as InitialStateType || 'light',
 };
 
 export const themeSlice = createSlice({

@@ -12,6 +12,7 @@
   --surface-card: #fff;
   --surface-button: #fff;
   --secondary-outline: #e2e6e9;
+  --checkout: var(--element-border-color);
 }
 
 html[data-theme='dark'] {
@@ -28,4 +29,5 @@ html[data-theme='dark'] {
   --surface-card: #161827;
   --surface-button: #323542;
   --secondary-outline: #4A4F57;
+  --checkout: #3B3E4A;
 }
