@@ -9,7 +9,7 @@ import {
   getProducts,
   getTabletById,
 } from '../../services/api/allProductsAPI';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FullProduct } from '../../types/FullProduct';
 import { ShortProduct } from '../../types/ShortProduct';
 import { Specs } from '../../design/molecules/Specs/Specs';
@@ -24,17 +24,22 @@ import { ButtonBack } from '../../design/atoms/ButtonBack/ButtonBack';
 import { Category } from '../../types/Category';
 import { Sorting } from '../../types/Sorting';
 import { getRandomProducts } from './Utils/Ulitls';
+import { Loader } from './Loader';
 
 export const ProductPage = () => {
   const [product, setProduct] = useState<FullProduct | null>(null);
   const [recommendedProducts, setRecommendedProducts] = useState<
     ShortProduct[]
   >([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { tabId } = useParams();
   const location = useLocation();
   const category = location.pathname.split('/')[1];
-  const currentProduct = location.state?.product;
+  const currentProduct = useMemo(
+    () => location.state?.product,
+    [location.state.product],
+  );
 
   useEffect(() => {
     if (!tabId) return;
@@ -70,11 +75,19 @@ export const ProductPage = () => {
       const products = res.products;
       const randomProducts = getRandomProducts(products, 8);
       setRecommendedProducts(randomProducts);
-    });
-  }, []);
+    }).finally(() => {
+      setIsLoading(false);
+    })
+  }, [tabId]);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div className="product">
+        <Breadcrumbs className="product__breadcrumbs" />
+        <ButtonBack className="product__button-back" />
+        <Loader />
+      </div>
+    );
   }
 
   const {
@@ -109,20 +122,25 @@ export const ProductPage = () => {
       <div className="product__top-details">
         <ColorPicker
           colorsAvailable={colorsAvailable}
-          color={color}
+          current={color}
+          category={category}
           id={namespaceId}
+          tabId={tabId as string}
+          currentProduct={currentProduct}
         />
 
         <SelectCapacity
           capacityAvailable={capacityAvailable}
-          capacity={capacity}
+          current={capacity}
           category={category}
+          tabId={tabId as string}
+          currentProduct={currentProduct}
         />
 
         <PriceBlock
           priceDiscount={priceDiscount}
           priceRegular={priceRegular}
-          year={currentProduct?.year}
+          year={currentProduct.year}
         />
 
         <PageButtons product={currentProduct} />
@@ -154,7 +172,7 @@ export const ProductPage = () => {
       </div>
 
       <div className="product__swiper">
-        <SwiperPhone title="You may also like">
+        <SwiperPhone title="You may also like" isLoading={isLoading}>
           {recommendedProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}

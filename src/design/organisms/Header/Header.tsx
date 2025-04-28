@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { HeaderDesktop } from './HeaderDesktop';
 import { HeaderMobile } from './HeaderMobile';
+import { useAppSelector } from '../../../store/hooks';
 
 export const Header = () => {
   const [width, setWidth] = useState(window.innerWidth);
+  const cartProducts = useAppSelector(state => state.cartProducts);
+  const favProducts = useAppSelector(state => state.favouriteProducts);
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -14,8 +17,8 @@ export const Header = () => {
   return (
     <div className="nav">
       <div className="nav__container">
-        {width > 700 && <HeaderDesktop />}
-        {width <= 700 && <HeaderMobile />}
+        {width > 768 && <HeaderDesktop cartProducts={cartProducts.length} favProducts={favProducts.length} />}
+        {width <= 768 && <HeaderMobile cartProducts={cartProducts.length} favProducts={favProducts.length} />}
       </div>
     </div>
   );

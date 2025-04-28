@@ -4,15 +4,10 @@
   height: 257px;
   border-top: $element-border-default;
   background-color: var(--white);
-  margin-top: 56px;
   transition: $transition-behavior;
 
   @include on-tablet-small {
     height: 96px;
-  }
-
-  @include on-desktop {
-    margin-top: 80px;
   }
 
   &__inner-container {
