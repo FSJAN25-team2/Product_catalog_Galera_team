@@ -24,7 +24,6 @@ import { ButtonBack } from '../../design/atoms/ButtonBack/ButtonBack';
 import { Category } from '../../types/Category';
 import { Sorting } from '../../types/Sorting';
 import { getRandomProducts } from './Utils/Ulitls';
-// import { ProductPageSkeleton } from './ProductPageSkeleton';
 import { Loader } from './Loader';
 
 export const ProductPage = () => {
