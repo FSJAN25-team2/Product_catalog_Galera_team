@@ -16,8 +16,20 @@ export const HomePage = () => {
   const [hotProducts, setHotProducts] = useState<ShortProduct[]>([]);
   const [newProducts, setNewProducts] = useState<ShortProduct[]>([]);
 
+  const [isHotProductsLoading, setIsHotProductsLoading] = useState(true);
+  const [isNewProductsLoading, setIsNewProductsLoading] = useState(true);
+
   useEffect(() => {
-    getHotPricedProducts().then(setHotProducts);
+    getHotPricedProducts()
+      .then(products => {
+        setHotProducts(products);
+      })
+      .catch(error => {
+        console.error('Error loading hot products:', error);
+      })
+      .finally(() => {
+        setIsHotProductsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -26,18 +38,28 @@ export const HomePage = () => {
       page: 1,
       category: Category.Phones,
       sortBy: Sorting.Newest,
-    }).then(res => {
-      setNewProducts(res.products);
-    });
+    })
+      .then(res => {
+        setNewProducts(res.products);
+      })
+      .catch(error => {
+        console.error('Error loading new products:', error);
+      })
+      .finally(() => {
+        setIsNewProductsLoading(false);
+      });
   }, []);
 
   return (
     <>
       <H1 className="home-page__title">Welcome to Nice Gadgets store</H1>
-      <SwiperBanner />
 
       <div className="home-page__content">
-        <SwiperPhone title="Brand new models">
+        <SwiperBanner />
+      </div>
+
+      <div className="home-page__content">
+        <SwiperPhone title="Brand new models" isLoading={isNewProductsLoading}>
           {newProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -47,7 +69,7 @@ export const HomePage = () => {
       <ShopByCategory />
 
       <div className="home-page__content">
-        <SwiperPhone title="Hot prices">
+        <SwiperPhone title="Hot prices" isLoading={isHotProductsLoading}>
           {hotProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
