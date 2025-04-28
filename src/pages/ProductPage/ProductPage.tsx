@@ -31,6 +31,7 @@ export const ProductPage = () => {
   const [recommendedProducts, setRecommendedProducts] = useState<
     ShortProduct[]
   >([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { tabId } = useParams();
   const location = useLocation();
@@ -74,8 +75,10 @@ export const ProductPage = () => {
       const products = res.products;
       const randomProducts = getRandomProducts(products, 8);
       setRecommendedProducts(randomProducts);
-    });
-  }, []);
+    }).finally(() => {
+      setIsLoading(false);
+    })
+  }, [tabId]);
 
   if (!product) {
     return (
@@ -169,7 +172,7 @@ export const ProductPage = () => {
       </div>
 
       <div className="product__swiper">
-        <SwiperPhone title="You may also like">
+        <SwiperPhone title="You may also like" isLoading={isLoading}>
           {recommendedProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
