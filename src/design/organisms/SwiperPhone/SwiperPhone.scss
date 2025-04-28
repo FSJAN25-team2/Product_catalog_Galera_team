@@ -68,17 +68,12 @@
   }
 
   &__slide {
+    padding: 10px;
     box-sizing: border-box;
     background-color: var(--white);
     height: auto;
     overflow: hidden;
-
     transition: $transition-behavior;
-
-    &:hover {
-      box-shadow: var(--button-hover);
-    }
-
     width: 212px;
 
     @include on-tablet-small {
@@ -95,7 +90,6 @@
   }
 }
 
-// Ensure proper slide height
 .swiper-slide.product-carousel__slide {
   height: auto;
 }

@@ -5,7 +5,15 @@
 .categories {
   @include page-grid;
   grid-column: 1 / -1;
-  margin-bottom: 80px;
+  margin-bottom: 56px;
+
+  @include on-tablet-small {
+    margin-bottom: 64px;
+  }
+
+  @include on-desktop {
+    margin-bottom: 80px;
+  }
 
   &__title {
     margin-bottom: 24px;
