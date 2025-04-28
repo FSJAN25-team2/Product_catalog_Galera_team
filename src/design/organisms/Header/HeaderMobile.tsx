@@ -5,7 +5,12 @@ import { MenuToggleIcon } from '../../atoms/MenuToggleIconMobile/MenuToggleIcon'
 import { IconLink } from '../../atoms/IconLink/IconLink';
 import { Switcher } from '../../atoms/Switcher/Switcher';
 
-export const HeaderMobile = () => {
+interface Props {
+  cartProducts: number;
+  favProducts: number;
+}
+
+export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts }) => {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
   const handleToggleMobileMenu = () => {
@@ -72,12 +77,14 @@ export const HeaderMobile = () => {
             src="/icons/favourites-icon.svg"
             alt="Favourites"
             className="bottom-bar__link"
+            quantity={favProducts}
           />
           <IconLink
             to="/cart"
             src="/icons/cart-icon.svg"
             alt="Cart"
             className="bottom-bar__link"
+            quantity={cartProducts}
           />
         </div>
       </aside>

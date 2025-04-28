@@ -14,6 +14,10 @@
     @include on-tablet {
       margin-bottom: 40px !important;
     }
+
+    @include on-big-desktop {
+      width: 1200px;
+    }
   }
 
   &__button-back {
@@ -56,6 +60,14 @@
 
   &__swiper {
     grid-column: 1/-1;    
+  }
+
+  &__loader {
+    grid-column: 1/-1;
+    height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -189,17 +201,68 @@
       border: $link-hover-active-border;
     }
 
+    &--black {
+      background-color: black;
+    }
+    &--gold {
+      background-color: #F6E0C9;
+    }
     &--yellow {
-      background-color: #ffe983;
+      background-color: lightyellow;
+    }
+    &--green {
+      background-color: lightgreen;
     }
     &--midnightgreen {
-      background-color: #5f7170;
+      background-color: #004953;
     }
-    &--midnight {
-      background-color: #4c4c4c;
+    &--silver {
+      background-color: #F0F2F2;
+    }
+    &--spacegray {
+      background-color: darkgray;
+    }
+    &--red {
+      background-color: red;
     }
     &--white {
-      background-color: #f0f0f0;
+      background-color: white;
+    }
+    &--purple {
+      background-color: lavender;
+    }
+    &--coral {
+      background-color: lightcoral;
+    }
+    &--rosegold {
+      background-color: #f7c5ad;
+    }
+    &--midnight {
+      background-color: #222930;
+    }
+    &--spaceblack {
+      background-color: black;
+    }
+    &--blue {
+      background-color: lightblue;
+    }
+    &--pink {
+      background-color: pink;
+    }
+    &--sierrablue {
+      background-color: lightblue;
+    }
+    &--graphite {
+      background-color: grey;
+    }
+    &--space-gray {
+      background-color: darkgray;
+    }
+    &--sky-sbue {
+      background-color: lightblue;
+    }
+    &--starlight {
+      background-color: white;
     }
   }
 }

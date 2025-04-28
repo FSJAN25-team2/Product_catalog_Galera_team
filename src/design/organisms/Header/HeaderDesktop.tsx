@@ -4,7 +4,12 @@ import { Logo } from '../../atoms/Logo/Logo';
 import { MenuLink } from '../../atoms/MenuLink/MenuLink';
 import { Switcher } from '../../atoms/Switcher/Switcher';
 
-export const HeaderDesktop = () => {
+interface Props {
+  cartProducts: number;
+  favProducts: number;
+}
+
+export const HeaderDesktop: React.FC<Props> = ({ cartProducts, favProducts }) => {
   return (
     <>
       <div className="nav__left__container">
@@ -23,11 +28,13 @@ export const HeaderDesktop = () => {
           to="/favourites"
           src="/icons/favourites-icon.svg"
           alt="Favourites"
+          quantity={favProducts}
         />
         <IconLink
           to="/cart"
           src="/icons/cart-icon.svg"
           alt="Cart"
+          quantity={cartProducts}
         />
       </div>
     </>

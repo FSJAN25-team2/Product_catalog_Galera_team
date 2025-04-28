@@ -19,13 +19,7 @@ export const useHandleOptionChange = () => {
     current,
     currentProduct,
   }: Props) => {
-    const tabIdParts = tabId
-      .split('-')
-      .map(part =>
-        part === current.toLowerCase() ? option.toLowerCase() : part,
-      );
-
-    const newTabId = tabIdParts.join('-');
+    const newTabId = tabId.replace(current.toLowerCase(), option.toLowerCase());
 
     navigate(`/${category}/${newTabId}`, {
       state: { product: currentProduct },

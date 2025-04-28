@@ -10,7 +10,7 @@ interface SpecsProps {
 export const Specs: FC<SpecsProps> = ({ specs, className='' }) => {
   const getSpecLabel = (key: string) => {
     if (key === 'ram') return key.toUpperCase();
-    if (key === 'capacity') return 'Built in memory';
+    // if (key === 'capacity') return 'Built in memory';
     return Capitalize(key);
   };
 

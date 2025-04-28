@@ -24,6 +24,8 @@ import { ButtonBack } from '../../design/atoms/ButtonBack/ButtonBack';
 import { Category } from '../../types/Category';
 import { Sorting } from '../../types/Sorting';
 import { getRandomProducts } from './Utils/Ulitls';
+// import { ProductPageSkeleton } from './ProductPageSkeleton';
+import { Loader } from './Loader';
 
 export const ProductPage = () => {
   const [product, setProduct] = useState<FullProduct | null>(null);
@@ -34,9 +36,10 @@ export const ProductPage = () => {
   const { tabId } = useParams();
   const location = useLocation();
   const category = location.pathname.split('/')[1];
-  const currentProduct = useMemo(() => location.state?.product, [location.state.product]);
-
-  console.log(product);
+  const currentProduct = useMemo(
+    () => location.state?.product,
+    [location.state.product],
+  );
 
   useEffect(() => {
     if (!tabId) return;
@@ -76,7 +79,13 @@ export const ProductPage = () => {
   }, []);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div className="product">
+        <Breadcrumbs className="product__breadcrumbs" />
+        <ButtonBack className="product__button-back" />
+        <Loader />
+      </div>
+    );
   }
 
   const {
@@ -132,7 +141,6 @@ export const ProductPage = () => {
           year={currentProduct.year}
         />
 
-        <PageButtons product={currentProduct} />
         <PageButtons product={currentProduct} />
 
         <Specs
