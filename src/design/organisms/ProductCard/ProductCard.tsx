@@ -8,29 +8,31 @@ import { H3 } from '../../atoms/Typography/H3/H3';
 import { ShortProduct } from '../../../types/ShortProduct';
 import { useCartToggle } from '../../../utils/hooks/useCartToggle';
 import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
+import { ShortProductWithDetails } from '../../../types/FullProduct';
+import { Icon } from '../../atoms/icons/Icon';
+// import { useCompareToggle } from '../../../utils/hooks/useCompareToggle';
+import { getSpecs } from '../../../utils/helpers';
 
 interface ProductCardProps {
-  product: ShortProduct;
+  product: ShortProduct | ShortProductWithDetails;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
 }) => {
   const {
-    capacity,
     category,
     fullPrice,
     image,
     itemId,
     name,
     price,
-    ram,
-    screen,
     year,
   } = product;
 
   const { toggleCart, isInCart } = useCartToggle(product);
   const { toggleFav, isInFav } = useFavToggle(product);
+  // const { isInCompare, toggleCompare } = useCompareToggle(product);
 
   const handleAddToCart = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -47,6 +49,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     event.preventDefault();
     toggleFav();
   };
+
+  // const handleToggleCompare = (
+  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  // ) => {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  //   toggleCompare();
+  // };
+
+  const specs = getSpecs(product);
 
   return (
     <div className="product-card">
@@ -70,12 +82,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         <div className="product-card__divider" />
 
-        <Specs specs={{ screen, capacity, ram }} />
+        <Specs specs={specs} />
 
         <div className="product-card__buttons">
           <PrimaryButton isInCart={isInCart} onClick={handleAddToCart}>
             Add to cart
           </PrimaryButton>
+
+          <button /*onClick={handleToggleCompare}*/ style={{backgroundColor: 'green', width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <Icon name='compare' color='var(--primary-grey-color)'/>
+          </button>
 
           <FavouriteButton
             isInFavourites={isInFav}
