@@ -13,6 +13,8 @@ export const PictureSlider = ({ images }: Props) => {
   const sliderRef1 = useRef<Slider | null>(null);
   const sliderRef2 = useRef<Slider | null>(null);
 
+  const WIDTH_FOR_SWIPER = 767;
+
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
 
@@ -20,7 +22,7 @@ export const PictureSlider = ({ images }: Props) => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-    }
+    };
   }, []);
 
   return (
@@ -34,7 +36,7 @@ export const PictureSlider = ({ images }: Props) => {
         className="slider__swiper-thumbnails"
         arrows={false}
         infinite={false}
-        vertical={width > 767}
+        vertical={width > WIDTH_FOR_SWIPER}
       >
         {images.map(image => (
           <div>
@@ -50,8 +52,10 @@ export const PictureSlider = ({ images }: Props) => {
         arrows={false}
         infinite={false}
         slidesToShow={1}
-        vertical={width > 767}
-        swipeToSlide={false}
+        vertical={width > WIDTH_FOR_SWIPER}
+        verticalSwiping={width > WIDTH_FOR_SWIPER}
+        swipe={width < WIDTH_FOR_SWIPER}
+        swipeToSlide={width < WIDTH_FOR_SWIPER}
       >
         {images.map(image => (
           <div>
@@ -61,4 +65,4 @@ export const PictureSlider = ({ images }: Props) => {
       </Slider>
     </div>
   );
-}
+};

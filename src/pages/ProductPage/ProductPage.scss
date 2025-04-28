@@ -182,6 +182,7 @@
 
     &:hover {
       border: $element-border-hover;
+      cursor: pointer;
     }
 
     &--active {
@@ -223,6 +224,7 @@
     line-height: 32px;
     border: $element-border-default;
     margin-bottom: 24px;
+    cursor: pointer;
 
     &--filled {
       background-color: var(--primary-grey-color);
