@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useState, useRef, useEffect } from 'react';
 
 interface Props {
-  images?: string[];
+  images: string[];
 }
 
 export const PictureSlider = ({ images }: Props) => {
@@ -38,7 +38,7 @@ export const PictureSlider = ({ images }: Props) => {
         infinite={false}
         vertical={width > WIDTH_FOR_SWIPER}
       >
-        {images && images.map(image => (
+        {images.map(image => (
           <div>
             <img src={image} alt="" className="slider__image--thumbnail" />
           </div>
@@ -57,7 +57,7 @@ export const PictureSlider = ({ images }: Props) => {
         swipe={width < WIDTH_FOR_SWIPER}
         swipeToSlide={width < WIDTH_FOR_SWIPER}
       >
-        {images && images.map(image => (
+        {images.map(image => (
           <div>
             <img src={image} alt="" className="slider__image--preview" />
           </div>
