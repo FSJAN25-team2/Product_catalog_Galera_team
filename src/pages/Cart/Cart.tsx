@@ -4,6 +4,7 @@ import { CartItem } from '../../design/organisms/CartItem/CartItem';
 import { H1 } from '../../design/atoms/Typography/H1/H1';
 import { useAppSelector } from '../../store/hooks';
 import { ButtonBack } from '../../design/atoms/ButtonBack/ButtonBack';
+import { CheckoutForm } from '../../design/organisms/CheckoutForm/CheckoutForm';
 
 export const Cart = () => {
   const cartProducts = useAppSelector(state => state.cartProducts);
@@ -12,6 +13,7 @@ export const Cart = () => {
   >({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
 
   const handleQuantityChange = (
     id: string,
@@ -37,6 +39,23 @@ export const Cart = () => {
     setTotalItems(newTotalItems);
   }, [itemQuantities]);
 
+  const handleCheckoutClick = () => {
+    setShowCheckoutForm(true);
+  };
+
+  const handleCloseCheckoutForm = () => {
+    setShowCheckoutForm(false);
+  };
+
+  if (showCheckoutForm) {
+    return (
+      <CheckoutForm
+        onClose={handleCloseCheckoutForm}
+        totalPrice={totalPrice}
+        totalItems={totalItems}
+      />
+    );
+  }
 
   return (
     <section className="cart">
@@ -68,17 +87,27 @@ export const Cart = () => {
               </span>
             </div>
 
-            <div className="hr-line-checkout"/>
+            <div className="hr-line-checkout" />
 
-            <button className="cart__checkout-button" type="button">
+            <button
+              className="cart__checkout-button"
+              type="button"
+              onClick={handleCheckoutClick}
+            >
               Checkout
             </button>
           </div>
         </>
       ) : (
-        <H1 className="cart__empty-message">
-          Cart is empty
-        </H1>
+        <H1 className="cart__empty-message">Cart is empty</H1>
+      )}
+
+      {showCheckoutForm && (
+        <CheckoutForm
+          onClose={handleCloseCheckoutForm}
+          totalPrice={totalPrice}
+          totalItems={totalItems}
+        />
       )}
     </section>
   );
