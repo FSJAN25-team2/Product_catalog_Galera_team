@@ -4,13 +4,17 @@ import { MenuLink } from '../../atoms/MenuLink/MenuLink';
 import { MenuToggleIcon } from '../../atoms/MenuToggleIconMobile/MenuToggleIcon';
 import { IconLink } from '../../atoms/IconLink/IconLink';
 import { Switcher } from '../../atoms/Switcher/Switcher';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import BalanceSharpIcon from '@mui/icons-material/BalanceSharp';
+import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 
 interface Props {
   cartProducts: number;
   favProducts: number;
+  compareProducts: number;
 }
 
-export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts }) => {
+export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts, compareProducts }) => {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
   const handleToggleMobileMenu = () => {
@@ -65,27 +69,31 @@ export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts }) => 
                 accessories
               </MenuLink>
             </li>
-            <li>
-              {/* <Switcher /> */}
-            </li>
           </ul>
         </nav>
 
         <div className="bottom-bar" onClick={handleToggleMobileMenu}>
           <IconLink
             to="/favourites"
-            src="/icons/favourites-icon.svg"
-            alt="Favourites"
             className="bottom-bar__link"
             quantity={favProducts}
-          />
+          >
+            <FavoriteBorderIcon sx={{color: 'var(--primary-grey-color)'}}/>
+          </IconLink>
+          <IconLink
+            to="/compare"
+            className="bottom-bar__link"
+            quantity={compareProducts}
+          >
+            <BalanceSharpIcon sx={{color: 'var(--primary-grey-color)'}}/>
+          </IconLink>
           <IconLink
             to="/cart"
-            src="/icons/cart-icon.svg"
-            alt="Cart"
             className="bottom-bar__link"
             quantity={cartProducts}
-          />
+          >
+            <ShoppingCartSharpIcon sx={{color: 'var(--primary-grey-color)'}}/>
+          </IconLink>
         </div>
       </aside>
     </>

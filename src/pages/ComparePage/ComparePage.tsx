@@ -1,4 +1,4 @@
-import { ProductCard } from "../../design/organisms/ProductCard/ProductCard";
+import { CompareCard } from "../../design/organisms/CompareCard/CompareCard";
 import { useAppSelector } from "../../store/hooks";
 
 export const ComparePage = () => {
@@ -7,7 +7,7 @@ export const ComparePage = () => {
     <>
     {compareProducts.map(product => {
       return (
-        <ProductCard product={product} key={product.id}/>
+        <CompareCard detailProduct={product} key={product.id}/>
       )
     })}
     </>

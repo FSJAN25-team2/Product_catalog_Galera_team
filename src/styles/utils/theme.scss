@@ -13,6 +13,7 @@
   --surface-button: #fff;
   --secondary-outline: #e2e6e9;
   --checkout: var(--element-border-color);
+  --compare-active: #E1C16E;
 }
 
 html[data-theme='dark'] {
@@ -30,4 +31,5 @@ html[data-theme='dark'] {
   --surface-button: #323542;
   --secondary-outline: #4A4F57;
   --checkout: #3B3E4A;
+  --compare-active: #E1C16E;
 }

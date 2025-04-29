@@ -1,4 +1,4 @@
-import { ShortProductWithDetails } from '../types/FullProduct';
+import { FullProduct } from '../types/FullProduct';
 import { ShortProduct } from '../types/ShortProduct';
 
 export const Capitalize = (text: string) => {
@@ -21,10 +21,10 @@ const specKeys = [
   'capacity',
 ];
 
-export const getSpecs = (product: ShortProduct | ShortProductWithDetails) => {
+export const getSpecs = (product: ShortProduct | FullProduct) => {
   return specKeys.reduce((acc: SpecsType, key) => {
     if (key in product) {
-      acc[key] = product[key as keyof (ShortProduct | ShortProductWithDetails)] as string | string[];
+      acc[key] = product[key as keyof (ShortProduct | FullProduct)] as string | string[];
     }
 
     return acc;
