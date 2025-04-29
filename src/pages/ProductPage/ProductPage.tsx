@@ -7,9 +7,10 @@ import {
   getAccessoryById,
   getPhoneById,
   getProducts,
+  getShortProduct,
   getTabletById,
 } from '../../services/api/allProductsAPI';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FullProduct } from '../../types/FullProduct';
 import { ShortProduct } from '../../types/ShortProduct';
 import { Specs } from '../../design/molecules/Specs/Specs';
@@ -33,14 +34,14 @@ export const ProductPage = () => {
     ShortProduct[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentProduct, setCurrentProduct] = useState<ShortProduct | null>(null);
 
   const { tabId } = useParams();
   const location = useLocation();
   const category = location.pathname.split('/')[1];
-  const currentProduct = useMemo(
-    () => location.state?.product,
-    [location.state.product],
-  );
+  // const currentProduct = location.state.product;
+
+  console.log(currentProduct);
 
   useEffect(() => {
     if (!tabId) return;
@@ -64,6 +65,12 @@ export const ProductPage = () => {
     productPromise.then(result => {
       setProduct(result);
     });
+
+    getShortProduct(tabId).then(res => setCurrentProduct(res));
+
+    return () => {
+      setProduct(null);
+    }
   }, [category, tabId]);
 
   useEffect(() => {
@@ -131,7 +138,7 @@ export const ProductPage = () => {
           category={category}
           id={namespaceId}
           tabId={tabId as string}
-          currentProduct={currentProduct}
+          currentProduct={currentProduct as ShortProduct}
         />
 
         <SelectCapacity
@@ -139,16 +146,16 @@ export const ProductPage = () => {
           current={capacity}
           category={category}
           tabId={tabId as string}
-          currentProduct={currentProduct}
+          currentProduct={currentProduct as ShortProduct}
         />
 
         <PriceBlock
           priceDiscount={priceDiscount}
           priceRegular={priceRegular}
-          year={currentProduct.year}
+          year={currentProduct?.year as number}
         />
 
-        <PageButtons product={currentProduct} detailProduct={detailProduct} />
+        <PageButtons product={currentProduct as ShortProduct} detailProduct={detailProduct} />
 
         <Specs
           specs={{ screen, resolution, processor, ram }}

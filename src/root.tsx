@@ -11,6 +11,7 @@ import { AccessoriesCatalog } from './pages/Catalogs/AccessoriesCatalog/Accessor
 import { Cart } from './pages/Cart/Cart.tsx';
 import { ProductPage } from './pages/ProductPage/ProductPage.tsx';
 import { ComparePage } from './pages/ComparePage/ComparePage.tsx';
+import './i18n/i18.config.ts';
 
 export const Root = () => {
   return (

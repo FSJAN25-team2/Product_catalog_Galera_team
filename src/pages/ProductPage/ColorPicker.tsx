@@ -1,7 +1,7 @@
 import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
 import cn from 'classnames';
 import { ShortProduct } from '../../types/ShortProduct';
-import { useHandleOptionChange } from '../../utils/hooks/useHandleOptionChange';
+import { Link } from 'react-router-dom';
 
 interface Props {
   colorsAvailable: string[];
@@ -18,9 +18,12 @@ export const ColorPicker: React.FC<Props> = ({
   category,
   id,
   tabId,
-  currentProduct,
 }) => {
-  const { handleOptionChange } = useHandleOptionChange();
+  const calculateNewLink = (option: string) => {
+    const newTabId = tabId.replace(current.toLowerCase(), option.toLowerCase());
+
+    return `/${category}/${newTabId}`;
+  }
 
   return (
     <div className="colorpicker">
@@ -32,20 +35,14 @@ export const ColorPicker: React.FC<Props> = ({
       <div className="colorpicker__color-container">
         {colorsAvailable.map((option, index) => {
           return (
-            <div
+            <Link
               key={option + index}
+              to={calculateNewLink(option)}
               className={cn(
                 `colorpicker__color colorpicker__color--${option}`,
                 { 'colorpicker__color--active': option === current },
               )}
-              onClick={() => handleOptionChange({
-                tabId,
-                category,
-                current, 
-                option,
-                currentProduct,
-              })}
-            ></div>
+            ></Link>
           );
         })}
       </div>

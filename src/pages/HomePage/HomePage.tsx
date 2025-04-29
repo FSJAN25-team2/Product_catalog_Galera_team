@@ -11,6 +11,7 @@ import { ShopByCategory } from '../../design/organisms/ShopByCategory';
 import { H1 } from '../../design/atoms/Typography/H1/H1';
 import { Category } from '../../types/Category';
 import { Sorting } from '../../types/Sorting';
+import { useTranslation } from "react-i18next";
 
 export const HomePage = () => {
   const [hotProducts, setHotProducts] = useState<ShortProduct[]>([]);
@@ -18,6 +19,8 @@ export const HomePage = () => {
 
   const [isHotProductsLoading, setIsHotProductsLoading] = useState(true);
   const [isNewProductsLoading, setIsNewProductsLoading] = useState(true);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     getHotPricedProducts()
@@ -52,7 +55,8 @@ export const HomePage = () => {
 
   return (
     <>
-      <H1 className="home-page__title">Welcome to Nice Gadgets store</H1>
+      <H1 className="home-page__title">{t("hello_world")}</H1>
+      {/* <H1 className="home-page__title">Welcome to Nice Gadgets store</H1> */}
 
       <div className="home-page__content">
         <SwiperBanner />
