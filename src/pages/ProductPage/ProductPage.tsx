@@ -25,6 +25,7 @@ import { Category } from '../../types/Category';
 import { Sorting } from '../../types/Sorting';
 import { getRandomProducts } from './Utils/Ulitls';
 import { Loader } from './Loader';
+import { getSpecs } from '../../utils/helpers';
 
 export const ProductPage = () => {
   const [product, setProduct] = useState<FullProduct | null>(null);
@@ -90,6 +91,10 @@ export const ProductPage = () => {
     );
   }
 
+  const detailProduct = {...currentProduct, ...getSpecs(product)}
+  // console.log(detailProduct)
+  console.log(currentProduct);
+
   const {
     camera,
     capacity,
@@ -143,7 +148,7 @@ export const ProductPage = () => {
           year={currentProduct.year}
         />
 
-        <PageButtons product={currentProduct} />
+        <PageButtons product={currentProduct} detailProduct={detailProduct} />
 
         <Specs
           specs={{ screen, resolution, processor, ram }}

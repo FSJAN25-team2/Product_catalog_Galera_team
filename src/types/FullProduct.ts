@@ -1,3 +1,5 @@
+import { ShortProduct } from "./ShortProduct";
+
 export interface FullProduct {
   id: string;
   namespaceId: string;
@@ -22,19 +24,10 @@ export interface FullProduct {
   cell: string[];
 }
 
-export interface ProductLight {
-  //should be required
-  id?: number;
-  year?: number;
-  color?: string;
-
-  category: string;
-  itemId: string;
-  name: string;
-  fullPrice: number;
-  price: number;
-  screen: string;
-  capacity: string;
-  ram: string;
-  image: string;
+export interface ShortProductWithDetails extends ShortProduct {
+  resolution: string;
+  processor: string;
+  camera: string;
+  zoom: string;
+  cell: string[];
 }

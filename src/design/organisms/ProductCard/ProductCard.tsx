@@ -8,7 +8,7 @@ import { H3 } from '../../atoms/Typography/H3/H3';
 import { ShortProduct } from '../../../types/ShortProduct';
 import { useCartToggle } from '../../../utils/hooks/useCartToggle';
 import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
-
+import { getSpecs } from '../../../utils/helpers';
 interface ProductCardProps {
   product: ShortProduct;
 }
@@ -17,15 +17,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
 }) => {
   const {
-    capacity,
     category,
     fullPrice,
     image,
     itemId,
     name,
     price,
-    ram,
-    screen,
     year,
   } = product;
 
@@ -47,6 +44,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     event.preventDefault();
     toggleFav();
   };
+
+  const specs = getSpecs(product);
 
   return (
     <div className="product-card">
@@ -70,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         <div className="product-card__divider" />
 
-        <Specs specs={{ screen, capacity, ram }} />
+        <Specs specs={specs} />
 
         <div className="product-card__buttons">
           <PrimaryButton isInCart={isInCart} onClick={handleAddToCart}>

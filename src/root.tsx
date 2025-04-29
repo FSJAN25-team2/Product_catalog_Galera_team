@@ -10,6 +10,7 @@ import { TabletsCatalog } from './pages/Catalogs/TabletsCatalog/TabletsCatalog.t
 import { AccessoriesCatalog } from './pages/Catalogs/AccessoriesCatalog/AccessoriesCatalog.tsx';
 import { Cart } from './pages/Cart/Cart.tsx';
 import { ProductPage } from './pages/ProductPage/ProductPage.tsx';
+import { ComparePage } from './pages/ComparePage/ComparePage.tsx';
 
 export const Root = () => {
   return (
@@ -33,6 +34,7 @@ export const Root = () => {
             </Route>
             <Route path="favourites" element={<FavouritesPage />}></Route>
             <Route path="cart" element={<Cart />}></Route>
+            <Route path="compare" element={<ComparePage />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Route>
         </Routes>

@@ -1,15 +1,18 @@
-// import { Switch } from '@mui/material';
 import { IconLink } from '../../atoms/IconLink/IconLink';
 import { Logo } from '../../atoms/Logo/Logo';
 import { MenuLink } from '../../atoms/MenuLink/MenuLink';
 import { Switcher } from '../../atoms/Switcher/Switcher';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import BalanceSharpIcon from '@mui/icons-material/BalanceSharp';
+import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 
 interface Props {
   cartProducts: number;
   favProducts: number;
+  compareProducts: number;
 }
 
-export const HeaderDesktop: React.FC<Props> = ({ cartProducts, favProducts }) => {
+export const HeaderDesktop: React.FC<Props> = ({ cartProducts, favProducts, compareProducts }) => {
   return (
     <>
       <div className="nav__left__container">
@@ -26,16 +29,22 @@ export const HeaderDesktop: React.FC<Props> = ({ cartProducts, favProducts }) =>
       <div className="nav__icons">
         <IconLink
           to="/favourites"
-          src="/icons/favourites-icon.svg"
-          alt="Favourites"
           quantity={favProducts}
-        />
+        >
+          <FavoriteBorderIcon sx={{color: 'var(--primary-grey-color)'}}/>
+        </IconLink>
+        <IconLink
+          to="/compare"
+          quantity={compareProducts}
+        >
+          <BalanceSharpIcon sx={{color: 'var(--primary-grey-color)'}}/>
+        </IconLink>
         <IconLink
           to="/cart"
-          src="/icons/cart-icon.svg"
-          alt="Cart"
           quantity={cartProducts}
-        />
+        >
+          <ShoppingCartSharpIcon sx={{color: 'var(--primary-grey-color)'}}/>
+        </IconLink>
       </div>
     </>
   );

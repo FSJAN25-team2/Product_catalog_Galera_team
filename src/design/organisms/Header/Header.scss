@@ -141,7 +141,7 @@
 
     position: absolute;  
     bottom: 32px;
-    left: 25vw;
+    left: 54%;
 
     display: flex;
     justify-content: center;
@@ -184,10 +184,12 @@
 .bottom-bar {
   display: flex;
   justify-content: space-between;
+  width: 100vw;
 
   &__link {
     height: 64px;
-    width: 50vw;
+    // width: 50vw;
+    flex-grow: 1;
 
     position: relative;
 
