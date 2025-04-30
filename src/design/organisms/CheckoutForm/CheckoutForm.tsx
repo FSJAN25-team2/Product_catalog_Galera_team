@@ -51,6 +51,20 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
   const [cvvError, setCvvError] = useState<string>('');
 
   useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [onClose]);
+
+  useEffect(() => {
     if (selectedCityRef) {
       fetchWarehouses(selectedCityRef)
         .then(setWarehouses)

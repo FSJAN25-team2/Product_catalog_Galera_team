@@ -295,3 +295,49 @@
   font-size: 12px;
   margin-top: 4px;
 }
+
+/* Chrome, Safari autofill background color fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: var(--primary-grey-color) !important;
+  background-color: var(--surface-card) !important;
+  box-shadow: 0 0 0px 1000px var(--surface-card) inset !important;
+}
+
+/* Firefox autofill fix */
+input:autofill,
+select:autofill,
+textarea:autofill {
+  background-color: var(--surface-card) !important;
+  color: var(--primary-grey-color) !important;
+}
+
+/* Additional specificity for checkout inputs */
+.checkout__input:-webkit-autofill,
+.checkout__input:-webkit-autofill:hover,
+.checkout__input:-webkit-autofill:focus,
+.checkout__input:-webkit-autofill:active,
+.checkout__select:-webkit-autofill,
+.checkout__select:-webkit-autofill:hover,
+.checkout__select:-webkit-autofill:focus,
+.checkout__textarea:-webkit-autofill,
+.checkout__textarea:-webkit-autofill:hover,
+.checkout__textarea:-webkit-autofill:focus {
+  border: 1px solid var(--checkout) !important;
+}
+
+/* When autofilled inputs are focused */
+.checkout__input:-webkit-autofill:focus,
+.checkout__select:-webkit-autofill:focus,
+.checkout__textarea:-webkit-autofill:focus {
+  border-color: var(--action-button) !important;
+}
