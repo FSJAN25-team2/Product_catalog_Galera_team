@@ -43,7 +43,7 @@ export const ColorPicker: React.FC<Props> = ({
               })}
               state={{ product }}
               className={cn(
-                `colorpicker__color colorpicker__color--${option}`,
+                `colorpicker__color colorpicker__color--${option.split(' ').join('-')}`,
                 { 'colorpicker__color--active': option === current },
               )}
             ></Link>
