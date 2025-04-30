@@ -128,7 +128,7 @@
 .swiper-pagination-bullet {
   width: 14px;
   height: 4px;
-  background-color: #b6b6b6;
+  background-color: var(--secondary-grey-color);
   opacity: 1;
   border-radius: 0;
   cursor: pointer;
@@ -136,7 +136,7 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #000;
+  background-color: var(--action-button);
 }
 
 .nav-arrow-icon {
