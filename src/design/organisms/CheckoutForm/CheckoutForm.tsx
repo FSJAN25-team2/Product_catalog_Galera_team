@@ -25,6 +25,28 @@ interface Warehouse {
   Description: string;
 }
 
+interface FormState {
+  firstName: string;
+  lastName: string;
+  email: string;
+  city: string;
+  warehouse: string;
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+}
+
+interface FormErrors {
+  firstName: string;
+  lastName: string;
+  email: string;
+  city: string;
+  warehouse: string;
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+}
+
 export const CheckoutForm: React.FC<CheckoutFormProps> = ({
   onClose,
   totalPrice,
@@ -33,22 +55,48 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card'>('cash');
   const dispatch = useAppDispatch();
 
-  const [city, setCity] = useState<string>('');
+  const [formData, setFormData] = useState<FormState>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    city: '',
+    warehouse: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    city: '',
+    warehouse: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+  });
+
+  const [touched, setTouched] = useState<Record<string, boolean>>({
+    firstName: false,
+    lastName: false,
+    email: false,
+    city: false,
+    warehouse: false,
+    cardNumber: false,
+    expiryDate: false,
+    cvv: false,
+  });
+
   const [showAnimation, setShowAnimation] = useState(false);
   const [citySuggestions, setCitySuggestions] = useState<City[]>([]);
   const [selectedCityRef, setSelectedCityRef] = useState<string>('');
-  const [warehouse, setWarehouse] = useState<string>('');
-  const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
-  const [showCitySuggestions, setShowCitySuggestions] =
-    useState<boolean>(false);
-
-  // Card validation states
-  const [cardNumber, setCardNumber] = useState<string>('');
-  const [expiryDate, setExpiryDate] = useState<string>('');
-  const [cvv, setCvv] = useState<string>('');
-  const [cardNumberError, setCardNumberError] = useState<string>('');
-  const [expiryDateError, setExpiryDateError] = useState<string>('');
-  const [cvvError, setCvvError] = useState<string>('');
+  
+  const [warehouseSuggestions, setWarehouseSuggestions] = useState<Warehouse[]>([]);
+  const [showWarehouseSuggestions, setShowWarehouseSuggestions] = useState<boolean>(false);
+  const [showCitySuggestions, setShowCitySuggestions] = useState<boolean>(false);
+  const [filteredWarehouses, setFilteredWarehouses] = useState<Warehouse[]>([]);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -67,14 +115,159 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
   useEffect(() => {
     if (selectedCityRef) {
       fetchWarehouses(selectedCityRef)
-        .then(setWarehouses)
+        .then((warehouses) => {
+          setWarehouseSuggestions(warehouses);
+          setFilteredWarehouses([]);
+        })
         .catch(error => console.error('Error fetching warehouses:', error));
     }
   }, [selectedCityRef]);
 
+  const handleBlur = (field: keyof FormState) => {
+    setTouched({
+      ...touched,
+      [field]: true,
+    });
+    validateField(field, formData[field]);
+  };
+
+  const validateField = (field: keyof FormState, value: string): string => {
+    let errorMessage = '';
+    
+    switch (field) {
+      case 'firstName':
+        if (!value.trim()) {
+          errorMessage = 'First name is required';
+        }
+        break;
+      case 'lastName':
+        if (!value.trim()) {
+          errorMessage = 'Last name is required';
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          errorMessage = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          errorMessage = 'Please enter a valid email address';
+        }
+        break;
+      case 'city':
+        if (!value.trim()) {
+          errorMessage = 'City is required';
+        }
+        break;
+      case 'warehouse':
+        if (!value.trim() && selectedCityRef) {
+          errorMessage = 'Branch office is required';
+        }
+        break;
+      case 'cardNumber':
+        if (paymentMethod === 'card') {
+          if (!value.trim()) {
+            errorMessage = 'Card number is required';
+          } else if (value.replace(/\s/g, '').length !== 16) {
+            errorMessage = 'Card number must be 16 digits';
+          } else if (!validateCardNumber(value.replace(/\s/g, ''))) {
+            errorMessage = 'Invalid card number';
+          }
+        }
+        break;
+      case 'expiryDate':
+        if (paymentMethod === 'card') {
+          if (!value.trim()) {
+            errorMessage = 'Expiry date is required';
+          } else if (value.length < 5) {
+            errorMessage = 'Please enter a valid expiry date';
+          } else {
+            const month = parseInt(value.slice(0, 2));
+            const year = parseInt('20' + value.slice(3));
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth() + 1;
+
+            if (month < 1 || month > 12) {
+              errorMessage = 'Invalid month';
+            } else if (
+              year < currentYear ||
+              (year === currentYear && month < currentMonth)
+            ) {
+              errorMessage = 'Card expired';
+            }
+          }
+        }
+        break;
+      case 'cvv':
+        if (paymentMethod === 'card') {
+          if (!value.trim()) {
+            errorMessage = 'CVV is required';
+          } else if (value.length !== 3) {
+            errorMessage = 'CVV must be 3 digits';
+          }
+        }
+        break;
+    }
+
+    setErrors(prev => ({
+      ...prev,
+      [field]: errorMessage
+    }));
+
+    return errorMessage;
+  };
+
+  const validateForm = (): boolean => {
+    let isValid = true;
+    const newErrors: FormErrors = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      city: '',
+      warehouse: '',
+      cardNumber: '',
+      expiryDate: '',
+      cvv: '',
+    };
+
+    const allTouched: Record<string, boolean> = {};
+    Object.keys(formData).forEach(key => {
+      allTouched[key] = true;
+    });
+    setTouched(allTouched);
+
+    Object.keys(formData).forEach(key => {
+      const fieldName = key as keyof FormState;
+      const error = validateField(fieldName, formData[fieldName]);
+      newErrors[fieldName] = error;
+      if (error) {
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const fieldName = name as keyof FormState;
+    
+    setFormData({
+      ...formData,
+      [fieldName]: value,
+    });
+
+    if (touched[fieldName]) {
+      validateField(fieldName, value);
+    }
+  };
+
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setCity(value);
+    setFormData({
+      ...formData,
+      city: value,
+    });
     setShowCitySuggestions(true);
 
     if (value.length > 2) {
@@ -86,27 +279,77 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
     } else {
       setCitySuggestions([]);
     }
+
+    if (touched.city) {
+      validateField('city', value);
+    }
   };
 
   const handleCitySelect = (city: City) => {
-    setCity(city.Description);
+    setFormData({
+      ...formData,
+      city: city.Description,
+      warehouse: '',
+    });
     setSelectedCityRef(city.Ref);
     setShowCitySuggestions(false);
-    setWarehouse('');
+    setErrors({
+      ...errors,
+      city: '',
+    });
   };
 
-  const handleWarehouseChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setWarehouse(e.target.value);
+  const handleWarehouseChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({
+      ...formData,
+      warehouse: value,
+    });
+    setShowWarehouseSuggestions(true);
+
+    if (value.length > 0 && warehouseSuggestions.length > 0) {
+      const filtered = warehouseSuggestions.filter(w =>
+        w.Description.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredWarehouses(filtered);
+    } else {
+      setFilteredWarehouses([]);
+    }
+
+    if (touched.warehouse) {
+      validateField('warehouse', value);
+    }
+  };
+
+  const handleWarehouseSelect = (warehouse: Warehouse) => {
+    setFormData({
+      ...formData,
+      warehouse: warehouse.Description,
+    });
+    setShowWarehouseSuggestions(false);
+    setErrors({
+      ...errors,
+      warehouse: '',
+    });
   };
 
   const handlePaymentMethodChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPaymentMethod(e.target.value as 'cash' | 'card');
+    const method = e.target.value as 'cash' | 'card';
+    setPaymentMethod(method);
 
     // Reset card validation errors when switching payment methods
-    if (e.target.value !== 'card') {
-      setCardNumberError('');
-      setExpiryDateError('');
-      setCvvError('');
+    if (method !== 'card') {
+      setErrors({
+        ...errors,
+        cardNumber: '',
+        expiryDate: '',
+        cvv: '',
+      });
+    } else if (formSubmitted) {
+      // If form was submitted before and switching back to card, validate card fields
+      validateField('cardNumber', formData.cardNumber);
+      validateField('expiryDate', formData.expiryDate);
+      validateField('cvv', formData.cvv);
     }
   };
 
@@ -117,17 +360,14 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
     if (value.length <= 16) {
       // Format with spaces after every 4 digits
       const formatted = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-      setCardNumber(formatted);
+      
+      setFormData({
+        ...formData,
+        cardNumber: formatted,
+      });
 
-      // Validate using Luhn algorithm
-      if (value.length === 16) {
-        if (validateCardNumber(value)) {
-          setCardNumberError('');
-        } else {
-          setCardNumberError('Invalid card number');
-        }
-      } else {
-        setCardNumberError('');
+      if (touched.cardNumber) {
+        validateField('cardNumber', formatted);
       }
     }
   };
@@ -144,28 +384,13 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
         formatted = value.slice(0, 2) + '/' + value.slice(2);
       }
 
-      setExpiryDate(formatted);
+      setFormData({
+        ...formData,
+        expiryDate: formatted,
+      });
 
-      // Validate expiry date
-      if (value.length === 4) {
-        const month = parseInt(value.slice(0, 2));
-        const year = parseInt('20' + value.slice(2));
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
-        const currentMonth = currentDate.getMonth() + 1;
-
-        if (month < 1 || month > 12) {
-          setExpiryDateError('Invalid month');
-        } else if (
-          year < currentYear ||
-          (year === currentYear && month < currentMonth)
-        ) {
-          setExpiryDateError('Card expired');
-        } else {
-          setExpiryDateError('');
-        }
-      } else {
-        setExpiryDateError('');
+      if (touched.expiryDate) {
+        validateField('expiryDate', formatted);
       }
     }
   };
@@ -175,8 +400,14 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
     const value = e.target.value.replace(/\D/g, '');
 
     if (value.length <= 3) {
-      setCvv(value);
-      setCvvError(value.length === 3 ? '' : '');
+      setFormData({
+        ...formData,
+        cvv: value,
+      });
+
+      if (touched.cvv) {
+        validateField('cvv', value);
+      }
     }
   };
 
@@ -203,35 +434,16 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setFormSubmitted(true);
 
-    // Additional validation check before submission
-    if (paymentMethod === 'card') {
-      if (cardNumber.length < 19) {
-        setCardNumberError('Card number must be 16 digits');
-        return;
-      }
+    if (validateForm()) {
+      setShowAnimation(true);
 
-      if (expiryDate.length < 5) {
-        setExpiryDateError('Please enter a valid expiry date');
-        return;
-      }
-
-      if (cvv.length < 3) {
-        setCvvError('CVV must be 3 digits');
-        return;
-      }
-
-      if (cardNumberError || expiryDateError || cvvError) {
-        return;
-      }
+      setTimeout(() => {
+        dispatch(CartAction.removeAllFromCart());
+        onClose();
+      }, 2500);
     }
-
-    setShowAnimation(true);
-
-    setTimeout(() => {
-      dispatch(CartAction.removeAllFromCart());
-      onClose();
-    }, 2500);
   };
 
   return (
@@ -241,7 +453,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
           <H1 className="checkout__title">Checkout</H1>
         </div>
 
-        <form className="checkout__form" onSubmit={handleSubmit}>
+        <form className="checkout__form" onSubmit={handleSubmit} noValidate>
           <div className="checkout__section">
             <h2 className="checkout__section-title">Personal Information</h2>
 
@@ -250,12 +462,20 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 First Name
               </label>
               <input
-                className="checkout__input"
+                className={`checkout__input ${touched.firstName && errors.firstName ? 'checkout__input--error' : ''}`}
                 type="text"
                 id="firstName"
                 name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                onBlur={() => handleBlur('firstName')}
                 required
               />
+              {touched.firstName && errors.firstName && (
+                <div className="checkout__error-message">
+                  {errors.firstName}
+                </div>
+              )}
             </div>
 
             <div className="checkout__field">
@@ -263,12 +483,20 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 Last Name
               </label>
               <input
-                className="checkout__input"
+                className={`checkout__input ${touched.lastName && errors.lastName ? 'checkout__input--error' : ''}`}
                 type="text"
                 id="lastName"
                 name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                onBlur={() => handleBlur('lastName')}
                 required
               />
+              {touched.lastName && errors.lastName && (
+                <div className="checkout__error-message">
+                  {errors.lastName}
+                </div>
+              )}
             </div>
 
             <div className="checkout__field">
@@ -276,12 +504,20 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 Email
               </label>
               <input
-                className="checkout__input"
+                className={`checkout__input ${touched.email && errors.email ? 'checkout__input--error' : ''}`}
                 type="email"
                 id="email"
                 name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                onBlur={() => handleBlur('email')}
                 required
               />
+              {touched.email && errors.email && (
+                <div className="checkout__error-message">
+                  {errors.email}
+                </div>
+              )}
             </div>
           </div>
 
@@ -294,14 +530,21 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               </label>
               <div className="checkout__autocomplete">
                 <input
-                  className="checkout__input"
+                  className={`checkout__input ${touched.city && errors.city ? 'checkout__input--error' : ''}`}
                   type="text"
                   id="city"
+                  name="city"
                   placeholder="Enter city name"
-                  value={city}
+                  value={formData.city}
                   onChange={handleCityChange}
+                  onBlur={() => handleBlur('city')}
                   required
                 />
+                {touched.city && errors.city && (
+                  <div className="checkout__error-message">
+                    {errors.city}
+                  </div>
+                )}
                 {showCitySuggestions && citySuggestions.length > 0 && (
                   <ul className="checkout__suggestions">
                     {citySuggestions.map(city => (
@@ -322,21 +565,38 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               <label className="checkout__label" htmlFor="warehouse">
                 Branch Office
               </label>
-              <select
-                className="checkout__select"
-                id="warehouse"
-                value={warehouse}
-                onChange={handleWarehouseChange}
-                required
-                disabled={!selectedCityRef}
-              >
-                <option value="">Select branch office</option>
-                {warehouses.map(w => (
-                  <option className="option" key={w.Ref} value={w.Description}>
-                    {w.Description}
-                  </option>
-                ))}
-              </select>
+              <div className="checkout__autocomplete">
+                <input
+                  className={`checkout__input ${touched.warehouse && errors.warehouse ? 'checkout__input--error' : ''}`}
+                  type="text"
+                  id="warehouse"
+                  name="warehouse"
+                  placeholder="Enter branch office"
+                  value={formData.warehouse}
+                  onChange={handleWarehouseChange}
+                  onBlur={() => handleBlur('warehouse')}
+                  required
+                  disabled={!selectedCityRef}
+                />
+                {touched.warehouse && errors.warehouse && (
+                  <div className="checkout__error-message">
+                    {errors.warehouse}
+                  </div>
+                )}
+                {showWarehouseSuggestions && filteredWarehouses.length > 0 && (
+                  <ul className="checkout__suggestions">
+                    {filteredWarehouses.map(warehouse => (
+                      <li
+                        key={warehouse.Ref}
+                        onClick={() => handleWarehouseSelect(warehouse)}
+                        className="checkout__suggestion-item"
+                      >
+                        {warehouse.Description}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
 
@@ -382,19 +642,20 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                     Card Number
                   </label>
                   <input
-                    className={`checkout__input ${cardNumberError ? 'checkout__input--error' : ''}`}
+                    className={`checkout__input ${touched.cardNumber && errors.cardNumber ? 'checkout__input--error' : ''}`}
                     type="text"
                     id="cardNumber"
                     name="cardNumber"
                     placeholder="XXXX XXXX XXXX XXXX"
-                    value={cardNumber}
+                    value={formData.cardNumber}
                     onChange={handleCardNumberChange}
+                    onBlur={() => handleBlur('cardNumber')}
                     required={paymentMethod === 'card'}
                     maxLength={19}
                   />
-                  {cardNumberError && (
+                  {touched.cardNumber && errors.cardNumber && (
                     <div className="checkout__error-message">
-                      {cardNumberError}
+                      {errors.cardNumber}
                     </div>
                   )}
                 </div>
@@ -404,19 +665,20 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                     Expiry Date
                   </label>
                   <input
-                    className={`checkout__input ${expiryDateError ? 'checkout__input--error' : ''}`}
+                    className={`checkout__input ${touched.expiryDate && errors.expiryDate ? 'checkout__input--error' : ''}`}
                     type="text"
                     id="expiryDate"
                     name="expiryDate"
                     placeholder="MM/YY"
-                    value={expiryDate}
+                    value={formData.expiryDate}
                     onChange={handleExpiryDateChange}
+                    onBlur={() => handleBlur('expiryDate')}
                     required={paymentMethod === 'card'}
                     maxLength={5}
                   />
-                  {expiryDateError && (
+                  {touched.expiryDate && errors.expiryDate && (
                     <div className="checkout__error-message">
-                      {expiryDateError}
+                      {errors.expiryDate}
                     </div>
                   )}
                 </div>
@@ -426,18 +688,19 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                     CVV
                   </label>
                   <input
-                    className={`checkout__input ${cvvError ? 'checkout__input--error' : ''}`}
+                    className={`checkout__input ${touched.cvv && errors.cvv ? 'checkout__input--error' : ''}`}
                     type="text"
                     id="cvv"
                     name="cvv"
                     placeholder="XXX"
-                    value={cvv}
+                    value={formData.cvv}
                     onChange={handleCvvChange}
+                    onBlur={() => handleBlur('cvv')}
                     required={paymentMethod === 'card'}
                     maxLength={3}
                   />
-                  {cvvError && (
-                    <div className="checkout__error-message">{cvvError}</div>
+                  {touched.cvv && errors.cvv && (
+                    <div className="checkout__error-message">{errors.cvv}</div>
                   )}
                 </div>
               </div>
