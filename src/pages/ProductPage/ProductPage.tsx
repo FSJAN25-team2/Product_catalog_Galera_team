@@ -61,35 +61,10 @@ export const ProductPage = () => {
         return;
     }
 
-    // productPromise.then(result => {
-    //   setFullProduct(result);
-    // });
-
-    // getShortProduct(tabId)
-    //   .then(result => {
-    //     setProduct(result);
-    // });
-
-    // // Promise.all([productPromise, getShortProduct(tabId)])
-    // //   .then(([fullResult, shortResult]) => {
-    // //
-    // //   })
-
     Promise.all([productPromise, getShortProduct(tabId)])
       .then(([fullResult, shortResult]) => {
         setFullProduct(fullResult);
         setProduct(shortResult);
-
-        // const specs = getSpecs(fullResult);
-
-        // // Validate specs manually or assert type
-        // const detailProduct = {
-        //   ...shortResult,
-        //   ...specs,
-        // };
-
-        // // optionally setDetailProduct if you want it separate
-        // console.log('Detail product:', detailProduct);
       })
       .catch(() => setError(true));
   }, [category, tabId]);

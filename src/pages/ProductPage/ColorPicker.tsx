@@ -19,7 +19,7 @@ export const ColorPicker: React.FC<Props> = ({
   category,
   id,
   tabId,
-  product
+  product,
 }) => {
   const { calculateNewLink } = useCalculateNewLink();
 
@@ -33,20 +33,25 @@ export const ColorPicker: React.FC<Props> = ({
       <div className="colorpicker__color-container">
         {colorsAvailable.map((option, index) => {
           return (
-            <Link
-              key={option + index}
-              to={calculateNewLink({
-                tabId, 
-                current, 
-                option, 
-                category
+            <div
+              className={cn('colorpicker__color-ind-container', {
+                'colorpicker__color-ind-container--active': option === current,
               })}
-              state={{ product }}
-              className={cn(
-                `colorpicker__color colorpicker__color--${option}`,
-                { 'colorpicker__color--active': option === current },
-              )}
-            ></Link>
+            >
+              <Link
+                key={option + index}
+                to={calculateNewLink({
+                  tabId,
+                  current,
+                  option,
+                  category,
+                })}
+                state={{ product }}
+                className={cn(
+                  `colorpicker__color colorpicker__color--${option.split(' ').join('-')}`,
+                )}
+              ></Link>
+            </div>
           );
         })}
       </div>
