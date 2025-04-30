@@ -52,6 +52,7 @@ export const HomePage = () => {
 
   return (
     <>
+      {/* <H1 className="home-page__title">{t("hello_world")}</H1> */}
       <H1 className="home-page__title">Welcome to Nice Gadgets store</H1>
 
       <div className="home-page__content">

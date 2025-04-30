@@ -7,10 +7,11 @@ import {
   getAccessoryById,
   getPhoneById,
   getProducts,
+  getShortProduct,
   getTabletById,
 } from '../../services/api/allProductsAPI';
-import { useEffect, useMemo, useState } from 'react';
-import { FullProduct } from '../../types/FullProduct';
+import { useEffect, useState } from 'react';
+import { FullProduct, ShortProductWithDetails } from '../../types/FullProduct';
 import { ShortProduct } from '../../types/ShortProduct';
 import { Specs } from '../../design/molecules/Specs/Specs';
 import { H2 } from '../../design/atoms/Typography/H2/H2';
@@ -26,21 +27,20 @@ import { Sorting } from '../../types/Sorting';
 import { getRandomProducts } from './Utils/Ulitls';
 import { Loader } from './Loader';
 import { getSpecs } from '../../utils/helpers';
+import { ErrorPage } from '../ErrorPage/ErrorPage';
 
 export const ProductPage = () => {
-  const [product, setProduct] = useState<FullProduct | null>(null);
+  const [fullProduct, setFullProduct] = useState<FullProduct | null>(null);
   const [recommendedProducts, setRecommendedProducts] = useState<
     ShortProduct[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [product, setProduct] = useState<ShortProduct | null>(null);
+  const [error, setError] = useState(false);
 
   const { tabId } = useParams();
   const location = useLocation();
   const category = location.pathname.split('/')[1];
-  const currentProduct = useMemo(
-    () => location.state?.product,
-    [location.state.product],
-  );
 
   useEffect(() => {
     if (!tabId) return;
@@ -61,9 +61,37 @@ export const ProductPage = () => {
         return;
     }
 
-    productPromise.then(result => {
-      setProduct(result);
-    });
+    // productPromise.then(result => {
+    //   setFullProduct(result);
+    // });
+
+    // getShortProduct(tabId)
+    //   .then(result => {
+    //     setProduct(result);
+    // });
+
+    // // Promise.all([productPromise, getShortProduct(tabId)])
+    // //   .then(([fullResult, shortResult]) => {
+    // //
+    // //   })
+
+    Promise.all([productPromise, getShortProduct(tabId)])
+      .then(([fullResult, shortResult]) => {
+        setFullProduct(fullResult);
+        setProduct(shortResult);
+
+        // const specs = getSpecs(fullResult);
+
+        // // Validate specs manually or assert type
+        // const detailProduct = {
+        //   ...shortResult,
+        //   ...specs,
+        // };
+
+        // // optionally setDetailProduct if you want it separate
+        // console.log('Detail product:', detailProduct);
+      })
+      .catch(() => setError(true));
   }, [category, tabId]);
 
   useEffect(() => {
@@ -72,16 +100,18 @@ export const ProductPage = () => {
       page: 1,
       category: Category.Phones,
       sortBy: Sorting.Newest,
-    }).then(res => {
-      const products = res.products;
-      const randomProducts = getRandomProducts(products, 8);
-      setRecommendedProducts(randomProducts);
-    }).finally(() => {
-      setIsLoading(false);
     })
+      .then(res => {
+        const products = res.products;
+        const randomProducts = getRandomProducts(products, 8);
+        setRecommendedProducts(randomProducts);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [tabId]);
 
-  if (!product) {
+  if ((!fullProduct || !product) && !error) {
     return (
       <div className="product">
         <Breadcrumbs className="product__breadcrumbs" />
@@ -89,100 +119,105 @@ export const ProductPage = () => {
         <Loader />
       </div>
     );
+  } else if (error) {
+    return <ErrorPage />;
   }
 
-  const detailProduct = {...currentProduct, ...getSpecs(product)}
-  // console.log(detailProduct)
-  console.log(currentProduct);
+  if (fullProduct && product && !error && tabId) {
+    const detailProduct = { ...product, ...getSpecs(fullProduct) };
 
-  const {
-    camera,
-    capacity,
-    capacityAvailable,
-    cell,
-    color,
-    colorsAvailable,
-    description,
-    images,
-    name,
-    namespaceId,
-    priceDiscount,
-    priceRegular,
-    processor,
-    ram,
-    resolution,
-    screen,
-    zoom,
-  } = product;
+    const {
+      camera,
+      capacity,
+      capacityAvailable,
+      cell,
+      color,
+      colorsAvailable,
+      description,
+      images,
+      name,
+      namespaceId,
+      priceDiscount,
+      priceRegular,
+      processor,
+      ram,
+      resolution,
+      screen,
+      zoom,
+    } = fullProduct;
 
-  return (
-    <div className="product">
-      <Breadcrumbs className="product__breadcrumbs" />
-      <ButtonBack className="product__button-back" />
+    return (
+      <div className="product">
+        <Breadcrumbs className="product__breadcrumbs" />
+        <ButtonBack className="product__button-back" />
 
-      <H2 className="product__title">{name}</H2>
+        <H2 className="product__title">{name}</H2>
 
-      <PictureSlider images={images} />
+        <PictureSlider images={images} />
 
-      <div className="product__top-details">
-        <ColorPicker
-          colorsAvailable={colorsAvailable}
-          current={color}
-          category={category}
-          id={namespaceId}
-          tabId={tabId as string}
-          currentProduct={currentProduct}
-        />
+        <div className="product__top-details">
+          <ColorPicker
+            colorsAvailable={colorsAvailable}
+            current={color}
+            category={category}
+            id={namespaceId}
+            tabId={tabId}
+            product={product}
+          />
 
-        <SelectCapacity
-          capacityAvailable={capacityAvailable}
-          current={capacity}
-          category={category}
-          tabId={tabId as string}
-          currentProduct={currentProduct}
-        />
+          <SelectCapacity
+            capacityAvailable={capacityAvailable}
+            current={capacity}
+            category={category}
+            tabId={tabId}
+            product={product}
+          />
 
-        <PriceBlock
-          priceDiscount={priceDiscount}
-          priceRegular={priceRegular}
-          year={currentProduct.year}
-        />
+          <PriceBlock
+            priceDiscount={priceDiscount}
+            priceRegular={priceRegular}
+            year={product.year}
+          />
 
-        <PageButtons product={currentProduct} detailProduct={detailProduct} />
+          <PageButtons
+            product={product}
+            detailProduct={detailProduct as ShortProductWithDetails}
+          />
 
-        <Specs
-          specs={{ screen, resolution, processor, ram }}
-          className="product__specs"
-        />
+          <Specs
+            specs={{ screen, resolution, processor, ram }}
+            className="product__specs"
+          />
+        </div>
+
+        <About description={description} />
+
+        <div className="product__tech-specs section">
+          <H3 className="section__title">Tech specs</H3>
+
+          <Specs
+            specs={{
+              screen,
+              resolution,
+              processor,
+              ram,
+              capacity,
+              camera,
+              zoom,
+              cell,
+            }}
+            className="product__specs"
+          />
+        </div>
+
+        <div className="product__swiper">
+          <SwiperPhone title="You may also like" isLoading={isLoading}>
+            {recommendedProducts.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </SwiperPhone>
+        </div>
       </div>
-
-      <About description={description} />
-
-      <div className="product__tech-specs section">
-        <H3 className="section__title">Tech specs</H3>
-
-        <Specs
-          specs={{
-            screen,
-            resolution,
-            processor,
-            ram,
-            capacity,
-            camera,
-            zoom,
-            cell,
-          }}
-          className="product__specs"
-        />
-      </div>
-
-      <div className="product__swiper">
-        <SwiperPhone title="You may also like" isLoading={isLoading}>
-          {recommendedProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </SwiperPhone>
-      </div>
-    </div>
-  );
+    );
+  }
 };
