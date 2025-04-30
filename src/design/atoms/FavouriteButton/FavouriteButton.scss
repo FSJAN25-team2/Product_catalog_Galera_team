@@ -22,9 +22,11 @@
     background-image: url(/public/icons/favourites-icon-filled.svg);
   }
 
-  &:hover {
-    // background-color: var(--white);
-    transform: scale(1.2);
-    // border-color: var(--primary-grey-color);
+  @include on-desktop {
+    &:hover {
+      // background-color: var(--white);
+      transform: scale(1.2);
+      // border-color: var(--primary-grey-color);
+    }
   }
 }

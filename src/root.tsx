@@ -11,7 +11,6 @@ import { AccessoriesCatalog } from './pages/Catalogs/AccessoriesCatalog/Accessor
 import { Cart } from './pages/Cart/Cart.tsx';
 import { ProductPage } from './pages/ProductPage/ProductPage.tsx';
 import { ComparePage } from './pages/ComparePage/ComparePage.tsx';
-import './i18n/i18.config.ts';
 
 export const Root = () => {
   return (
@@ -23,7 +22,10 @@ export const Root = () => {
             <Route path="homepage" element={<Navigate to="/" />}></Route>
             <Route path="phones">
               <Route index element={<PhonesCatalog />} />
-              <Route path=":tabId" element={<ProductPage />} />
+              <Route path=":tabId">
+                <Route index element={<ProductPage />} />
+                <Route path="*" element={<ErrorPage />}></Route>
+              </Route>
             </Route>
             <Route path="tablets">
               <Route index element={<TabletsCatalog />} />
