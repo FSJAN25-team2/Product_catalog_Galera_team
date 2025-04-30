@@ -11,7 +11,8 @@ import './SwiperBanner.scss';
 const SwiperBanner: React.FC = () => {
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const bannerItems: { image: string; path: string }[] = [
+  const bannerItems: { image: string; path?: string; isGif?: boolean }[] = [
+    { image: 'J51', isGif: true },
     { image: 'banner-phones', path: '/phones' },
     { image: 'banner-tablets', path: '/tablets' },
     { image: 'banner-accessories', path: '/accessories' },
@@ -64,13 +65,23 @@ const SwiperBanner: React.FC = () => {
           >
             {bannerItems.map((item, index) => (
               <SwiperSlide key={index}>
-                <Link to={item.path} className="swiper-image-wrapper">
-                  <img
-                    src={`/img/${item.image}.png`}
-                    alt={`Slide ${index + 1}`}
-                    className="slide-image"
-                  />
-                </Link>
+                {item.path ? (
+                  <Link to={item.path} className="swiper-image-wrapper">
+                    <img
+                      src={`/img/${item.image}${item.isGif ? '.gif' : '.png'}`}
+                      alt={`Slide ${index + 1}`}
+                      className="slide-image"
+                    />
+                  </Link>
+                ) : (
+                  <div className="swiper-image-wrapper">
+                    <img
+                      src={`/img/${item.image}${item.isGif ? '.gif' : '.png'}`}
+                      alt={`Slide ${index + 1}`}
+                      className="slide-image"
+                    />
+                  </div>
+                )}
               </SwiperSlide>
             ))}
           </Swiper>
