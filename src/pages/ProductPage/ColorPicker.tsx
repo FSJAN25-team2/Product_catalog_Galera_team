@@ -2,6 +2,7 @@ import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
 import cn from 'classnames';
 import { ShortProduct } from '../../types/ShortProduct';
 import { Link } from 'react-router-dom';
+import { useCalculateNewLink } from '../../utils/hooks/useCalculateNewLink';
 
 interface Props {
   colorsAvailable: string[];
@@ -9,7 +10,7 @@ interface Props {
   category: string;
   id: string;
   tabId: string;
-  currentProduct: ShortProduct;
+  product: ShortProduct;
 }
 
 export const ColorPicker: React.FC<Props> = ({
@@ -18,12 +19,9 @@ export const ColorPicker: React.FC<Props> = ({
   category,
   id,
   tabId,
+  product
 }) => {
-  const calculateNewLink = (option: string) => {
-    const newTabId = tabId.replace(current.toLowerCase(), option.toLowerCase());
-
-    return `/${category}/${newTabId}`;
-  }
+  const { calculateNewLink } = useCalculateNewLink();
 
   return (
     <div className="colorpicker">
@@ -37,7 +35,13 @@ export const ColorPicker: React.FC<Props> = ({
           return (
             <Link
               key={option + index}
-              to={calculateNewLink(option)}
+              to={calculateNewLink({
+                tabId, 
+                current, 
+                option, 
+                category
+              })}
+              state={{ product }}
               className={cn(
                 `colorpicker__color colorpicker__color--${option}`,
                 { 'colorpicker__color--active': option === current },

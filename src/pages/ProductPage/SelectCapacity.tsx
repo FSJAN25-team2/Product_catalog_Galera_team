@@ -2,14 +2,15 @@ import { P } from '../../design/atoms/Typography/P/P';
 import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
 import cn from 'classnames';
 import { ShortProduct } from '../../types/ShortProduct';
-import { useHandleOptionChange } from '../../utils/hooks/useHandleOptionChange';
+import { useCalculateNewLink } from '../../utils/hooks/useCalculateNewLink';
+import { Link } from 'react-router-dom';
 
 interface Props {
   capacityAvailable: string[];
   current: string;
   category: string;
   tabId: string;
-  currentProduct: ShortProduct;
+  product: ShortProduct;
 }
 
 export const SelectCapacity: React.FC<Props> = ({
@@ -17,9 +18,9 @@ export const SelectCapacity: React.FC<Props> = ({
   current,
   category,
   tabId,
-  currentProduct,
+  product,
 }) => {
-  const { handleOptionChange } = useHandleOptionChange();
+  const { calculateNewLink } = useCalculateNewLink();
 
   return (
     <div className="capacity">
@@ -30,21 +31,24 @@ export const SelectCapacity: React.FC<Props> = ({
       <div className="capacity__options">
         {capacityAvailable.map(option => {
           return (
-            <P
+            <Link
               key={option}
-              onClick={() => handleOptionChange({
+              to={calculateNewLink({
                 tabId,
-                category,
-                current, 
+                current,
                 option,
-                currentProduct,
+                category,
               })}
-              className={cn('capacity__option', {
-                'capacity__option--filled': option === current,
-              })}
+              state={{ product }}
             >
-              {option}
-            </P>
+              <P
+                className={cn('capacity__option', {
+                  'capacity__option--filled': option === current,
+                })}
+              >
+                {option}
+              </P>
+            </Link>
           );
         })}
       </div>

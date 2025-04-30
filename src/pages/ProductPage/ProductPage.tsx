@@ -29,19 +29,18 @@ import { Loader } from './Loader';
 import { getSpecs } from '../../utils/helpers';
 
 export const ProductPage = () => {
-  const [product, setProduct] = useState<FullProduct | null>(null);
+  const [fullProduct, setFullProduct] = useState<FullProduct | null>(null);
   const [recommendedProducts, setRecommendedProducts] = useState<
     ShortProduct[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentProduct, setCurrentProduct] = useState<ShortProduct | null>(null);
+  const [product, setProduct] = useState<ShortProduct | null>(null);
 
   const { tabId } = useParams();
   const location = useLocation();
   const category = location.pathname.split('/')[1];
-  // const currentProduct = location.state.product;
 
-  console.log(currentProduct);
+  console.log(product);
 
   useEffect(() => {
     if (!tabId) return;
@@ -63,13 +62,14 @@ export const ProductPage = () => {
     }
 
     productPromise.then(result => {
-      setProduct(result);
+      setFullProduct(result);
     });
 
-    getShortProduct(tabId).then(res => setCurrentProduct(res));
+    getShortProduct(tabId)
+      .then(res => setProduct(res));
 
     return () => {
-      setProduct(null);
+      setFullProduct(null);
     }
   }, [category, tabId]);
 
@@ -88,7 +88,7 @@ export const ProductPage = () => {
     })
   }, [tabId]);
 
-  if (!product) {
+  if (!fullProduct) {
     return (
       <div className="product">
         <Breadcrumbs className="product__breadcrumbs" />
@@ -98,9 +98,8 @@ export const ProductPage = () => {
     );
   }
 
-  const detailProduct = {...currentProduct, ...getSpecs(product)}
+  const detailProduct = {...product, ...getSpecs(fullProduct)}
   // console.log(detailProduct)
-  console.log(currentProduct);
 
   const {
     camera,
@@ -120,7 +119,7 @@ export const ProductPage = () => {
     resolution,
     screen,
     zoom,
-  } = product;
+  } = fullProduct;
 
   return (
     <div className="product">
@@ -137,25 +136,25 @@ export const ProductPage = () => {
           current={color}
           category={category}
           id={namespaceId}
-          tabId={tabId as string}
-          currentProduct={currentProduct as ShortProduct}
+          tabId={tabId}
+          product={product}
         />
 
         <SelectCapacity
           capacityAvailable={capacityAvailable}
           current={capacity}
           category={category}
-          tabId={tabId as string}
-          currentProduct={currentProduct as ShortProduct}
+          tabId={tabId}
+          product={product}
         />
 
         <PriceBlock
           priceDiscount={priceDiscount}
           priceRegular={priceRegular}
-          year={currentProduct?.year as number}
+          year={product.year}
         />
 
-        <PageButtons product={currentProduct as ShortProduct} detailProduct={detailProduct} />
+        <PageButtons product={product} detailProduct={detailProduct} />
 
         <Specs
           specs={{ screen, resolution, processor, ram }}
