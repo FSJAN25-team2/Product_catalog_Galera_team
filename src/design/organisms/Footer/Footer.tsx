@@ -3,7 +3,7 @@ import { P_UpperCase } from '../../atoms/Typography/P_UpperCase/P_UpperCase';
 import { BackToTop } from '../../molecules/BackToTop/BackToTop';
 import { GridTemplate } from '../../templates/GridTemplate';
 
-export const Footer = () => {
+export const Footer = ({ handleScrollToTop }: { handleScrollToTop: () => void}) => {
   return (
     <div className="footer">
       <GridTemplate>
@@ -26,7 +26,7 @@ export const Footer = () => {
             </a>
           </div>
 
-          <BackToTop />
+          <BackToTop handleScrollToTop={handleScrollToTop} />
         </div>
       </GridTemplate>
     </div>

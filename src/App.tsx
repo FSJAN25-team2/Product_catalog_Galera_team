@@ -15,16 +15,20 @@ export const App = () => {
   const { pathname, search } = useLocation();
   const simpleBarRef = useRef<any>(null);
 
+  const handleScrollToTop = () => {
+    simpleBarRef.current.getScrollElement().scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   useEffect(() => {
     if (simpleBarRef.current) {
-      simpleBarRef.current.getScrollElement().scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
+      handleScrollToTop();
     }
   }, [pathname, search]);
 
@@ -40,7 +44,7 @@ export const App = () => {
         <GridTemplate>
           <Outlet />
         </GridTemplate>
-        <Footer />
+        <Footer handleScrollToTop={handleScrollToTop} />
       </GridRows>
     </SimpleBar>
   );

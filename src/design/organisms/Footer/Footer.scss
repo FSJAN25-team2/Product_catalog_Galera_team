@@ -71,6 +71,7 @@
     gap: 16px;
     color: var(--secondary-grey-color);
     transition: $transition-behavior;
+    cursor: pointer;
 
     &--icon {
       border: $element-border-default;
