@@ -99,7 +99,15 @@ export const Cart = () => {
           </div>
         </>
       ) : (
-        <H1 className="cart__empty-message">Cart is empty</H1>
+        <div className="cart__empty">
+         <img 
+            src="/img/wired-gradient-139-basket-hover-oscillate-empty.gif" 
+            alt="Empty cart" 
+            className="cart__empty-animation" 
+            width="400"
+          />
+          <H1 className="cart__empty-message">Cart is empty</H1>
+         </div>
       )}
 
       {showCheckoutForm && (
