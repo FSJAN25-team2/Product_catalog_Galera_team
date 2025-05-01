@@ -9,8 +9,7 @@
   width: 40px;
   height: 40px;
 
-  background-color: var(--surface-card);
-  // border: 1px solid var(--icons-outline-color);
+  background-color: transparent;
   cursor: pointer;
 
   &--dark {
@@ -18,15 +17,12 @@
   }
 
   &--active {
-    // border-color: var(--element-border-color);
     background-image: url(/public/icons/favourites-icon-filled.svg);
   }
 
   @include on-desktop {
     &:hover {
-      // background-color: var(--white);
       transform: scale(1.2);
-      // border-color: var(--primary-grey-color);
     }
   }
 }

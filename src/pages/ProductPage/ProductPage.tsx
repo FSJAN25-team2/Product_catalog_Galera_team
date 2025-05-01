@@ -73,7 +73,7 @@ export const ProductPage = () => {
     getProducts({
       limit: 50,
       page: 1,
-      category: Category.Phones,
+      category: category as Category,
       sortBy: Sorting.Newest,
     })
       .then(res => {

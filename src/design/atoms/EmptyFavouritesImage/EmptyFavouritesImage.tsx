@@ -13,9 +13,6 @@ export const EmptyFavouritesImage = () => {
       <p className="empty-favourites-image__text">
         Your favourites list is empty
       </p>
-      <p className="empty-favourites-image__subtext">
-        Add some products to your favourites to see them here
-      </p>
     </div>
   );
 }; 

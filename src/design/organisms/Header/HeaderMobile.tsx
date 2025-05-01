@@ -7,6 +7,8 @@ import { Switcher } from '../../atoms/Switcher/Switcher';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BalanceSharpIcon from '@mui/icons-material/BalanceSharp';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
   cartProducts: number;
@@ -14,7 +16,11 @@ interface Props {
   compareProducts: number;
 }
 
-export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts, compareProducts }) => {
+export const HeaderMobile: React.FC<Props> = ({
+  cartProducts,
+  favProducts,
+  compareProducts,
+}) => {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
   const handleToggleMobileMenu = () => {
@@ -25,11 +31,12 @@ export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts, compa
     <>
       <Logo linkClass={'nav__logo'} imgClass={'nav__logo-image'} />
       <Switcher />
-      <MenuToggleIcon
-        src={'/icons/burger-menu.svg'}
-        alt={'Menu'}
-        onClick={handleToggleMobileMenu}
-      />
+      <MenuToggleIcon onClick={handleToggleMobileMenu}>
+        <MenuIcon
+          className="nav__icon"
+          sx={{ color: 'var(--primary-grey-color)' }}
+        />
+      </MenuToggleIcon>
 
       <aside
         className={isMobileMenuActive ? 'nav--mobile active' : 'nav--mobile'}
@@ -37,11 +44,14 @@ export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts, compa
         <div className="top-bar">
           <Logo linkClass={'nav__logo'} imgClass={'nav__logo-image'} />
 
-          <MenuToggleIcon
-            src={'/icons/icon-close.svg'}
-            alt={'Close'}
-            onClick={handleToggleMobileMenu}
-          />
+          <Switcher />
+
+          <MenuToggleIcon onClick={handleToggleMobileMenu}>
+            <CloseIcon
+              className="nav__icon"
+              sx={{ color: 'var(--primary-grey-color)' }}
+            />
+          </MenuToggleIcon>
         </div>
 
         <nav className="nav__menu--mobile">
@@ -78,21 +88,23 @@ export const HeaderMobile: React.FC<Props> = ({ cartProducts, favProducts, compa
             className="bottom-bar__link"
             quantity={favProducts}
           >
-            <FavoriteBorderIcon sx={{color: 'var(--primary-grey-color)'}}/>
+            <FavoriteBorderIcon sx={{ color: 'var(--primary-grey-color)' }} />
           </IconLink>
           <IconLink
             to="/compare"
             className="bottom-bar__link"
             quantity={compareProducts}
           >
-            <BalanceSharpIcon sx={{color: 'var(--primary-grey-color)'}}/>
+            <BalanceSharpIcon sx={{ color: 'var(--primary-grey-color)' }} />
           </IconLink>
           <IconLink
             to="/cart"
             className="bottom-bar__link"
             quantity={cartProducts}
           >
-            <ShoppingCartSharpIcon sx={{color: 'var(--primary-grey-color)'}}/>
+            <ShoppingCartSharpIcon
+              sx={{ color: 'var(--primary-grey-color)' }}
+            />
           </IconLink>
         </div>
       </aside>
