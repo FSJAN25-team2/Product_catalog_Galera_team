@@ -31,7 +31,7 @@ export const App = () => {
   return (
     <SimpleBar 
       ref={simpleBarRef}
-      style={{ maxHeight: '100vh' }}
+      style={{ maxHeight: '100dvh' }}
       autoHide={true}
     >
       <WelcomeAnimation />
