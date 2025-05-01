@@ -3,6 +3,7 @@
 
   margin-bottom: 40px;
   grid-column: 1/-1;
+
   &__title {
     grid-column: 1/-1;
     margin-bottom: 32px;
@@ -28,20 +29,25 @@
     }
 
     select,
-    .products-catalog__reset {
+    .products-catalog__button {
       height: 40px;
       font-weight: 700;
       font-size: 14px;
       line-height: 21px;
-      padding: 8px;
-      border: 1px solid #ccc;
+      padding: 8px 16px;
+      border: 1px solid var(--element-border-color);
       border-radius: 4px;
-      background: var(--white);
+      background: var(--surface-button);
+      color: var(--primary-grey-color);
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: 
+        border-color 0.3s ease, 
+        background-color 0.3s ease, 
+        color 0.3s ease;
 
       &:hover {
-        border-color: #333;
+        background-color: var(--element-hover-bg-color);
+        box-shadow: var(--button-hover);
       }
     }
 
@@ -91,18 +97,27 @@
       width: 40px;
       height: 40px;
       margin: 0 4px;
-      border: 1px solid #ccc;
-      background: var(--white);
+      border: 1px solid var(--element-border-color);
+      background: var(--surface-button);
+      color: var(--primary-grey-color);
       cursor: pointer;
+      transition: 
+        background-color 0.3s ease, 
+        color 0.3s ease;
 
       &.active {
-        background: #333;
+        background: var(--action-button);
         color: var(--white);
       }
 
       &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: var(--element-hover-bg-color);
+        box-shadow: var(--button-hover);
       }
     }
   }

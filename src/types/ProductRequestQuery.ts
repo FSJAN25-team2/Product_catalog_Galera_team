@@ -6,4 +6,7 @@ export interface ProductRequestQuery {
   limit: number,
   category: Category,
   sortBy: Sorting,
+  color?: string;
+  capacity?: string;
+  ram?: string;
 }

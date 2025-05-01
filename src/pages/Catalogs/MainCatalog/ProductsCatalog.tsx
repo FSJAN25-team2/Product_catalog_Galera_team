@@ -1,20 +1,20 @@
-import { ProductCard } from '../../../design/organisms/ProductCard/ProductCard';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { ProductCard } from '../../../design/organisms/ProductCard/ProductCard';
 import { Filters } from './Sorting';
 import { Pagination } from './Pagination';
-import { ShortProduct } from '../../../types/ShortProduct';
-import { Category } from '../../../types/Category';
-import { getPageNumbers } from './Functions';
 import { getProducts } from '../../../services/api/allProductsAPI';
-import { Sorting } from '../../../types/Sorting';
+import { getPageNumbers } from './Functions';
 import { Breadcrumbs } from '../../../design/atoms/Breadcrumbs/Breadcrumbs';
 import { ButtonBack } from '../../../design/atoms/ButtonBack/ButtonBack';
 import { H2 } from '../../../design/atoms/Typography/H2/H2';
 import { P_Small } from '../../../design/atoms/Typography/P_Small/P_Small';
 import { CardsContainer } from '../../../design/atoms/CardsContainer/CardsContainer';
 import { SkeletonCards } from '../../../design/organisms/SkeletonCards/SkeletonCards';
-
+import { Category } from '../../../types/Category';
+import { Sorting } from '../../../types/Sorting';
+import { FilterType } from '../../../types/FilterType';
+import { ShortProduct } from '../../../types/ShortProduct';
 
 type Props = {
   title: string;
@@ -23,14 +23,25 @@ type Props = {
 
 export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
   const [products, setProducts] = useState<ShortProduct[]>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [totalCount, setTotalCount] = useState(0);
+  const [filters, setFilters] = useState<null | FilterType>(null);
   const [loading, setLoading] = useState(true);
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get('sort') || 'newest';
   const itemsPerPage = +(searchParams.get('itemsPerPage') || 16);
   const currentPage = +(searchParams.get('page') || 1);
+
+  const selectedColor = searchParams.get('color') || '';
+  const selectedRam = searchParams.get('ram') || '';
+  const selectedCapacity = searchParams.get('capacity') || '';
+
+  const [tempColor, setTempColor] = useState(selectedColor);
+  const [tempRam, setTempRam] = useState(selectedRam);
+  const [tempCapacity, setTempCapacity] = useState(selectedCapacity);
+
   const totalPages = Math.ceil(totalCount / itemsPerPage);
+  const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -64,29 +75,71 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
     setSearchParams(params);
   };
 
-  const pageNumbers = getPageNumbers(currentPage, totalPages);
+  const handleResetFilters = () => {
+    setSearchParams({});
+    setTempColor('');
+    setTempRam('');
+    setTempCapacity('');
+  };
+
+  const handleApplyFilters = () => {
+    const params = new URLSearchParams(searchParams);
+  
+    if (tempColor) {
+      params.set('color', tempColor);
+    } else {
+      params.delete('color');
+    }
+  
+    if (tempRam) {
+      params.set('ram', tempRam);
+    } else {
+      params.delete('ram');
+    }
+  
+    if (tempCapacity) {
+      params.set('capacity', tempCapacity);
+    } else {
+      params.delete('capacity');
+    }
+  
+    params.delete('page');
+    setSearchParams(params);
+  };
+  
 
   useEffect(() => {
+    setLoading(true);
     getProducts({
       limit: itemsPerPage,
       page: currentPage,
       category,
       sortBy: sortBy as Sorting,
+      color: selectedColor,
+      ram: selectedRam,
+      capacity: selectedCapacity,
     })
-      .then(({ products, totalCount }) => {
+      .then(({ products, totalCount, allColors, allRam, allCapacity }) => {
         setProducts(products);
         setTotalCount(totalCount);
+        setFilters({ allColors, allRam, allCapacity });
       })
-      .catch(error => console.error(error))
+      .catch(console.error)
       .finally(() => setLoading(false));
-  }, [category, currentPage, itemsPerPage, sortBy]);
+  }, [
+    category,
+    currentPage,
+    itemsPerPage,
+    sortBy,
+    selectedColor,
+    selectedRam,
+    selectedCapacity,
+  ]);
 
   return (
     <div className="products-catalog">
       <Breadcrumbs className="products-catalog__breadcrumbs" />
-
-      <ButtonBack className='products-catalog__buttom-back'/>
-
+      <ButtonBack className="products-catalog__buttom-back" />
       <H2 className="products-catalog__title">{title}</H2>
       <P_Small className="products-catalog__count">{totalCount} models</P_Small>
 
@@ -95,32 +148,28 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
         itemsPerPage={itemsPerPage}
         onSortChange={handleSortChange}
         onItemsPerPageChange={handleItemsPerPageChange}
+        availableFilters={filters}
+        onResetFilters={handleResetFilters}
+        onApplyFilters={handleApplyFilters}
+        selectedColor={selectedColor}
+        selectedRam={selectedRam}
+        selectedCapacity={selectedCapacity}
+        tempColor={tempColor}
+        tempRam={tempRam}
+        tempCapacity={tempCapacity}
+        setTempColor={setTempColor}
+        setTempRam={setTempRam}
+        setTempCapacity={setTempCapacity}
       />
 
-    <CardsContainer>
-    {loading ? (
-      <SkeletonCards quantity={itemsPerPage}/>
-      ) : (
-        products.map(product => (
-          <ProductCard
-            key={product.id}
-            product={{
-              name: product.name,
-              fullPrice: product.fullPrice,
-              price: product.price,
-              screen: product.screen,
-              capacity: product.capacity,
-              ram: product.ram,
-              image: product.image,
-              itemId: product.itemId,
-              category: category,
-              id: product.id,
-              year: product.year,
-              color: product.color,
-            }}
-          />
-        ))
-      )}
+      <CardsContainer>
+        {loading ? (
+          <SkeletonCards quantity={itemsPerPage} />
+        ) : (
+          products.map(product => (
+            <ProductCard key={product.id} product={{ ...product, category }} />
+          ))
+        )}
       </CardsContainer>
 
       <Pagination
