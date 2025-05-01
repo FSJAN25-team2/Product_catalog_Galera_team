@@ -44,6 +44,8 @@ export const HeaderMobile: React.FC<Props> = ({
         <div className="top-bar">
           <Logo linkClass={'nav__logo'} imgClass={'nav__logo-image'} />
 
+          <Switcher />
+
           <MenuToggleIcon onClick={handleToggleMobileMenu}>
             <CloseIcon
               className="nav__icon"
