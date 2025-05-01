@@ -2,10 +2,13 @@ import { P_Small } from "../../atoms/Typography/P_Small/P_Small";
 
 export const BackToTop = () => {
   const handleScrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    const scrollableElement = document.querySelector('.simplebar-content-wrapper');
+    if (scrollableElement) {
+      scrollableElement.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
