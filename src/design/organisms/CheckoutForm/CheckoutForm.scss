@@ -23,6 +23,20 @@
   max-height: 90vh;
   overflow-y: auto;
 
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--action-button);
+    border-radius: 4px;
+  }
+
   &__header {
     display: flex;
     align-items: center;
