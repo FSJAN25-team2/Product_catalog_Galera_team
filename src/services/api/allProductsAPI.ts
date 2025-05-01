@@ -9,9 +9,12 @@ export const getProducts = ({
   page,
   category,
   sortBy,
+  color,
+  capacity,
+  ram,
 }: ProductRequestQuery) => {
   return client.get<ProductsResponse>(
-    `/products?limit=${limit}&page=${page}&category=${category}&sortBy=${sortBy}`,
+    `/products?limit=${limit}&page=${page}&category=${category}&sortBy=${sortBy}&color=${color}&capacity=${capacity}&ram=${ram}`,
   );
 };
 
