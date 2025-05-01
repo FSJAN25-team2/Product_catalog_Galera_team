@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
+  gap: 16px;
 
   @include on-big-desktop {
     min-width: 1200px
@@ -12,7 +12,7 @@
 
   &__button-back {
     grid-column: 1/-1;
-    align-self: flex-start;
+    margin-bottom: 16px;
   }
 
   &__title {
@@ -22,5 +22,6 @@
   &__picture {
     width: 288px;
     height: 288px;
+    object-fit: contain;
   }
 }

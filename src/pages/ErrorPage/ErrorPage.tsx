@@ -4,11 +4,11 @@ import { P_UpperCase } from '../../design/atoms/Typography/P_UpperCase/P_UpperCa
 import { useCountdown } from '../../utils/hooks/useCountdown';
 
 export const ErrorPage = () => {
-  // const countdown = useCountdown(5);
+  const countdown = useCountdown(5);
 
   return (
     <>
-      <ButtonBack />
+      <ButtonBack className='error__button-back' />
 
       <div className="error">
         <img
@@ -20,7 +20,7 @@ export const ErrorPage = () => {
         <P_UpperCase className="error__title">
           Oops, something went wrong.. Please try again later
         </P_UpperCase>
-        <P className="error__title">Redirect in countdown</P>
+      <P className="error__title">Redirect in {countdown}</P>
       </div>
     </>
   );
