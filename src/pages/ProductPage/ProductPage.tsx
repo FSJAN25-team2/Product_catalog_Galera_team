@@ -28,19 +28,23 @@ import { getRandomProducts } from './Utils/Ulitls';
 import { Loader } from './Loader';
 import { getSpecs } from '../../utils/helpers';
 import { ErrorPage } from '../ErrorPage/ErrorPage';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { addToRecentlyViewed } from '../../store/features/recentlyViewedProducts';
 
 export const ProductPage = () => {
   const [fullProduct, setFullProduct] = useState<FullProduct | null>(null);
+  const [product, setProduct] = useState<ShortProduct | null>(null);
   const [recommendedProducts, setRecommendedProducts] = useState<
     ShortProduct[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [product, setProduct] = useState<ShortProduct | null>(null);
   const [error, setError] = useState(false);
 
   const { tabId } = useParams();
   const location = useLocation();
   const category = location.pathname.split('/')[1];
+  const recentlyViewed = useAppSelector(store => store.recentlyViewed);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!tabId) return;
@@ -65,6 +69,7 @@ export const ProductPage = () => {
       .then(([fullResult, shortResult]) => {
         setFullProduct(fullResult);
         setProduct(shortResult);
+        dispatch(addToRecentlyViewed(shortResult));
       })
       .catch(() => setError(true));
   }, [category, tabId]);
@@ -192,6 +197,16 @@ export const ProductPage = () => {
             ))}
           </SwiperPhone>
         </div>
+
+        {recentlyViewed.length > 0 && (
+          <div className="product__swiper">
+            <SwiperPhone title="Recently viewed">
+              {recentlyViewed.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </SwiperPhone>
+          </div>
+        )}
       </div>
     );
   }

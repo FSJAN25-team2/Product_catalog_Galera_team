@@ -65,6 +65,7 @@ export const Cart = () => {
 
       {cartProducts.length > 0 ? (
         <>
+        <div className='cart__items-container'>
           {cartProducts.map(product => (
             <CartItem
               key={product.itemId}
@@ -72,7 +73,6 @@ export const Cart = () => {
               onQuantityChange={handleQuantityChange}
             />
           ))}
-
           <div className="cart__checkout-container">
             <div className="cart__total">
               <span className="cart__total-price">
@@ -97,6 +97,10 @@ export const Cart = () => {
               Checkout
             </button>
           </div>
+
+        </div>
+
+          
         </>
       ) : (
         <div className="cart__empty">

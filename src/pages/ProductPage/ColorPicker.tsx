@@ -37,9 +37,9 @@ export const ColorPicker: React.FC<Props> = ({
               className={cn('colorpicker__color-ind-container', {
                 'colorpicker__color-ind-container--active': option === current,
               })}
+              key={option + index}
             >
               <Link
-                key={option + index}
                 to={calculateNewLink({
                   tabId,
                   current,

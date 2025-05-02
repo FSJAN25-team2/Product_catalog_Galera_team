@@ -6,9 +6,8 @@ import { PrimaryButton } from '../../atoms/PrimaryButton/PrimaryButton';
 import { FavouriteButton } from '../../atoms/FavouriteButton/FavouriteButton';
 import { H3 } from '../../atoms/Typography/H3/H3';
 import { ShortProduct } from '../../../types/ShortProduct';
-import { useCartToggle } from '../../../utils/hooks/useCartToggle';
-import { useFavToggle } from '../../../utils/hooks/useFavouriteToggle';
 import { getSpecs } from '../../../utils/helpers';
+import { useActionButtons } from '../../../utils/hooks/useActionButtons';
 interface ProductCardProps {
   product: ShortProduct;
 }
@@ -26,24 +25,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     year,
   } = product;
 
-  const { toggleCart, isInCart } = useCartToggle(product);
-  const { toggleFav, isInFav } = useFavToggle(product);
-
-  const handleAddToCart = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    event.stopPropagation();
-    event.preventDefault();
-    toggleCart();
-  };
-
-  const handleAddToFavourites = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    event.stopPropagation();
-    event.preventDefault();
-    toggleFav();
-  };
+  const { isInCart, isInFav, handleAddToCart, handleAddToFavourites } = useActionButtons(product);
 
   const specs = getSpecs(product);
 
