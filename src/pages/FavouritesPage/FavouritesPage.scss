@@ -4,29 +4,29 @@
 
 .favourites-page {
   @include page-grid;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
   grid-column: 1/-1;
 
   &__breadcrumbs {
     grid-column: 1/-1;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   &__title {
     grid-column: 1/-1;
     margin-bottom: 8px;
+    padding-top: 40px;
   }
 
   &__count {
     grid-column: 1/-1;
-    margin-bottom: 16px;
-    color: var(--secondary-grey-color)
+    margin-bottom: 40px;
+    color: var(--secondary-grey-color);
   }
 
   &__empty {
     grid-column: 1/-1;
     text-align: center;
-    margin-top: 24px;
     color: var(--secondary-grey-color);
   }
 }

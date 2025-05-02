@@ -5,6 +5,7 @@ import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
 import { Breadcrumbs } from '../../design/atoms/Breadcrumbs';
 import './FavouritesPage.scss';
 import { CardsContainer } from '../../design/atoms/CardsContainer/CardsContainer';
+import { EmptyFavouritesImage } from '../../design/atoms/EmptyFavouritesImage/EmptyFavouritesImage';
 
 export const FavouritesPage = () => {
   const favourites = useAppSelector(state => state.favouriteProducts);
@@ -19,14 +20,12 @@ export const FavouritesPage = () => {
 
       {favourites.length > 0 ? (
         <CardsContainer>
-        {favourites.map(product => (
-          <ProductCard key={product.itemId} product={product} />
-        ))}
+          {favourites.map(product => (
+            <ProductCard key={product.itemId} product={product} />
+          ))}
         </CardsContainer>
       ) : (
-        <P_Small className="favourites-page__empty">
-          No items in favourites yet
-        </P_Small>
+        <EmptyFavouritesImage />
       )}
     </div>
   );

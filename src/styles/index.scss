@@ -29,12 +29,13 @@
 @import '../design/organisms/SwiperPhone/SwiperPhone';
 @import '../design/organisms/ProductCard/ProductCard';
 @import '../design/organisms/Footer/Footer.scss';
-@import '../design/organisms/CompareCard/CompareCard.scss';
+@import '../design/organisms/CompareTable/CompareTable.scss';
 
 
 //pages
 @import '../pages/HomePage/HomePage.scss';
 @import '../pages/Catalogs/MainCatalog/ProductsCatalog.scss';
 @import '../pages/ProductPage/ProductPage.scss';
-
+@import '../pages/ErrorPage/ErrorPage.scss';
+@import '../pages/ComparePage/ComparePage.scss';
 

@@ -66,7 +66,7 @@ export const CartItem: React.FC<CartItemProps> = ({
       <div className="cart-item__controls">
         <div className="cart-item__quantity">
           <button
-            className="cart-item__quantity-button cart-item__quantity-button--decrease"
+            className={`cart-item__quantity-button cart-item__quantity-button--decrease ${quantity <= 1 ? 'cart-item__quantity-button--disabled' : ''}`}
             onClick={handleQuantityDecrease}
             disabled={quantity <= 1}
             aria-label="Decrease quantity"

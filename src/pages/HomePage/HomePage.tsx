@@ -20,38 +20,47 @@ export const HomePage = () => {
   const [isNewProductsLoading, setIsNewProductsLoading] = useState(true);
 
   useEffect(() => {
-    getHotPricedProducts()
-      .then(products => {
-        setHotProducts(products);
-      })
-      .catch(error => {
-        console.error('Error loading hot products:', error);
-      })
-      .finally(() => {
-        setIsHotProductsLoading(false);
-      });
+    const timer = setTimeout(() => {
+      getHotPricedProducts()
+        .then(products => {
+          setHotProducts(products);
+        })
+        .catch(error => {
+          console.error('Error loading hot products:', error);
+        })
+        .finally(() => {
+          setIsHotProductsLoading(false);
+        });
+    }, 400);
+
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    getProducts({
-      limit: 10,
-      page: 1,
-      category: Category.Phones,
-      sortBy: Sorting.Newest,
-    })
-      .then(res => {
-        setNewProducts(res.products);
+    const timer = setTimeout(() => {
+      getProducts({
+        limit: 10,
+        page: 1,
+        category: Category.Phones,
+        sortBy: Sorting.Newest,
       })
-      .catch(error => {
-        console.error('Error loading new products:', error);
-      })
-      .finally(() => {
-        setIsNewProductsLoading(false);
-      });
+        .then(res => {
+          setNewProducts(res.products);
+        })
+        .catch(error => {
+          console.error('Error loading new products:', error);
+        })
+        .finally(() => {
+          setIsNewProductsLoading(false);
+        });
+    }, 400);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
+      {/* <H1 className="home-page__title">{t("hello_world")}</H1> */}
       <H1 className="home-page__title">Welcome to Nice Gadgets store</H1>
 
       <div className="home-page__content">

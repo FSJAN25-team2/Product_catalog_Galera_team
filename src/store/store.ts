@@ -3,10 +3,12 @@ import { cartLocStorMiddleware } from './middleware/cartMiddleware';
 import { favouritesLocStorMiddleWare } from './middleware/favouritesMiddleware';
 import { themeMiddleware } from './middleware/themeMiddleware';
 import { compareLocStorMiddleware } from './middleware/compareMiddleware';
+import { recentlyViewedMiddleware } from './middleware/recentlyViewedMiddleware';
 import cartReducer from './features/cartProducts';
 import favouritesReducer from './features/favouriteProducts';
 import themeReducer from './features/theme'
 import compareReducer from './features/compareProducts';
+import recentlyViewedReducer from './features/recentlyViewedProducts';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,7 @@ export const store = configureStore({
     favouriteProducts: favouritesReducer,
     theme: themeReducer,
     compareProducts: compareReducer,
+    recentlyViewed: recentlyViewedReducer,
   },
   middleware: getDefaultMiddleware => {
     return getDefaultMiddleware().concat(
@@ -21,6 +24,7 @@ export const store = configureStore({
       favouritesLocStorMiddleWare,
       themeMiddleware,
       compareLocStorMiddleware,
+      recentlyViewedMiddleware,
     );
   },
 });

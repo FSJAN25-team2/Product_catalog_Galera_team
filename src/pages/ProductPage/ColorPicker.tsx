@@ -1,7 +1,8 @@
 import { P_Small } from '../../design/atoms/Typography/P_Small/P_Small';
 import cn from 'classnames';
 import { ShortProduct } from '../../types/ShortProduct';
-import { useHandleOptionChange } from '../../utils/hooks/useHandleOptionChange';
+import { Link } from 'react-router-dom';
+import { useCalculateNewLink } from '../../utils/hooks/useCalculateNewLink';
 
 interface Props {
   colorsAvailable: string[];
@@ -9,7 +10,7 @@ interface Props {
   category: string;
   id: string;
   tabId: string;
-  currentProduct: ShortProduct;
+  product: ShortProduct;
 }
 
 export const ColorPicker: React.FC<Props> = ({
@@ -18,9 +19,9 @@ export const ColorPicker: React.FC<Props> = ({
   category,
   id,
   tabId,
-  currentProduct,
+  product,
 }) => {
-  const { handleOptionChange } = useHandleOptionChange();
+  const { calculateNewLink } = useCalculateNewLink();
 
   return (
     <div className="colorpicker">
@@ -33,19 +34,24 @@ export const ColorPicker: React.FC<Props> = ({
         {colorsAvailable.map((option, index) => {
           return (
             <div
-              key={option + index}
-              className={cn(
-                `colorpicker__color colorpicker__color--${option}`,
-                { 'colorpicker__color--active': option === current },
-              )}
-              onClick={() => handleOptionChange({
-                tabId,
-                category,
-                current, 
-                option,
-                currentProduct,
+              className={cn('colorpicker__color-ind-container', {
+                'colorpicker__color-ind-container--active': option === current,
               })}
-            ></div>
+              key={option + index}
+            >
+              <Link
+                to={calculateNewLink({
+                  tabId,
+                  current,
+                  option,
+                  category,
+                })}
+                state={{ product }}
+                className={cn(
+                  `colorpicker__color colorpicker__color--${option.split(' ').join('-')}`,
+                )}
+              ></Link>
+            </div>
           );
         })}
       </div>

@@ -5,7 +5,7 @@ const initialState: ShortProduct[] = JSON.parse(
   localStorage.getItem('favouriteProducts') || '[]',
 );
 
-export const FavouritesProductsSlice = createSlice({
+export const favouritesProductsSlice = createSlice({
   name: 'favouriteProducts',
   initialState,
   reducers: {
@@ -18,6 +18,6 @@ export const FavouritesProductsSlice = createSlice({
   },
 });
 
-export default FavouritesProductsSlice.reducer;
+export default favouritesProductsSlice.reducer;
 export const { addToFav, removeFromFav } =
-FavouritesProductsSlice.actions;
+favouritesProductsSlice.actions;

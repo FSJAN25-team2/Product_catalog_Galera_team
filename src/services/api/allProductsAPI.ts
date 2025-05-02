@@ -41,3 +41,7 @@ export const getTabletById = (tabletId: string) => {
 export const getAccessoryById = (accessoryId: string) => {
   return client.get<FullProduct>(`/accessories/${accessoryId}`);
 };
+
+export const getShortProduct = (itemId: string) => {
+  return client.get<ShortProduct>(`/products/${itemId}`);
+};

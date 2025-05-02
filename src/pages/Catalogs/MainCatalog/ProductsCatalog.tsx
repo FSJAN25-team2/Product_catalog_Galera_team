@@ -153,7 +153,7 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
   return (
     <div className="products-catalog">
       <Breadcrumbs className="products-catalog__breadcrumbs" />
-      <ButtonBack className="products-catalog__buttom-back" />
+      <ButtonBack className="products-catalog__button-back" />
       <H2 className="products-catalog__title">{title}</H2>
       <P_Small className="products-catalog__count">{totalCount} models</P_Small>
 

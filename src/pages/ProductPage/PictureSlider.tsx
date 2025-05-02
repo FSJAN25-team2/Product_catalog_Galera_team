@@ -10,10 +10,16 @@ interface Props {
 export const PictureSlider = ({ images }: Props) => {
   const [width, setWidth] = useState(window.innerWidth);
 
+  const [nav1, setNav1] = useState<Slider | null>(null);
+  const [nav2, setNav2] = useState<Slider | null>(null);
+
   const sliderRef1 = useRef<Slider | null>(null);
   const sliderRef2 = useRef<Slider | null>(null);
 
-  const WIDTH_FOR_SWIPER = 767;
+  useEffect(() => {
+    setNav1(sliderRef1.current);
+    setNav2(sliderRef2.current);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -25,10 +31,12 @@ export const PictureSlider = ({ images }: Props) => {
     };
   }, []);
 
+  const WIDTH_FOR_SWIPER = 767;
+
   return (
     <div className="slider__outer-container">
       <Slider
-        asNavFor={sliderRef2.current ?? undefined}
+        asNavFor={nav2 || undefined}
         ref={sliderRef1}
         slidesToShow={5}
         swipeToSlide={true}
@@ -38,15 +46,15 @@ export const PictureSlider = ({ images }: Props) => {
         infinite={false}
         vertical={width > WIDTH_FOR_SWIPER}
       >
-        {images.map(image => (
-          <div>
+        {images.map((image, index) => (
+          <div key={index}>
             <img src={image} alt="" className="slider__image--thumbnail" />
           </div>
         ))}
       </Slider>
 
       <Slider
-        asNavFor={sliderRef1.current ?? undefined}
+        asNavFor={nav1 || undefined}
         ref={sliderRef2}
         className="slider__swiper-preview"
         arrows={false}
@@ -57,8 +65,8 @@ export const PictureSlider = ({ images }: Props) => {
         swipe={width < WIDTH_FOR_SWIPER}
         swipeToSlide={width < WIDTH_FOR_SWIPER}
       >
-        {images.map(image => (
-          <div>
+        {images.map((image, index) => (
+          <div key={index}>
             <img src={image} alt="" className="slider__image--preview" />
           </div>
         ))}
