@@ -43,6 +43,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       separator={<NavigateNextIcon className={styles.separator} fontSize="small" />}
       className={className}
       {...muiProps}
+      sx={{ 'font-family': 'Mont, sans-serif' }}
     >
       <Link to="/" className={styles.link}>
         <HomeIcon className={styles.icon} fontSize="small" />
