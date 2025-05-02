@@ -5,7 +5,7 @@ const initialState: ShortProduct[] = JSON.parse(
   localStorage.getItem('recentlyViewed') || '[]',
 );
 
-export const RecentlyViewedProductsSlice = createSlice({
+export const recentlyViewedProductsSlice = createSlice({
   name: 'recentlyViewed',
   initialState,
   reducers: {
@@ -24,5 +24,5 @@ export const RecentlyViewedProductsSlice = createSlice({
   },
 });
 
-export default RecentlyViewedProductsSlice.reducer;
-export const { addToRecentlyViewed } = RecentlyViewedProductsSlice.actions;
+export default recentlyViewedProductsSlice.reducer;
+export const { addToRecentlyViewed } = recentlyViewedProductsSlice.actions;

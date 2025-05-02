@@ -1,7 +1,7 @@
 import { Middleware } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-export const RecentlyViewedMiddleware: Middleware = store => next => action => {
+export const recentlyViewedMiddleware: Middleware = store => next => action => {
   const result = next(action);
   const state = store.getState() as RootState;
   

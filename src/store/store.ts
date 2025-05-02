@@ -3,7 +3,7 @@ import { cartLocStorMiddleware } from './middleware/cartMiddleware';
 import { favouritesLocStorMiddleWare } from './middleware/favouritesMiddleware';
 import { themeMiddleware } from './middleware/themeMiddleware';
 import { compareLocStorMiddleware } from './middleware/compareMiddleware';
-import { RecentlyViewedMiddleware } from './middleware/recentlyViewedMiddleware';
+import { recentlyViewedMiddleware } from './middleware/recentlyViewedMiddleware';
 import cartReducer from './features/cartProducts';
 import favouritesReducer from './features/favouriteProducts';
 import themeReducer from './features/theme'
@@ -24,7 +24,7 @@ export const store = configureStore({
       favouritesLocStorMiddleWare,
       themeMiddleware,
       compareLocStorMiddleware,
-      RecentlyViewedMiddleware,
+      recentlyViewedMiddleware,
     );
   },
 });
