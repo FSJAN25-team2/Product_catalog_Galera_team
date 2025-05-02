@@ -49,7 +49,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       className={className}
       {...muiProps}
       sx={{
-        'font-family': 'Mont, sans-serif',
+        fontFamily: 'Mont, sans-serif',
       }}
     >
       <Link to="/" className={styles.link}>
