@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ProductCard } from '../../../design/organisms/ProductCard/ProductCard';
@@ -32,9 +33,9 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
   const itemsPerPage = +(searchParams.get('itemsPerPage') || 16);
   const currentPage = +(searchParams.get('page') || 1);
 
-  const selectedColor = searchParams.get('color') || '';
-  const selectedRam = searchParams.get('ram') || '';
-  const selectedCapacity = searchParams.get('capacity') || '';
+  const selectedColor = searchParams.getAll('color') || '';
+  const selectedRam = searchParams.getAll('ram') || '';
+  const selectedCapacity = searchParams.getAll('capacity') || '';
 
   const [tempColor, setTempColor] = useState(selectedColor);
   const [tempRam, setTempRam] = useState(selectedRam);
@@ -76,37 +77,40 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
   };
 
   const handleResetFilters = () => {
-    setSearchParams({});
-    setTempColor('');
-    setTempRam('');
-    setTempCapacity('');
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('color');
+    newParams.delete('ram');
+    newParams.delete('capacity');
+    newParams.delete('sort');
+    newParams.delete('itemsPerPage');
+    newParams.delete('page');
+    setSearchParams(newParams);
   };
 
   const handleApplyFilters = () => {
     const params = new URLSearchParams(searchParams);
-  
-    if (tempColor) {
-      params.set('color', tempColor);
+
+    if (tempColor.length > 0) {
+      params.set('color', tempColor.join(','));
     } else {
       params.delete('color');
     }
-  
-    if (tempRam) {
-      params.set('ram', tempRam);
+
+    if (tempRam.length > 0) {
+      params.set('ram', tempRam.join(','));
     } else {
       params.delete('ram');
     }
-  
-    if (tempCapacity) {
-      params.set('capacity', tempCapacity);
+
+    if (tempCapacity.length > 0) {
+      params.set('capacity', tempCapacity.join(','));
     } else {
       params.delete('capacity');
     }
-  
+
     params.delete('page');
     setSearchParams(params);
   };
-  
 
   useEffect(() => {
     setLoading(true);
@@ -115,9 +119,9 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
       page: currentPage,
       category,
       sortBy: sortBy as Sorting,
-      color: selectedColor,
-      ram: selectedRam,
-      capacity: selectedCapacity,
+      color: selectedColor.join(','),
+      ram: selectedRam.join(','),
+      capacity: selectedCapacity.join(','),
     })
       .then(({ products, totalCount, allColors, allRam, allCapacity }) => {
         setProducts(products);
@@ -131,9 +135,19 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
     currentPage,
     itemsPerPage,
     sortBy,
-    selectedColor,
-    selectedRam,
-    selectedCapacity,
+    JSON.stringify(selectedColor),
+    JSON.stringify(selectedRam),
+    JSON.stringify(selectedCapacity),
+  ]);
+
+  useEffect(() => {
+    setTempColor(selectedColor);
+    setTempRam(selectedRam);
+    setTempCapacity(selectedCapacity);
+  }, [
+    selectedColor.join(','),
+    selectedRam.join(','),
+    selectedCapacity.join(','),
   ]);
 
   return (
