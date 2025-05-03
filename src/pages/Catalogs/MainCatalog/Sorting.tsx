@@ -1,6 +1,6 @@
 import React from 'react';
-import { P_Small } from '../../../design/atoms/Typography/P_Small/P_Small';
 import { FilterType } from '../../../types/FilterType';
+import { Select } from '../../../design/atoms/Select/Select';
 
 type Props = {
   sortBy: string;
@@ -10,15 +10,15 @@ type Props = {
   availableFilters: FilterType | null;
   onResetFilters: () => void;
   onApplyFilters: () => void;
-  selectedColor: string;
-  selectedRam: string;
-  selectedCapacity: string;
-  tempColor: string;
-  tempRam: string;
-  tempCapacity: string;
-  setTempColor: (val: string) => void;
-  setTempRam: (val: string) => void;
-  setTempCapacity: (val: string) => void;
+  selectedColor: string[];
+  selectedRam: string[];
+  selectedCapacity: string[];
+  tempColor: string[];
+  tempRam: string[];
+  tempCapacity: string[];
+  setTempColor: (val: string[]) => void;
+  setTempRam: (val: string[]) => void;
+  setTempCapacity: (val: string[]) => void;
 };
 
 export const Filters: React.FC<Props> = ({
@@ -39,39 +39,35 @@ export const Filters: React.FC<Props> = ({
   setTempRam,
   setTempCapacity,
 }) => {
+  const sortByDefault = sortBy || 'newest';
+  const itemsPerPageDefault = itemsPerPage || 16;
+
   const hasTempChanges =
-    tempColor !== selectedColor ||
-    tempRam !== selectedRam ||
-    tempCapacity !== selectedCapacity;
+  JSON.stringify(tempColor) !== JSON.stringify(selectedColor) ||
+  JSON.stringify(tempRam) !== JSON.stringify(selectedRam) ||
+  JSON.stringify(tempCapacity) !== JSON.stringify(selectedCapacity);
 
   const hasAnyFilter =
-    selectedColor !== '' || selectedRam !== '' || selectedCapacity !== '';
+    selectedColor.length > 0 ||
+    selectedRam.length > 0 ||
+    selectedCapacity.length > 0;
 
   const renderFilterSelect = (
     label: string,
     id: string,
-    value: string,
     options: string[],
-    onChange: (val: string) => void,
+    onChange: (val: string | string[]) => void,
+    multiple: boolean,
+    defaultValue: string[] = [],
   ) => (
-    <div className="products-catalog__filter">
-      <label htmlFor={id}>
-        <P_Small>{label}</P_Small>
-      </label>
-      <select
-        id={id}
-        className="products-catalog__select"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      >
-        <option value="">All</option>
-        {options.map(opt => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Select
+      id={id}
+      label={label}
+      options={options}
+      onChange={onChange}
+      multiple={multiple}
+      defaultValue={defaultValue}
+    />
   );
 
   return (
@@ -79,16 +75,19 @@ export const Filters: React.FC<Props> = ({
       {renderFilterSelect(
         'Sort by',
         'sort',
-        sortBy,
-        ['newest', 'cheapest', 'mostExpensive'],
-        onSortChange,
+        ['newest', 'cheapest', 'most expensive'],
+        onSortChange as (val: string | string[]) => void,
+        false,
+        [sortByDefault],
       )}
+
       {renderFilterSelect(
         'Items on page',
         'itemsPerPage',
-        String(itemsPerPage),
         ['4', '8', '16', '32'],
         v => onItemsPerPageChange(Number(v)),
+        false,
+        [itemsPerPageDefault.toString()],
       )}
 
       {availableFilters && (
@@ -96,45 +95,42 @@ export const Filters: React.FC<Props> = ({
           {renderFilterSelect(
             'Color',
             'color',
-            tempColor,
             availableFilters.allColors,
-            setTempColor,
+            setTempColor as (val: string | string[]) => void,
+            true,
+            selectedColor,
           )}
           {renderFilterSelect(
             'RAM',
             'ram',
-            tempRam,
             availableFilters.allRam,
-            setTempRam,
+            setTempRam as (val: string | string[]) => void,
+            true,
+            selectedRam,
           )}
           {renderFilterSelect(
             'Capacity',
             'capacity',
-            tempCapacity,
             availableFilters.allCapacity,
-            setTempCapacity,
+            setTempCapacity as (val: string | string[]) => void,
+            true,
+            selectedCapacity,
           )}
         </>
       )}
 
-      {hasAnyFilter && (
+      {hasTempChanges && (
         <div className="products-catalog__filter">
-          <label>
-            <P_Small>Reset Filters</P_Small>
-          </label>
-          <button className="products-catalog__button" onClick={onResetFilters}>
-            RESET
+          <button className="products-catalog__button" onClick={onApplyFilters}>
+            Apply
           </button>
         </div>
       )}
 
-      {hasTempChanges && (
+      {hasAnyFilter && (
         <div className="products-catalog__filter">
-          <label>
-            <P_Small>Apply Filters</P_Small>
-          </label>
-          <button className="products-catalog__button" onClick={onApplyFilters}>
-            APPLY
+          <button className="products-catalog__button" onClick={onResetFilters}>
+            Reset
           </button>
         </div>
       )}

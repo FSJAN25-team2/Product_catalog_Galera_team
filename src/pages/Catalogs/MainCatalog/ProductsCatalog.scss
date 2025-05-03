@@ -7,6 +7,9 @@
   &__title {
     grid-column: 1/-1;
     margin-bottom: 32px;
+    @include on-desktop {
+      width: 1200px;
+    }
   }
 
   &__filters {
@@ -19,6 +22,7 @@
     & > * {
       display: flex;
       flex-direction: column;
+      align-self: flex-end;
     }
 
     label {
@@ -30,29 +34,32 @@
 
     select,
     .products-catalog__button {
-      height: 40px;
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 21px;
-      padding: 8px 16px;
+      @include button-reset-style;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 12px;
+      background-color: var(--surface-button);
+      color: var(--primary-grey-color);
       border: 1px solid var(--element-border-color);
       border-radius: 4px;
-      background: var(--surface-button);
-      color: var(--primary-grey-color);
+      transition:
+        background-color 0.5s,
+        color 0.5s,
+        box-shadow 0.2s;
+      font-size: 14px;
       cursor: pointer;
-      transition: 
-        border-color 0.3s ease, 
-        background-color 0.3s ease, 
-        color 0.3s ease;
 
       &:hover {
         background-color: var(--element-hover-bg-color);
+        color: var(--primary-grey-color);
         box-shadow: var(--button-hover);
       }
-    }
 
-    select {
-      text-transform: uppercase;
+      &:active {
+        transform: scale(0.98);
+      }
     }
   }
 
@@ -94,30 +101,13 @@
     }
 
     button {
+      @include button-reset-style;
       width: 40px;
-      height: 40px;
       margin: 0 4px;
-      border: 1px solid var(--element-border-color);
-      background: var(--surface-button);
-      color: var(--primary-grey-color);
-      cursor: pointer;
-      transition: 
-        background-color 0.3s ease, 
-        color 0.3s ease;
 
       &.active {
         background: var(--action-button);
         color: var(--white);
-      }
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      &:hover:not(:disabled) {
-        background-color: var(--element-hover-bg-color);
-        box-shadow: var(--button-hover);
       }
     }
   }
