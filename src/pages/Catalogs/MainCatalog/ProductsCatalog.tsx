@@ -179,6 +179,10 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
       <CardsContainer>
         {loading ? (
           <SkeletonCards quantity={itemsPerPage} />
+        ) : products.length === 0 ? (
+          <P_Small className="products-catalog__no-results">
+            Products not found
+          </P_Small>
         ) : (
           products.map(product => (
             <ProductCard key={product.id} product={{ ...product, category }} />
@@ -186,12 +190,14 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
         )}
       </CardsContainer>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        pageNumbers={pageNumbers}
-      />
+      {!loading && products.length > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          pageNumbers={pageNumbers}
+        />
+      )}
     </div>
   );
 };

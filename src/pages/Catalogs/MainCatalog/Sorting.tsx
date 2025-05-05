@@ -32,9 +32,9 @@ export const Filters: React.FC<Props> = ({
   selectedColor,
   selectedRam,
   selectedCapacity,
-  tempColor,
-  tempRam,
-  tempCapacity,
+  // tempColor,
+  // tempRam,
+  // tempCapacity,
   setTempColor,
   setTempRam,
   setTempCapacity,
@@ -42,15 +42,15 @@ export const Filters: React.FC<Props> = ({
   const sortByDefault = sortBy || 'newest';
   const itemsPerPageDefault = itemsPerPage || 16;
 
-  const hasTempChanges =
-  JSON.stringify(tempColor) !== JSON.stringify(selectedColor) ||
-  JSON.stringify(tempRam) !== JSON.stringify(selectedRam) ||
-  JSON.stringify(tempCapacity) !== JSON.stringify(selectedCapacity);
+  // const hasTempChanges =
+  //   JSON.stringify(tempColor) !== JSON.stringify(selectedColor) ||
+  //   JSON.stringify(tempRam) !== JSON.stringify(selectedRam) ||
+  //   JSON.stringify(tempCapacity) !== JSON.stringify(selectedCapacity);
 
-  const hasAnyFilter =
-    selectedColor.length > 0 ||
-    selectedRam.length > 0 ||
-    selectedCapacity.length > 0;
+  // const hasAnyFilter =
+  //   selectedColor.length > 0 ||
+  //   selectedRam.length > 0 ||
+  //   selectedCapacity.length > 0;
 
   const renderFilterSelect = (
     label: string,
@@ -119,21 +119,17 @@ export const Filters: React.FC<Props> = ({
         </>
       )}
 
-      {hasTempChanges && (
-        <div className="products-catalog__filter">
-          <button className="products-catalog__button" onClick={onApplyFilters}>
-            Apply
-          </button>
-        </div>
-      )}
+      <div className="products-catalog__filter">
+        <button className="products-catalog__button" onClick={onApplyFilters}>
+          Apply
+        </button>
+      </div>
 
-      {hasAnyFilter && (
-        <div className="products-catalog__filter">
-          <button className="products-catalog__button" onClick={onResetFilters}>
-            Reset
-          </button>
-        </div>
-      )}
+      <div className="products-catalog__filter">
+        <button className="products-catalog__button" onClick={onResetFilters}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 };

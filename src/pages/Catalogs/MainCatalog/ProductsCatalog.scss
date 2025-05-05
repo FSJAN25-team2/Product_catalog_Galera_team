@@ -12,6 +12,19 @@
     }
   }
 
+  &__no-results {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--secondary-grey-color);
+    min-height: 200px;
+    padding: 40px 20px;
+  }
+
   &__filters {
     display: flex;
     grid-column: 1/-1;
