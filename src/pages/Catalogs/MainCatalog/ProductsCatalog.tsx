@@ -168,9 +168,6 @@ export const ProductsCatalog: React.FC<Props> = ({ title, category }) => {
         selectedColor={selectedColor}
         selectedRam={selectedRam}
         selectedCapacity={selectedCapacity}
-        tempColor={tempColor}
-        tempRam={tempRam}
-        tempCapacity={tempCapacity}
         setTempColor={setTempColor}
         setTempRam={setTempRam}
         setTempCapacity={setTempCapacity}

@@ -13,9 +13,6 @@ type Props = {
   selectedColor: string[];
   selectedRam: string[];
   selectedCapacity: string[];
-  tempColor: string[];
-  tempRam: string[];
-  tempCapacity: string[];
   setTempColor: (val: string[]) => void;
   setTempRam: (val: string[]) => void;
   setTempCapacity: (val: string[]) => void;
@@ -32,25 +29,12 @@ export const Filters: React.FC<Props> = ({
   selectedColor,
   selectedRam,
   selectedCapacity,
-  // tempColor,
-  // tempRam,
-  // tempCapacity,
   setTempColor,
   setTempRam,
   setTempCapacity,
 }) => {
   const sortByDefault = sortBy || 'newest';
   const itemsPerPageDefault = itemsPerPage || 16;
-
-  // const hasTempChanges =
-  //   JSON.stringify(tempColor) !== JSON.stringify(selectedColor) ||
-  //   JSON.stringify(tempRam) !== JSON.stringify(selectedRam) ||
-  //   JSON.stringify(tempCapacity) !== JSON.stringify(selectedCapacity);
-
-  // const hasAnyFilter =
-  //   selectedColor.length > 0 ||
-  //   selectedRam.length > 0 ||
-  //   selectedCapacity.length > 0;
 
   const renderFilterSelect = (
     label: string,
