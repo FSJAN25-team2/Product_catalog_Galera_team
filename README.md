@@ -4,8 +4,7 @@ A responsive product catalog built with **React**, **TypeScript**, and **Redux T
 
 ## 🚀 Live Demo
 
-👉 [Visit Live Site](https://your-netlify-deployment-link.netlify.app)  
-*(Replace with your actual Netlify URL)*
+👉 [Visit Live Site](https://harmonious-faloodeh-7b7ebb.netlify.app/)
 
 ---
 
@@ -80,7 +79,7 @@ src/
 
 ## ✅ Team Members
 
-- [@AnOvramenko](https://github.com/YourGitHubName)
+- [@AnOvramenko](https://github.com/AnOvramenko)
 - [@maponomarenko](https://github.com/maponomarenko)
 - [@vladrlex](https://github.com/vladrlex)
 - [@glebanty19](https://github.com/glebanty19)
